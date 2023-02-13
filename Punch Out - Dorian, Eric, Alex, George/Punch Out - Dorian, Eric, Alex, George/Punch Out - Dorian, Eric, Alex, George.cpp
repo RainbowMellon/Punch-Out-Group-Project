@@ -8,6 +8,8 @@ int main()
   sf::RenderWindow window(sf::VideoMode(1536, 960), "Punch-Out");
   sf::View view(sf::FloatRect(0, 0, 512, 480));
   
+  Game game;
+  
   while (window.isOpen())
     {
         sf::Event event;
