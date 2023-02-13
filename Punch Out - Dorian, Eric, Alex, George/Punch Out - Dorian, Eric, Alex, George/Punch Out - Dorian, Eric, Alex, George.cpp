@@ -1,10 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
+#include <iostream>
 
 
 int main()
 {
-  sf::RenderWindow window(sf::VideoMode(512, 480), "Punch-Out");
+  sf::RenderWindow window(sf::VideoMode(1536, 960), "Punch-Out");
+  sf::View view(sf::FloatRect(0, 0, 512, 480));
   
   while (window.isOpen())
     {
