@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <string>
+#include "Game.h"
 
 
 class UIManager
@@ -11,9 +12,10 @@ public:
   void winScreen(float);
   void loseScreen();
   void drawText(std::string);
-  //give how much to take away
   void updatePlayerHealth(int);
   void updateOppoHealth(int);
+  void drawStats(&Player, &Opponent);
+  void roundStartScreen(&Player&, Opponent);
 
 private:
   *sf::RenderWindow window;
