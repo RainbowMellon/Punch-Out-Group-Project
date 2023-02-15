@@ -11,6 +11,14 @@ UIManager::UIManager(&sf::RenderWindow newWindow, &sf::View newView, &Player new
   window = newWindow;
   view = newView;
   player = newPlayer;
+  
+  pHealth.setSize(sf::Vector2f(7, 48));
+  pHealth.setFillColor(sf::Color::Black);
+  pHealth.setOutlineThickness(0);
+  
+  oHealth.setSize(sf::Vector2f(7, 48));
+  oHealth.setFillColor(sf::Color::Black);
+  oHealth.setOutlineThickness(0);
 }
 
 
