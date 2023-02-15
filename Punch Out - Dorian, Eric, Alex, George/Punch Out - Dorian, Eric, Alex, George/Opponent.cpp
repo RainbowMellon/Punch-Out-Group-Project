@@ -1,6 +1,7 @@
 #include "Opponent.h"
+//this file is pretty much useless, we just need these constructors to exist for subclasses
 
-Opponent::Opponent()//needs the default constructor for sub classes to work
+Opponent::Opponent()
 {
 
 }
