@@ -19,6 +19,6 @@ private:
   *sf::RenderWindow window;
   *sf::View view;
   Player player;
-  sf::Rect pHealth, oHealth;
+  sf::RectangleShape pHealth, oHealth;
 };
 
