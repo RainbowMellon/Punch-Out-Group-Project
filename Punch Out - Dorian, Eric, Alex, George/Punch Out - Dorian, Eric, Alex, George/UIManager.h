@@ -18,7 +18,7 @@ public:
 private:
   *sf::RenderWindow window;
   *sf::View view;
-  Player player;
+  *Player player;
   sf::RectangleShape pHealth, oHealth;
 };
 
