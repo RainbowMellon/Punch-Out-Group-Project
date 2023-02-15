@@ -1,13 +1,16 @@
 #include "UIManager.h"
 #include "Game.h"
+#include <string>
 #include <SFML/Graphics.hpp>
 
 
 //pass a reference to the window and view for more convinent drawing
-UIManager::UIManager(&sf::RenderWindow newWindow, &sf::View newView)
+//pass a reference to the player to get access stats
+UIManager::UIManager(&sf::RenderWindow newWindow, &sf::View newView, &Player newPlayer)
 {
   window = newWindow;
   view = newView;
+  player = newPlayer;
 }
 
 
@@ -20,10 +23,12 @@ UIManager::~UIManager()
 //give the time on the win clock
 void UIManager::winScreen(sf::float time)
 {
-  view.setCenter(0, 0);
-  view.move("coordinate of win screen");
+  //view.setCenter(0, 0);
+  //coordinate of the win screen
+  //view.move(?, ?);
   
-  window.draw(sf::Text("hello", font));
+  //how long it took to win
+  //window.draw(sf::Text(std::to_string(time)));
 }
 
 
@@ -39,31 +44,17 @@ void UIManager::drawText(std::string text)
 }
 
 
-//give how much damage the player takes
-void UIManager::updatePlayerHealth(int damage)
-{
-  
-}
-
-
-//give how much damage the player takes
-void UIManager::updateOppoHealth(int damage)
-{
-  
-}
-
-
-//pass a refrence to the player and opponent to access the states
+//pass a refrence to the opponent to access the states
 //used for while fighting
-void UIManager::drawStats(&Player player, &Opponent opponent)
+void UIManager::drawStats(&Opponent opponent)
 {
   
 }
 
 
-//pass a refrence to the player and opponent to access the states
+//pass a refrence to the opponent to access the states
 //used for inbetween fighting
-void roundStartScreen(&Player&, Opponent)
+void roundStartScreen(&Opponent opponent)
 {
   
 }
