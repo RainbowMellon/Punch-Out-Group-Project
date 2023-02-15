@@ -20,13 +20,16 @@ UIManager::~UIManager()
 //give the time on the win clock
 void UIManager::winScreen(sf::float time)
 {
+  view.setCenter(0, 0);
+  view.move("coordinate of win screen");
   
+  window.draw(
 }
 
 
 void UIManager::loseScreen()
 {
-  (*window).draw();
+  window.draw();
 }
 
 //give the text you want to draw
@@ -51,12 +54,15 @@ void UIManager::updateOppoHealth(int damage)
 
 
 //pass a refrence to the player and opponent to access the states
+//used for while fighting
 void UIManager::drawStats(&Player player, &Opponent opponent)
 {
   
 }
 
 
+//pass a refrence to the player and opponent to access the states
+//used for inbetween fighting
 void roundStartScreen(&Player&, Opponent)
 {
   
