@@ -23,13 +23,13 @@ void UIManager::winScreen(sf::float time)
   view.setCenter(0, 0);
   view.move("coordinate of win screen");
   
-  window.draw(
+  window.draw(sf::Text("hello", font));
 }
 
 
 void UIManager::loseScreen()
 {
-  window.draw();
+  
 }
 
 //give the text you want to draw
