@@ -12,10 +12,12 @@ UIManager::UIManager(&sf::RenderWindow newWindow, &sf::View newView, &Player new
   view = newView;
   player = newPlayer;
   
+  //player health on screen
   pHealth.setSize(sf::Vector2f(7, 48));
   pHealth.setFillColor(sf::Color::Black);
   pHealth.setOutlineThickness(0);
   
+  //opponent health on screen
   oHealth.setSize(sf::Vector2f(7, 48));
   oHealth.setFillColor(sf::Color::Black);
   oHealth.setOutlineThickness(0);
