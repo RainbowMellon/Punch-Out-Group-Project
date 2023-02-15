@@ -9,6 +9,12 @@ public:
 
 	void draw();
 	void update();
+	
+	void setHealth(int);
+	void setDamage(int);
+	
+	int getPosition();
+	
 	//health is the heart points that make you wended
 	int getHealth();
 	//damage is your hp bar that determines when you get ko'd
