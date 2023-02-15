@@ -20,5 +20,14 @@ public:
 private:
 	//moveCD is move cooldown
 	int health, damage, starCount, moveCD;
+	/*
+	position is what position mac is in
+	0 = standing still
+	1 = dodging right 
+	2 = dodging back
+	3 = dodging left
+	4 = blocking
+	*/
+	int position;
 	bool isWinded;
 };
