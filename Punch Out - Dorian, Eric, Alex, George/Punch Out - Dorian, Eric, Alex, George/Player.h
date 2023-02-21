@@ -15,7 +15,7 @@ public:
 	int getHealth();
 	int getDamage();
 	int getStarCount();
-	void wasHit(Opponent);
+	//void wasHit(Opponent);  <--somethings broken
 
 private:
 	sf::Sprite sprite;
