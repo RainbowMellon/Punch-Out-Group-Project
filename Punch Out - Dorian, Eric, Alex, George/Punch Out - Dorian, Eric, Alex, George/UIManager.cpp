@@ -1,5 +1,7 @@
 #include "UIManager.h"
 #include "Game.h"
+#include "Player.h"
+#include "Opponent.h"
 #include <string>
 #include <SFML/Graphics.hpp>
 
@@ -31,7 +33,7 @@ UIManager::~UIManager()
 
 
 //give the time on the win clock
-void UIManager::winScreen(sf::float time)
+void UIManager::winScreen(float time)
 {
   //view.setCenter(0, 0);
   //coordinate of the win screen
@@ -56,7 +58,7 @@ void UIManager::drawText(std::string text)
 
 //pass a refrence to the opponent to access the states
 //used for while fighting
-void UIManager::drawStats(&Opponent opponent)
+void UIManager::drawStats(Opponent& opponent)
 {
 
 }
@@ -64,7 +66,7 @@ void UIManager::drawStats(&Opponent opponent)
 
 //pass a refrence to the opponent to access the states
 //used for inbetween fighting
-void roundStartScreen(&Opponent opponent)
+void UIManager::roundStartScreen(Opponent& opponent)
 {
 
 }
