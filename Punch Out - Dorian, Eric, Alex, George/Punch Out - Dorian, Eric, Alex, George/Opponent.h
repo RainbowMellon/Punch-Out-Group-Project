@@ -11,7 +11,7 @@ public:
 	virtual void draw()=0;
 	int getHealth();
 	virtual int getDamage()=0;
-	virtual void wasHit(Player&)=0;
+	//virtual void wasHit(Player&)=0;  <--somethings broken
 
 
 private:
