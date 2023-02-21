@@ -10,17 +10,17 @@ class UIManager
 {
 public:
   UIManager();
-  UIManager(&sf::RenderWindow, &sf::View, &Player);
+  UIManager(sf::RenderWindow&, sf::View&, Player&);
   ~UIManager();
   void winScreen(float);
   void loseScreen();
   void drawText(std::string);
-  void drawStats(&Player, &Opponent);
-  void roundStartScreen(&Player&, Opponent);
+  void drawStats(Player&, Opponent&);
+  void roundStartScreen(Player&, Opponent&);
 
 private:
-  *sf::RenderWindow window;
-  *sf::View view;
-  *Player player;
+  sf::RenderWindow *window;
+  sf::View *view;
+  Player *player;
   sf::RectangleShape pHealth, oHealth;
 };
