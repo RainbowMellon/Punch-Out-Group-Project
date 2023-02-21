@@ -14,7 +14,7 @@ public:
 
 
 private:
-	int health, damage, canDodgeCD, cantDodgeCD, rank, age, weight;
+	int health, damage, stamina, canDodgeCD, cantDodgeCD, rank, age, weight;
 	/*Health is the number of hp the opponent has left, damage is how much they do 
 	to mac, cool downs for when the opponent can dodge, and nums for the screens
 	between the rounds*/
