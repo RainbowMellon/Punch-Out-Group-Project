@@ -10,8 +10,8 @@ Player::Player()
 	texture.loadFromFile("sprites/little-mac.png"); //FullSpriteSheet
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0,27, 25, 61)); //Just a rectangle covering the sprite sheet
-	sprite.scale(1.5, 1.5);
-	sprite.setOrigin(16 / 2, 44 / 2);
+	sprite.scale(1.2, 1.2);
+	sprite.setOrigin(25 / 2, 61 / 2);
 	sprite.setPosition(256 / 2, 240 * 0.75);
 
 	buffer.loadFromFile("sounds/Dodge.flac");
@@ -58,7 +58,7 @@ void Player::updatePlayer(sf::Event& event)
 	}
 	else if (moveCoolD > 0)
 	{
-		sprite.setTextureRect(sf::IntRect(6, 0, 16, 44));
+		sprite.setTextureRect(sf::IntRect(0,27, 25, 61));
 		sprite.move(sf::Vector2f(dir * -1, 0));
 		moveCoolD--;
 	}
