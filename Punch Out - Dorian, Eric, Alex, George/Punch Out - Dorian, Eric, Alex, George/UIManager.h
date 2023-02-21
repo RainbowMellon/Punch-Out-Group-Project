@@ -1,69 +1,23 @@
-#include "Game.h"
-#include <string>
+#pragma once
 #include <SFML/Graphics.hpp>
+#include <string>
+#include "Game.h"
 
 
-//pass a reference to the window and view for more convinent drawing
-//pass a reference to the player to get access stats
-UIManager::UIManager(&sf::RenderWindow newWindow, &sf::View newView, &Player newPlayer)
+class UIManager
 {
-  window = newWindow;
-  view = newView;
-  player = newPlayer;
+public:
+  UIManager(&sf::RenderWindow, &sf::View, &Player);
+  ~UIManager();
+  void winScreen(float);
+  void loseScreen();
+  void drawText(std::string);
+  void drawStats(&Player, &Opponent);
+  void roundStartScreen(&Player&, Opponent);
 
-  //player health on screen
-  pHealth.setSize(sf::Vector2f(7, 48));
-  pHealth.setFillColor(sf::Color::Black);
-  pHealth.setOutlineThickness(0);
-
-  //opponent health on screen
-  oHealth.setSize(sf::Vector2f(7, 48));
-  oHealth.setFillColor(sf::Color::Black);
-  oHealth.setOutlineThickness(0);
-}
-
-
-UIManager::~UIManager()
-{
-
-}
-
-
-//give the time on the win clock
-void UIManager::winScreen(sf::float time)
-{
-  //view.setCenter(0, 0);
-  //coordinate of the win screen
-  //view.move(?, ?);
-
-  //how long it took to win
-  //window.draw(sf::Text(std::to_string(time)));
-}
-
-
-void UIManager::loseScreen()
-{
-
-}
-
-//give the text you want to draw
-void UIManager::drawText(std::string text)
-{
-
-}
-
-
-//pass a refrence to the opponent to access the states
-//used for while fighting
-void UIManager::drawStats(&Opponent opponent)
-{
-
-}
-
-
-//pass a refrence to the opponent to access the states
-//used for inbetween fighting
-void roundStartScreen(&Opponent opponent)
-{
-
-}
+private:
+  *sf::RenderWindow window;
+  *sf::View view;
+  *Player player;
+  sf::RectangleShape pHealth, oHealth;
+};
