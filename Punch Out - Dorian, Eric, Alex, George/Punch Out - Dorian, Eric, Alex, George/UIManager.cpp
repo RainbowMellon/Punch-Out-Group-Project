@@ -8,7 +8,7 @@
 
 //pass a reference to the window and view for more convinent drawing
 //pass a reference to the player to get access stats
-UIManager::UIManager(&sf::RenderWindow newWindow, &sf::View newView, &Player newPlayer)
+UIManager::UIManager(sf::RenderWindow& newWindow, sf::View newView&, Player& newPlayer)
 {
   window = newWindow;
   view = newView;
