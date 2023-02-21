@@ -1,6 +1,6 @@
 #pragma once
 #include "Player.h"
-#include "UIManager
+#include "UIManager.h"
 
 class Game
 {
