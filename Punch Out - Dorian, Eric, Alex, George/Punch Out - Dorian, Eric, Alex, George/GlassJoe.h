@@ -6,10 +6,10 @@ public:
 	GlassJoe();
 	~GlassJoe();
 	void update();
-	virtual void draw();
+	void draw();
 	int getHealth();
-	virtual int getDamage();
-	virtual void wasHit(Player&);
+	int getDamage();
+	void wasHit(Player&);
 private:
 	int health, stamina, canDodgeCD, cantDodgeCD, rank, age, weight;
 	bool isInPattern, isStunned;
