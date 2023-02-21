@@ -19,6 +19,8 @@ private:
 	int time, points, round, playerKO, oppoKO, state;
 	Player littleMax;
 	bool isKeyPressed;
+	sf::View view;
+	sf::UIManager ui;
 	sf::Music mainTheme;
 };
 
