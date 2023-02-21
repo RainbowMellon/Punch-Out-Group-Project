@@ -13,7 +13,7 @@ public:
 private:
 	sf::Sprite sprite;
 	sf::Texture texture;
-	int moveCoolD, dir;
+	int moveCoolD, dir, startCount, damage, health;
 	bool isWinded, keyPressed;
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
