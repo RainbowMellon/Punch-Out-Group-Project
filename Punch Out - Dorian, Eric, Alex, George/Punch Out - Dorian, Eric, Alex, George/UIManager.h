@@ -2,11 +2,14 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "Game.h"
+#include "Player.h"
+#include "Opponent.h"
 
 
 class UIManager
 {
 public:
+  UIManager();
   UIManager(&sf::RenderWindow, &sf::View, &Player);
   ~UIManager();
   void winScreen(float);
