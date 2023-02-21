@@ -61,15 +61,15 @@ void UIManager::drawText(std::string text)
 
 //pass a refrence to the opponent to access the states
 //used for while fighting
-void UIManager::drawStats(Opponent& opponent)
-{
+//void UIManager::drawStats(Opponent& opponent)
+//{
 
-}
+//}
 
 
 //pass a refrence to the opponent to access the states
 //used for inbetween fighting
-void UIManager::roundStartScreen(Opponent& opponent)
-{
+//void UIManager::roundStartScreen(Opponent& opponent)
+//{
 
-}
+//}
