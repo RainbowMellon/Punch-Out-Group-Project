@@ -20,7 +20,7 @@ private:
 	Player littleMax;
 	bool isKeyPressed;
 	sf::View view;
-	sf::UIManager ui;
+	UIManager ui;
 	sf::Music mainTheme;
 };
 
