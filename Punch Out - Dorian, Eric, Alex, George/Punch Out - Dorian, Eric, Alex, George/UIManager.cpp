@@ -1,4 +1,5 @@
 #include "Opponent.h"
+#include "UIManager.h"
 #include <string>
 #include <SFML/Graphics.hpp>
 
