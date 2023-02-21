@@ -1,18 +1,21 @@
-#include "UIManager.h"
-#include "Game.h"
-#include "Player.h"
 #include "Opponent.h"
 #include <string>
 #include <SFML/Graphics.hpp>
 
 
+UIManager::UIManager()
+{
+
+}
+
+
 //pass a reference to the window and view for more convinent drawing
 //pass a reference to the player to get access stats
-UIManager::UIManager(sf::RenderWindow& newWindow, sf::View newView&, Player& newPlayer)
+UIManager::UIManager(sf::RenderWindow& newWindow, sf::View& newView, Player& newPlayer)
 {
-  window = newWindow;
-  view = newView;
-  player = newPlayer;
+  window = &newWindow;
+  view = &newView;
+  player = &newPlayer;
 
   //player health on screen
   pHealth.setSize(sf::Vector2f(7, 48));
