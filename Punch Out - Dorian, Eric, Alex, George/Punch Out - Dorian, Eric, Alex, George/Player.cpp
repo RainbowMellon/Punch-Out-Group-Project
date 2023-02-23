@@ -7,7 +7,7 @@ Player::Player()
 	keyPressed = false;
 	moveCoolD = 0;
 	dir = 0;
-	texture.loadFromFile("sprites/little-mac.png"); //FullSpriteSheet
+	texture.loadFromFile("sprites/littleMac.png"); //FullSpriteSheet
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0,27, 25, 61)); //Just a rectangle covering the sprite sheet
 	sprite.scale(1.2, 1.2);
