@@ -1,4 +1,13 @@
-﻿  Game.cpp
-  Punch Out - Dorian, Eric, Alex, George.cpp
-  Generating Code...
-  Punch Out - Dorian, Eric, Alex, George.vcxproj -> C:\Users\kenji\Desktop\Punch Out - Dorian, Eric, Alex, George\Debug\Punch Out - Dorian, Eric, Alex, George.exe
+﻿  Player.cpp
+C:\Users\24glm01\Downloads\Punch-Out-Group-Project-main\Punch-Out-Group-Project-main\Punch Out - Dorian, Eric, Alex, George\Punch Out - Dorian, Eric, Alex, George\Player.cpp(13,23): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\24glm01\Downloads\Punch-Out-Group-Project-main\Punch-Out-Group-Project-main\Punch Out - Dorian, Eric, Alex, George\Punch Out - Dorian, Eric, Alex, George\Player.cpp(51,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\24glm01\Downloads\Punch-Out-Group-Project-main\Punch-Out-Group-Project-main\Punch Out - Dorian, Eric, Alex, George\Punch Out - Dorian, Eric, Alex, George\Player.cpp(62,32): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Punch Out - Dorian, Eric, Alex, George.vcxproj -> C:\Users\24glm01\Downloads\Punch-Out-Group-Project-main\Punch-Out-Group-Project-main\Punch Out - Dorian, Eric, Alex, George\Debug\Punch Out - Dorian, Eric, Alex, George.exe
