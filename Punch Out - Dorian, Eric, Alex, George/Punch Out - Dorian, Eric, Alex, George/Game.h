@@ -1,11 +1,12 @@
 #pragma once
 #include "Player.h"
 #include "UIManager.h"
+#include "Opponent.h"
 
 class Game
 {
 public:
-	Game();
+	Game(sf::RenderWindow&, sf::View&);
 	~Game();
 	void play(sf::RenderWindow&, sf::Event&, sf::View&);
 
@@ -18,10 +19,11 @@ public:
 
 private:
 	int time, points, round, playerKO, oppoKO, state;
-	Player littleMax;
-	bool isKeyPressed;
 	sf::View view;
-	//UIManager ui;  <--somethings broken here
+	Player littleMax;
+	Opponent *opponent;
+	UIManager ui;
 	sf::Music mainTheme;
+	bool isKeyPressed;
 };
 

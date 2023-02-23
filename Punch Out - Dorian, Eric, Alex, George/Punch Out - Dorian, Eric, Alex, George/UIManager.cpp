@@ -6,7 +6,7 @@
 
 UIManager::UIManager()
 {
-
+	"punch-out-nes.ttf";
 }
 
 
@@ -62,15 +62,24 @@ void UIManager::drawText(std::string text)
 
 //pass a refrence to the opponent to access the states
 //used for while fighting
-//void UIManager::drawStats(Opponent& opponent)
-//{
-
-//}
+void UIManager::drawStats(Player& player, Opponent& opponent)
+{
+	// Declare and load a font
+	sf::Font font;
+	font.loadFromFile("punch-out-nes.ttf");
+	// Create a text
+	sf::Text text("hello", font);
+	text.setCharacterSize(30);
+	text.setStyle(sf::Text::Bold);
+	text.setFillColor(sf::Color::Red);
+	// Draw it
+	(*window).draw(text);
+}
 
 
 //pass a refrence to the opponent to access the states
 //used for inbetween fighting
-//void UIManager::roundStartScreen(Opponent& opponent)
-//{
+void UIManager::roundStartScreen(Player& player, Opponent& opponent)
+{
 
-//}
+}

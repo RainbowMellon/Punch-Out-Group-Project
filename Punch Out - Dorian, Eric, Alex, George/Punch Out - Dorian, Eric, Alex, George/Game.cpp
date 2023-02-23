@@ -1,6 +1,7 @@
 #include "Game.h"
+#include "UIManager.h"
 
-Game::Game()
+Game::Game(sf::RenderWindow& window, sf::View& view)
 {
 	isKeyPressed = false;
 	playerKO = 0;
@@ -9,7 +10,7 @@ Game::Game()
 	round = 1;
 	state = 0;
 	time = 0;
-
+	ui = UIManager(window, view, &littleMax);
 	mainTheme.openFromFile("sounds/Bout Theme.wav");
 }
 
@@ -60,6 +61,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 		
 		*/
 	}
+
 }
 int Game::getPlayerKO()
 {

@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
+#include "GlassJoe.h"
 #include <iostream>
 
 
@@ -19,15 +20,7 @@ int main()
   stageS.setTexture(stageT);
   stageS.setTextureRect(sf::IntRect(0, 0, 1024, 960));
 
-  
-  
-  //Rectangles, too see if I'm getting the viewing right
-  sf::RectangleShape rect;
-  rect.setSize(sf::Vector2f(256, 240));
-  rect.setPosition(0, 0);
-  rect.setFillColor(sf::Color(0, 0, 255));
-
-  Game game;
+  Game game(window, view);
 
   while (window.isOpen())
     {
@@ -41,8 +34,9 @@ int main()
         window.clear();
     
         window.draw(stageS);
+
         game.play(window,event,view);
-        //window.draw(rect);
+
 
         window.setView(view); //Comment this line out to see the full screen
         window.display();
