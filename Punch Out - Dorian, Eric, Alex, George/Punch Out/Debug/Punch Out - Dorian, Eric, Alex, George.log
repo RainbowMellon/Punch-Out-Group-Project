@@ -1,0 +1,31 @@
+<<<<<<< Updated upstream
+﻿  Player.cpp
+C:\Users\24glm01\Downloads\Punch-Out-Group-Project-main\Punch-Out-Group-Project-main\Punch Out - Dorian, Eric, Alex, George\Punch Out - Dorian, Eric, Alex, George\Player.cpp(13,23): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\24glm01\Downloads\Punch-Out-Group-Project-main\Punch-Out-Group-Project-main\Punch Out - Dorian, Eric, Alex, George\Punch Out - Dorian, Eric, Alex, George\Player.cpp(51,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+=======
+﻿  Game.cpp
+  Player.cpp
+C:\Users\24glm01\Documents\GitHub\Punch-Out-Group-Project\Punch Out - Dorian, Eric, Alex, George\Punch Out - Dorian, Eric, Alex, George\Player.cpp(13,23): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\24glm01\Documents\GitHub\Punch-Out-Group-Project\Punch Out - Dorian, Eric, Alex, George\Punch Out - Dorian, Eric, Alex, George\Player.cpp(51,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+>>>>>>> Stashed changes
+          with
+          [
+              T=float
+          ]
+<<<<<<< Updated upstream
+C:\Users\24glm01\Downloads\Punch-Out-Group-Project-main\Punch-Out-Group-Project-main\Punch Out - Dorian, Eric, Alex, George\Punch Out - Dorian, Eric, Alex, George\Player.cpp(62,32): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+=======
+C:\Users\24glm01\Documents\GitHub\Punch-Out-Group-Project\Punch Out - Dorian, Eric, Alex, George\Punch Out - Dorian, Eric, Alex, George\Player.cpp(62,32): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+>>>>>>> Stashed changes
+          with
+          [
+              T=float
+          ]
+<<<<<<< Updated upstream
+  Punch Out - Dorian, Eric, Alex, George.vcxproj -> C:\Users\24glm01\Downloads\Punch-Out-Group-Project-main\Punch-Out-Group-Project-main\Punch Out - Dorian, Eric, Alex, George\Debug\Punch Out - Dorian, Eric, Alex, George.exe
+=======
+  Punch Out - Dorian, Eric, Alex, George.cpp
+  UIManager.cpp
+  Generating Code...
+  Punch Out - Dorian, Eric, Alex, George.vcxproj -> C:\Users\24glm01\Documents\GitHub\Punch-Out-Group-Project\Punch Out - Dorian, Eric, Alex, George\Debug\Punch Out - Dorian, Eric, Alex, George.exe
+>>>>>>> Stashed changes
