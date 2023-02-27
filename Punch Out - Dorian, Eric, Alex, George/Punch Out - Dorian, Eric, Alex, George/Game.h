@@ -22,7 +22,7 @@ private:
 	sf::View view;
 	Player littleMax;
 	Opponent *opponent;
-	UIManager ui;
+	//UIManager uiManager;
 	sf::Music mainTheme;
 	bool isKeyPressed;
 };

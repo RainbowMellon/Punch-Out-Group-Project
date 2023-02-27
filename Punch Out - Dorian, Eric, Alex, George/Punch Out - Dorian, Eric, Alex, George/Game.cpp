@@ -10,7 +10,7 @@ Game::Game(sf::RenderWindow& window, sf::View& view)
 	round = 1;
 	state = 0;
 	time = 0;
-	ui = UIManager(window, view, &littleMax);
+	//uiManager = UIManager(window, view, littleMax);
 	mainTheme.openFromFile("sounds/Bout Theme.wav");
 }
 
