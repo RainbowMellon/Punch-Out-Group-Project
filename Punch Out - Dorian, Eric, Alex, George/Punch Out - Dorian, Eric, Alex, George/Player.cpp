@@ -57,7 +57,7 @@ void Player::updatePlayer(sf::Event& event)
 	}
 	else if (moveCoolD > 20)
 	{
-
+		sprite.setTextureRect(sf::IntRect(26, 27, 25, 61)); // when it gets to this point change the rect on the texture
 		moveCoolD--;
 	}
 	else if (moveCoolD > 0)
