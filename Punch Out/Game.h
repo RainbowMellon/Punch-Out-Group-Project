@@ -23,9 +23,9 @@ private:
 	sf::View view;
 	Player littleMac;
 	Opponent *opponent;
-	//UIManager uiManager;
+	UIManager UI;
+	sf::RectangleShape fadeout;
 	sf::Music mainTheme;
 	bool isKeyPressed;
 	GlassJoe joe;
 };
-
