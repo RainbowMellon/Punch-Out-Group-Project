@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "UIManager.h"
 #include "Opponent.h"
+#include "GlassJoe.h"
 
 class Game
 {
@@ -20,10 +21,11 @@ public:
 private:
 	int time, points, round, playerKO, oppoKO, state;
 	sf::View view;
-	Player littleMax;
+	Player littleMac;
 	Opponent *opponent;
 	//UIManager uiManager;
 	sf::Music mainTheme;
 	bool isKeyPressed;
+	GlassJoe joe;
 };
 
