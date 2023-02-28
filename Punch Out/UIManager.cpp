@@ -6,7 +6,20 @@
 
 UIManager::UIManager()
 {
+	player = NULL;
+	window = NULL;
+	view = NULL;
 	"punch-out-nes.ttf";
+
+	//player health on screen
+	pHealth.setSize(sf::Vector2f(7, 48));
+	pHealth.setFillColor(sf::Color::Black);
+	pHealth.setOutlineThickness(0);
+
+	//opponent health on screen
+	oHealth.setSize(sf::Vector2f(7, 48));
+	oHealth.setFillColor(sf::Color::Black);
+	oHealth.setOutlineThickness(0);
 }
 
 
@@ -29,6 +42,12 @@ UIManager::UIManager(sf::RenderWindow& newWindow, sf::View& newView, Player& new
   oHealth.setOutlineThickness(0);
 }
 
+void UIManager::setPointers(sf::RenderWindow& window, sf::View& view, Player& player)
+{
+	this->window = &window;
+	this->view = &view;
+	this->player = &player;
+}
 
 UIManager::~UIManager()
 {
