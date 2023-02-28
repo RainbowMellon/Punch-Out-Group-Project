@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <string>
-#include "Game.h"
 #include "Player.h"
 #include "Opponent.h"
 
@@ -12,6 +11,7 @@ public:
   UIManager();
   UIManager(sf::RenderWindow&, sf::View&, Player&);
   ~UIManager();
+  void setPointers(sf::RenderWindow&, sf::View&, Player&);
   void winScreen(float);
   void loseScreen();
   void drawText(std::string);
