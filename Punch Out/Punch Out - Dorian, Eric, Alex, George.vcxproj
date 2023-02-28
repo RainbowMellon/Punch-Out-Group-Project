@@ -137,12 +137,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GlassJoe.cpp" />
+    <ClCompile Include="Opponent.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Punch Out - Dorian, Eric, Alex, George.cpp" />
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GlassJoe.h" />
+    <ClInclude Include="Opponent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="UIManager.h" />
   </ItemGroup>
