@@ -8,7 +8,7 @@ GlassJoe::GlassJoe()
 	stats = "1-99      1 KO";
 	texture.loadFromFile("punchout sprites/GlassJoe.png");
 	sprite.setTexture(texture);
-	sprite.setTextureRect(sf::IntRect(0, 0, 55, 115));
+	sprite.setTextureRect(sf::IntRect(0, 0, 55, 100));
 	//sprite.scale(1.5, 1.5);
 	sprite.setOrigin(55 / 2, 115 / 2);
 	sprite.setPosition(256 / 2, 100);
@@ -19,9 +19,9 @@ void GlassJoe::update(int time)
 	if (time < 4000)
 	{
 		if (time % 400 == 0)
-			sprite.setTextureRect(sf::IntRect(0, 115 * 3, 50, 115));
+			sprite.setTextureRect(sf::IntRect(0, 115 * 3, 50, 100));
 		else
-			sprite.setTextureRect(sf::IntRect(50, 115 * 3, 50, 115));
+			sprite.setTextureRect(sf::IntRect(50, 115 * 3, 50, 100));
 	}
 }
 void GlassJoe::draw(sf::RenderWindow& window)
