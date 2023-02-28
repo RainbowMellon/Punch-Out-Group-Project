@@ -21,7 +21,7 @@ private:
 	int time, points, round, playerKO, oppoKO, state;
 	sf::View view;
 	Player littleMax;
-	//Opponent *opponent;
+	Opponent *opponent;
 	//UIManager uiManager;
 	sf::Music mainTheme;
 	bool isKeyPressed;
