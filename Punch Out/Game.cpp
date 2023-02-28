@@ -1,16 +1,18 @@
 #include "Game.h"
 #include "UIManager.h"
+#include <iostream>
 
 Game::Game(sf::RenderWindow& window, sf::View& view)
 {
+	opponent = &joe;
 	isKeyPressed = false;
 	playerKO = 0;
 	oppoKO = 0;
 	points = 0;
 	round = 1;
 	state = 0;
-	time = 0;
-	//uiManager = UIManager(window, view, littleMax);
+	time = 0; //For timer, first 2 digits are milliseconds, second two are seconds, fifth one is minute 
+	//uiManager = UIManager(window, view, littleMac);
 	mainTheme.openFromFile("sounds/Bout Theme.wav");
 }
 
@@ -30,11 +32,22 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			}
 			view.setCenter(128 + 2, 110 + 2); //center of first + 2 for border
 			//update FightUI, player, Opponent
-			littleMax.updatePlayer(event);
+
+			
+			if (time % 6000 == 0)
+				time += 4000;
+			else
+				time+= 4;
+			littleMac.updatePlayer(event);
+			opponent->update(time);
+
+			//If timer is 3,00,00 (3 minutes) stop the fight and go back to the states screen, increase round as well
 
 			//Draw Player, Opponent, FightUI
-			littleMax.drawPlayer(window);
-			
+			opponent->draw(window);
+			littleMac.drawPlayer(window);
+			std::cout << time << std::endl;
+
 			break;
 		
 		case 1: //Second ring
