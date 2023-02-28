@@ -1,17 +1,19 @@
 #pragma once
 #include <string>
 #include "Player.h"
+#include <SFML/Graphics.hpp>
+
 class Opponent
 {
 public:
 	Opponent(int);
 	Opponent();
 	~Opponent();
-	virtual void update()=0;
-	virtual void draw()=0;
+	virtual void update(int);
+	virtual void draw(sf::RenderWindow&);
 	int getHealth();
-	virtual void setHealth(int) = 0;
-	virtual int getDamage()=0;
+	virtual void setHealth(int);
+	virtual int getDamage();
 	//virtual void wasHit(Player&)=0;  <--somethings broken
 
 
@@ -25,4 +27,3 @@ protected:
 	std::string name, location, stats;
 	//for the screens before and between rounds
 };
-
