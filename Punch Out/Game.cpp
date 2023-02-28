@@ -10,9 +10,12 @@ Game::Game(sf::RenderWindow& window, sf::View& view)
 	oppoKO = 0;
 	points = 0;
 	round = 1;
-	state = 0;
+	state = 3;
 	time = 0; //For timer, first 2 digits are milliseconds, second two are seconds, fifth one is minute 
-	//uiManager = UIManager(window, view, littleMac);
+	fadeout.setSize(sf::Vector2f(256, 240));
+	fadeout.setFillColor(sf::Color(0, 0, 0, 0));
+	fadeout.getFillColor().a;
+	UI.setPointers(window, view, littleMac);
 	mainTheme.openFromFile("sounds/Bout Theme.wav");
 }
 
@@ -23,10 +26,24 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 
 	switch (state) //what ever the current state of the game, game does this. Ex, if we're not in the fight state don't show or update fight screen
 	{	
-		case 0: //First ring
+		case 0: //Main menu
+
+			break;
+		case 1: //Stats screen
+			
+			//draw states, if round >= 2, draw the opponents and docs quotes
+
+			//when enter is press, scroll down to round image, fade in black box, then switch states
+
+			break;
+
+		case 2: //view transistion? I might make stats screen absorb this
+
+			break;
+		case 3: //Fight screen
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) && !isKeyPressed)
 			{
-				state = 1;
+				state = 4;
 				isKeyPressed = true;
 				mainTheme.stop();
 			}
@@ -34,27 +51,31 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			//update FightUI, player, Opponent
 
 			
-			if (time % 6000 == 0)
+			if (time % 6000 == 0 && time != 0)
 				time += 4000;
 			else
-				time+= 4;
+				time+= 3;
 			littleMac.updatePlayer(event);
 			opponent->update(time);
 
 			//If timer is 3,00,00 (3 minutes) stop the fight and go back to the states screen, increase round as well
+
+
+			//if the timer is 3 minutes and it's round three, go to the disision screen.
 
 			//Draw Player, Opponent, FightUI
 			opponent->draw(window);
 			littleMac.drawPlayer(window);
 			std::cout << time << std::endl;
 
+			//If the opponent or player is KOed, go to win or lose screen
 			break;
 		
-		case 1: //Second ring
+		case 4: //Second ring
 			view.setCenter(384 + 3, 110 + 2); //center of second + 3 for border
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) && !isKeyPressed)
 			{
-				state = 0;
+				state = 3;
 				isKeyPressed = true;
 				mainTheme.play();
 			}
