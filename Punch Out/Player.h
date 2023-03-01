@@ -15,6 +15,7 @@ public:
 	int getHealth();
 	int getDamage();
 	int getStarCount();
+	bool isPunching();
 	//void wasHit(Opponent);  <--somethings broken
 
 private:
