@@ -33,20 +33,20 @@ void Player::updatePlayer(sf::Event& event)
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::A) && moveCoolD <= 0) && !keyPressed) //Move right
 	{
 		keyPressed = true;
-		moveCoolD = 50;
+		moveCoolD = 30;
 		dir = -2;
 		sound.play();
 	}
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::D) && moveCoolD <= 0) && !keyPressed) //move left
 	{
 		keyPressed = true;
-		moveCoolD = 50;
+		moveCoolD = 30;
 		dir = 2;
 		sound.play();
 	}
 
 
-	if (moveCoolD > 30)
+	if (moveCoolD > 15)
 	{
 		if (dir < 0)
 			sprite.setTextureRect(sf::IntRect(50, 100, 25, 61)); // when it gets to this point change the rect on the texture
@@ -55,10 +55,11 @@ void Player::updatePlayer(sf::Event& event)
 		sprite.move(sf::Vector2f(dir, 0));
 		moveCoolD--;
 	}
-	else if (moveCoolD > 20)
+	else if (moveCoolD > 10)
 	{
 		sprite.setTextureRect(sf::IntRect(26, 27, 25, 61)); // when it gets to this point change the rect on the texture
 		moveCoolD--;
+		sprite.move(sf::Vector2f(dir * -1, 0));
 	}
 	else if (moveCoolD > 0)
 	{
@@ -69,5 +70,7 @@ void Player::updatePlayer(sf::Event& event)
 }
 
 Player::~Player() {}
+
+
 
 
