@@ -33,6 +33,13 @@ void Player::updatePlayer(sf::Event& event)
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::P) && moveCoolD <= 0) && !keyPressed) //punch forward
 	{
 		keyPressed = punching = true;
+		dir = 1;//right punch
+		moveCoolD = 20;
+	}
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::O) && moveCoolD <= 0) && !keyPressed)
+	{
+		keyPressed = punching = true;
+		dir = -1;//left punch
 		moveCoolD = 20;
 	}
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::A) && moveCoolD <= 0) && !keyPressed) //Move right
@@ -50,30 +57,65 @@ void Player::updatePlayer(sf::Event& event)
 		sound.play();
 	}
 
+
+
+
 	if (punching)
 	{
-		if (moveCoolD > 15)
+		if (dir == 1)
 		{
-			sprite.setTextureRect(sf::IntRect(278, 25, 25, 61)); //punching forward sprite
-			moveCoolD--;
+			if(moveCoolD == 20)
+				sprite.scale(-1, 1);
+			if (moveCoolD > 15)
+			{
+				sprite.setTextureRect(sf::IntRect(132, 23, 27, 61)); //punching forward sprite
+				moveCoolD--;
+			}
+			else if (moveCoolD > 10)
+			{
+				sprite.setTextureRect(sf::IntRect(163, 23, 28, 64));
+				moveCoolD--;
+			}
+			else if (moveCoolD > 0)
+			{
+				sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
+				if (moveCoolD == 10)
+					sprite.move(0, -10);
+				moveCoolD--;
+			}
+			if (moveCoolD == 0)
+			{
+				sprite.move(0, 10);
+				sprite.scale(-1, 1);
+				punching = false;
+				sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
+			}
 		}
-		else if (moveCoolD > 10)
+		else if (dir == -1)
 		{
-			sprite.setTextureRect(sf::IntRect(314, 23, 28, 64));
-			//sprite.move(sf::Vector2f(0, -1));
-			moveCoolD--;
-		}
-		else if (moveCoolD > 0)
-		{
-			sprite.setTextureRect(sf::IntRect(349, 17, 25, 67));
-			//if(moveCoolD <= 5)
-			//	sprite.move(sf::Vector2f(0, 1));
-			moveCoolD--;
-		}
-		if (moveCoolD == 0)
-		{
-			punching = false;
-			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
+			if (moveCoolD > 15)
+			{
+				sprite.setTextureRect(sf::IntRect(132, 23, 27, 61)); //punching forward sprite
+				moveCoolD--;
+			}
+			else if (moveCoolD > 10)
+			{
+				sprite.setTextureRect(sf::IntRect(163, 23, 28, 64));
+				moveCoolD--;
+			}
+			else if (moveCoolD > 0)
+			{
+				sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
+				if (moveCoolD == 10)
+					sprite.move(0, -10);
+				moveCoolD--;
+			}
+			if (moveCoolD == 0)
+			{
+				sprite.move(0, 10);
+				punching = false;
+				sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
+			}
 		}
 	}
 
@@ -101,6 +143,11 @@ void Player::updatePlayer(sf::Event& event)
 			moveCoolD--;
 		}
 	}
+}
+
+bool Player::isPunching()
+{
+	return punching;
 }
 
 Player::~Player() {}
