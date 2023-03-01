@@ -30,6 +30,11 @@ void Player::updatePlayer(sf::Event& event)
 		keyPressed = false;
 
 
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::P) && moveCoolD <= 0) && !keyPressed) //punch forward
+	{
+		keyPressed = punching = true;
+		moveCoolD = 20;
+	}
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::A) && moveCoolD <= 0) && !keyPressed) //Move right
 	{
 		keyPressed = true;
@@ -45,32 +50,59 @@ void Player::updatePlayer(sf::Event& event)
 		sound.play();
 	}
 
+	if (punching)
+	{
+		if (moveCoolD > 15)
+		{
+			sprite.setTextureRect(sf::IntRect(278, 25, 25, 61)); //punching forward sprite
+			moveCoolD--;
+		}
+		else if (moveCoolD > 10)
+		{
+			sprite.setTextureRect(sf::IntRect(314, 23, 28, 64));
+			//sprite.move(sf::Vector2f(0, -1));
+			moveCoolD--;
+		}
+		else if (moveCoolD > 0)
+		{
+			sprite.setTextureRect(sf::IntRect(349, 17, 25, 67));
+			//if(moveCoolD <= 5)
+			//	sprite.move(sf::Vector2f(0, 1));
+			moveCoolD--;
+		}
+		if (moveCoolD == 0)
+		{
+			punching = false;
+			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
+		}
+	}
 
-	if (moveCoolD > 15)
+	else //if they aren't punching they're moving
 	{
-		if (dir < 0)
-			sprite.setTextureRect(sf::IntRect(50, 100, 25, 61)); // when it gets to this point change the rect on the texture
-		else
-			sprite.setTextureRect(sf::IntRect(100, 100, 25, 61));
-		sprite.move(sf::Vector2f(dir, 0));
-		moveCoolD--;
-	}
-	else if (moveCoolD > 10)
-	{
-		sprite.setTextureRect(sf::IntRect(26, 27, 25, 61)); // when it gets to this point change the rect on the texture
-		moveCoolD--;
-		sprite.move(sf::Vector2f(dir * -1, 0));
-	}
-	else if (moveCoolD > 0)
-	{
-		sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
-		sprite.move(sf::Vector2f(dir * -1, 0));
-		moveCoolD--;
+		if (moveCoolD > 15)
+		{
+			if (dir < 0)
+				sprite.setTextureRect(sf::IntRect(50, 100, 25, 61)); // when it gets to this point change the rect on the texture
+			else
+				sprite.setTextureRect(sf::IntRect(100, 100, 25, 61));
+			sprite.move(sf::Vector2f(dir, 0));
+			moveCoolD--;
+		}
+		else if (moveCoolD > 10)
+		{
+			sprite.setTextureRect(sf::IntRect(26, 27, 25, 61)); // when it gets to this point change the rect on the texture
+			sprite.move(dir * -1, 0);
+			moveCoolD--;
+		}
+		else if (moveCoolD > 0)
+		{
+			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
+			sprite.move(sf::Vector2f(dir * -1, 0));
+			moveCoolD--;
+		}
 	}
 }
 
 Player::~Player() {}
-
-
 
 
