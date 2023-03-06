@@ -36,6 +36,13 @@ int Opponent::getHealth()
 	return health;
 }
 
+
+int Opponent::getStamina()
+{
+	return stamina;
+}
+
+
 Opponent::~Opponent()
 {}
 
