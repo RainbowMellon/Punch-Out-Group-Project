@@ -118,4 +118,8 @@ int Game::getOppoKO()
 
 	return 2;
 }
+int getRound()
+{
+	return round;
+}
 Game::~Game(){}
