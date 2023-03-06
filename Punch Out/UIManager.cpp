@@ -87,7 +87,7 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock)
 	font.loadFromFile("punch-out-nes.ttf");
 
 	std::string starCount_str, stamina_str, clock_str;
-	int starCount, stamina;
+	int starCount, stamina, second, minute;
 	float playerHealth;
 
 	//star count num
@@ -115,12 +115,22 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock)
 	(*window).draw(pHealth);
 
 	//clock
-	clock_str = std::to_string(clock);
+	//	second
+	minute = clock / 10000;
+	second = (clock / 100) - (minute * 100);
+	clock_str = std::to_string(second);
+	if (second < 10)
+		clock_str = "0" + clock_str;
 	text.setString(clock_str);
-	text.setPosition(210, 18); 
+	text.setPosition(226, 18);
 	text.setScale(0.08, 0.08);
 	(*window).draw(text);
-
+	//	minute
+	clock_str = std::to_string(minute);
+	text.setString(clock_str);
+	text.setPosition(210, 18);
+	text.setScale(0.08, 0.08);
+	(*window).draw(text);
 }
 
 

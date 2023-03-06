@@ -23,13 +23,14 @@ void Player::drawPlayer(sf::RenderWindow& window)
 	window.draw(sprite);
 }
 
+
 void Player::updatePlayer(sf::Event& event)
 {
 
 	if (event.type == sf::Event::KeyReleased) //No repeating keys if key is held down
 		keyPressed = false;
 
-
+	
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::P) && moveCoolD <= 0) && !keyPressed) //punch forward
 	{
 		keyPressed = punching = true;
@@ -122,7 +123,7 @@ void Player::updatePlayer(sf::Event& event)
 			blocking = false;
 		}
 	}
-
+	
 	else if (punching && dir != 10)
 	{
 		if(moveCoolD == 20 && dir == 1)//mirrors the sprite if it's right punching
