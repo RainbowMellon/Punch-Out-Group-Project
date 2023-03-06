@@ -14,9 +14,9 @@ GlassJoe::GlassJoe()
 	srand(time(NULL));
 }
 
-void GlassJoe::update(int time, Game& game)
+void GlassJoe::update(int time, int round)
 {
-	if (game.getRound() == 1)
+	if (round == 1)
 	{
 		if (time < 4000)
 			idle(time);
