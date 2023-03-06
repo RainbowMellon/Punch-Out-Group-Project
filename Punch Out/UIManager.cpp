@@ -12,12 +12,12 @@ UIManager::UIManager()
 	"punch-out-nes.ttf";
 
 	//player health on screen
-	pHealth.setSize(sf::Vector2f(7, 48));
+	pHealth.setSize(sf::Vector2f(48, 7));
 	pHealth.setFillColor(sf::Color::Black);
 	pHealth.setOutlineThickness(0);
 
 	//opponent health on screen
-	oHealth.setSize(sf::Vector2f(7, 48));
+	oHealth.setSize(sf::Vector2f(48, 7));
 	oHealth.setFillColor(sf::Color::Black);
 	oHealth.setOutlineThickness(0);
 }
