@@ -56,70 +56,105 @@ void Player::updatePlayer(sf::Event& event)
 		dir = 2;
 		sound.play();
 	}
-
-
-
-
-	if (punching)
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::S) && moveCoolD <= 0) && !keyPressed)
+    {
+		keyPressed = true;
+		moveCoolD = 15;
+		blocking = true;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && moveCoolD > 0 && blocking && !keyPressed)
 	{
-		if (dir == 1)
+		keyPressed = true;
+		moveCoolD = 20;
+		blocking = false;
+		dodging = true;
+
+	}
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W) && moveCoolD <= 0) && !keyPressed)
+	{
+		punching = true;
+		moveCoolD = 30;
+		dir = 10;
+		upper = true;
+	}
+
+	if (upper)
+	{
+		if (moveCoolD > 25)
 		{
-			if(moveCoolD == 20)
-				sprite.scale(-1, 1);
-			if (moveCoolD > 15)
-			{
-				sprite.setTextureRect(sf::IntRect(132, 23, 27, 61)); //punching forward sprite
-				moveCoolD--;
-			}
-			else if (moveCoolD > 10)
-			{
-				sprite.setTextureRect(sf::IntRect(163, 23, 28, 64));
-				moveCoolD--;
-			}
-			else if (moveCoolD > 0)
-			{
-				sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
-				if (moveCoolD == 10)
-					sprite.move(0, -10);
-				moveCoolD--;
-			}
-			if (moveCoolD == 0)
-			{
-				sprite.move(0, 10);
-				sprite.scale(-1, 1);
-				punching = false;
-				sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
-			}
+			sprite.setTextureRect(sf::IntRect(125,26,25,61));
+			moveCoolD--;
 		}
-		else if (dir == -1)
+		if (moveCoolD > 0)
+			moveCoolD--;
+		if (moveCoolD <= 0)
 		{
-			if (moveCoolD > 15)
-			{
-				sprite.setTextureRect(sf::IntRect(132, 23, 27, 61)); //punching forward sprite
-				moveCoolD--;
-			}
-			else if (moveCoolD > 10)
-			{
-				sprite.setTextureRect(sf::IntRect(163, 23, 28, 64));
-				moveCoolD--;
-			}
-			else if (moveCoolD > 0)
-			{
-				sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
-				if (moveCoolD == 10)
-					sprite.move(0, -10);
-				moveCoolD--;
-			}
-			if (moveCoolD == 0)
-			{
-				sprite.move(0, 10);
-				punching = false;
-				sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
-			}
+			upper = false;
+			punching = false;
+			//sprite.setTextureRect(sf::IntRect(0, 27, 26, 61));
 		}
 	}
 
-	else //if they aren't punching they're moving
+	else if (dodging)
+	{
+		if (moveCoolD > 0)
+		{
+			sprite.setTextureRect(sf::IntRect(399, 100, 25, 61));
+			moveCoolD--;
+		}
+		else
+		{
+			sprite.setTextureRect(sf::IntRect(0, 26, 25, 61));
+			dodging = false;
+		}
+	}
+
+	else if (blocking)
+	{
+		if (moveCoolD > 0)
+		{
+			sprite.setTextureRect(sf::IntRect(374, 100, 25, 61));
+			moveCoolD--;
+		}
+		else
+		{
+			sprite.setTextureRect(sf::IntRect(0, 26, 25, 61));
+			blocking = false;
+		}
+	}
+
+	else if (punching && dir != 10)
+	{
+		if(moveCoolD == 20 && dir == 1)//mirrors the sprite if it's right punching
+			sprite.scale(-1, 1);
+		if (moveCoolD > 15)
+		{
+			sprite.setTextureRect(sf::IntRect(132, 23, 27, 61));
+			moveCoolD--;
+		}
+		else if (moveCoolD > 10)
+		{
+			sprite.setTextureRect(sf::IntRect(163, 23, 28, 64));
+			moveCoolD--;
+		}
+		else if (moveCoolD > 0)
+		{
+			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
+			if (moveCoolD == 10 && !upper)
+				sprite.move(0, -10);
+			moveCoolD--;
+		}
+		if (moveCoolD == 0)
+		{
+			sprite.move(0, 10);
+			if(dir == 1)
+				sprite.scale(-1, 1);
+			punching = false;
+			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
+		}
+	}
+
+	else  //if they aren't punching they're moving
 	{
 		if (moveCoolD > 15)
 		{
@@ -157,12 +192,15 @@ int Player::getStarCount()
 	return starCount;
 }
 
-
 bool Player::isPunching()
 {
-	return punching;
+	return(punching && moveCoolD > 10 && moveCoolD < 15);
+}
+
+
+bool Player::isBlocking()
+{
+	return blocking;
 }
 
 Player::~Player() {}
-
-

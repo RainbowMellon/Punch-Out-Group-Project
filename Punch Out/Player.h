@@ -16,13 +16,16 @@ public:
 	int getDamage();
 	int getStarCount();
 	bool isPunching();
+	bool isBlocking();
 	//void wasHit(Opponent);  <--somethings broken
 
 private:
 	sf::Sprite sprite;
 	sf::Texture texture;
+  
 	int moveCoolD, dir, starCount, damage, health, maxStamina;
 	bool isWinded, keyPressed, punching;
+  
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
 };
