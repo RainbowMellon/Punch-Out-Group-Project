@@ -21,7 +21,7 @@ public:
 private:
 	sf::Sprite sprite;
 	sf::Texture texture;
-	int moveCoolD, dir, starCount, damage, health;
+	int moveCoolD, dir, starCount, damage, health, maxStamina;
 	bool isWinded, keyPressed, punching;
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
