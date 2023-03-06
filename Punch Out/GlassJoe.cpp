@@ -26,7 +26,7 @@ void GlassJoe::update(int time, Game& game)
 			jab(time);
 		}
 
-		/*else if (time >= 5000)
+		/*else if (time >= 5000) not working correctly
 		{
 
 			if (rand() % 5 != 0)
