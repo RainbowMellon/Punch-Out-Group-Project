@@ -145,6 +145,19 @@ void Player::updatePlayer(sf::Event& event)
 	}
 }
 
+
+int Player::getHealth()
+{
+	return health;
+}
+
+
+int Player::getStarCount()
+{
+	return starCount;
+}
+
+
 bool Player::isPunching()
 {
 	return punching;
