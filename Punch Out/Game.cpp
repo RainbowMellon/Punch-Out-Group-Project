@@ -66,7 +66,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			//Draw Player, Opponent, FightUI
 			opponent->draw(window);
 			littleMac.drawPlayer(window);
-			UI.drawStats(littleMac, *opponent);
+			UI.drawStats(littleMac, *opponent, time);
 			std::cout << time << std::endl;
 
 			//If the opponent or player is KOed, go to win or lose screen
