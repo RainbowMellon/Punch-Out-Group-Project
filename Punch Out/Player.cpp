@@ -181,7 +181,17 @@ void Player::updatePlayer(sf::Event& event)
 }
 
 
-//returns whether or not mac's punch should hurt the opponent 
+int Player::getHealth()
+{
+	return health;
+}
+
+
+int Player::getStarCount()
+{
+	return starCount;
+}
+
 bool Player::isPunching()
 {
 	return(punching && moveCoolD > 10 && moveCoolD < 15);

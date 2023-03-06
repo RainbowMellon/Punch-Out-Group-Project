@@ -22,8 +22,10 @@ public:
 private:
 	sf::Sprite sprite;
 	sf::Texture texture;
-	int moveCoolD, dir, startCount, damage, health;
-	bool isWinded, keyPressed, punching, blocking, dodging, upper;
+  
+	int moveCoolD, dir, starCount, damage, health, maxStamina;
+	bool isWinded, keyPressed, punching;
+  
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
 };

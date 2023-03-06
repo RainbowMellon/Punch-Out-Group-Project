@@ -12,6 +12,7 @@ public:
 	virtual void update(int);
 	virtual void draw(sf::RenderWindow&);
 	int getHealth();
+	int getStamina();
 	virtual void setHealth(int);
 	virtual int getDamage();
 	//virtual void wasHit(Player&)=0;  <--somethings broken
