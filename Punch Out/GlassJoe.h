@@ -7,7 +7,7 @@ class GlassJoe : public Opponent
 public:
 	GlassJoe();
 	~GlassJoe();
-	void update(int time, Game&);
+	void update(int time, int round);
 	void draw(sf::RenderWindow&);
 	int getHealth();
 	int getDamage();
