@@ -17,6 +17,7 @@ public:
 	void setPlayerKO();
 	int getOppoKO();
 	void setOppoKO();
+	int getRound();//needed for opponent's patterns
 
 private:
 	int time, points, round, playerKO, oppoKO, state;
