@@ -7,7 +7,7 @@ class GlassJoe : public Opponent
 public:
 	GlassJoe();
 	~GlassJoe();
-	void update(int time, int round);
+	void update(int time, Player& );
 	void draw(sf::RenderWindow&);
 	int getHealth();
 	int getDamage();
@@ -19,7 +19,7 @@ public:
 	
 
 private:
-	int health, stamina, canDodgeCD, cantDodgeCD, rank, age, weight;
+	int health, stamina, canDodgeCD, cantDodgeCD, rank, age, weight,punch;
 	bool isInPattern, isStunned;
 	std::string name, location, stats;
 	sf::Sprite sprite;
