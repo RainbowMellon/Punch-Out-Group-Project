@@ -7,6 +7,7 @@ Player::Player()
 	keyPressed = false;
 	moveCoolD = 0;
 	dir = 0;
+	health = 16;
 	texture.loadFromFile("punchout sprites/little-mac.png"); //FullSpriteSheet
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0, 27, 25, 61)); //Just a rectangle covering the sprite sheet
