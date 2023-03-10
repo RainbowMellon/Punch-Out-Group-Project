@@ -24,7 +24,7 @@ private:
 	sf::Texture texture;
   
 	int moveCoolD, dir, starCount, damage, health, maxStamina;
-	bool isWinded, keyPressed, punching, blocking, dodging, upper;
+	bool isWinded, keyPressed, punching , blocking, upper, dodging;
   
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
