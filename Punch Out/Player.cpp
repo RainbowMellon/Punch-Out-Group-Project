@@ -11,9 +11,9 @@ Player::Player()
 	texture.loadFromFile("punchout sprites/little-mac.png"); //FullSpriteSheet
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0, 27, 25, 61)); //Just a rectangle covering the sprite sheet
-	sprite.scale(1.2, 1.2);
+	sprite.scale(1.1, 1.1);
 	sprite.setOrigin(25 / 2, 61 / 2);
-	sprite.setPosition(256 / 2, 240 * 0.75);
+	sprite.setPosition(256 / 2, 240 * 0.75 - 10);
 	buffer.loadFromFile("sounds/Dodge.flac");
 	sound.setBuffer(buffer);
 }
@@ -23,10 +23,9 @@ void Player::drawPlayer(sf::RenderWindow& window)
 	window.draw(sprite);
 }
 
-
 void Player::updatePlayer(sf::Event& event)
 {
-	sprite.setScale(1.2, 1.2);
+	sprite.setScale(1.1, 1.1);
 
 
 	if (event.type == sf::Event::KeyReleased) //No repeating keys if key is held down
@@ -58,7 +57,6 @@ void Player::updatePlayer(sf::Event& event)
 			upper = true;
 		}
 	}
-
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::A) && moveCoolD <= 0) && !keyPressed) //Move right
 	{
 		keyPressed = true;
@@ -121,14 +119,12 @@ void Player::updatePlayer(sf::Event& event)
 		keyPressed = true;
 		isWinded = !isWinded;
 		moveCoolD = 5;
-		aniCoolD = 300;
+		aniCoolD = 200;
 		action = 12;
 	}
 
 	/*
 	To-Do:
-	Fix the clunky ass uppercut animation
-	Create star uppercut
 	make isPpunching work correctly
 	*/
 
@@ -143,7 +139,7 @@ void Player::updatePlayer(sf::Event& event)
 	{
 	case 1://forward right punch
 	{
-		sprite.setScale(-1.2, 1.2);
+		sprite.setScale(-1.1, 1.1);
 		if (moveCoolD > 15)
 		{
 			sprite.setTextureRect(sf::IntRect(132, 23, 27, 61));
@@ -158,6 +154,7 @@ void Player::updatePlayer(sf::Event& event)
 		else if (moveCoolD > 0)
 		{
 			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
+			punch = 1;
 			if (moveCoolD == 10)
 				sprite.move(0, -10);
 			moveCoolD--;
@@ -165,6 +162,7 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		if (moveCoolD == 0)
 		{
+			punch = 0;
 			sprite.scale(-1, 1);
 			sprite.move(0, 10);
 			action = 0;
@@ -186,6 +184,7 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		else if (moveCoolD > 0)
 		{
+			punch = 2;
 			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
 			if (moveCoolD == 10)
 				sprite.move(0, -10);
@@ -193,6 +192,7 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		if (moveCoolD == 0)
 		{
+			punch = 0;
 			sprite.move(0, 10);
 			action = 0;
 			punch = 0;
@@ -202,44 +202,49 @@ void Player::updatePlayer(sf::Event& event)
 	}
 	case 3://upper right punch
 	{
-		sprite.setScale(-1.2, 1.2);
+		sprite.setScale(-1.1, 1.1);
 		if (moveCoolD > 25)
 		{
 			sprite.setTextureRect(sf::IntRect(132, 23, 26, 61));
-			moveCoolD--;
 		}
 		else if (moveCoolD > 20)
 		{
-			sprite.move(0, -1.5);
+			if (moveCoolD == 25)
+				sprite.move(0, -5);
 			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
-			moveCoolD--;
 		}
 		else if (moveCoolD > 15)
 		{
-			sprite.move(0, -1.5);
-			sprite.setTextureRect(sf::IntRect(191, 19, 28, 65));
-			moveCoolD--;
+			if (moveCoolD == 20)
+				sprite.move(0, -10);
+			sprite.setTextureRect(sf::IntRect(191, 19, 28, 70));
+		}
+		else if (moveCoolD > 10)
+		{
+			if (moveCoolD == 15)
+				sprite.move(0, -10);
+			punch = 3;
+			sprite.setTextureRect(sf::IntRect(216,7,28,83));
 		}
 		else if (moveCoolD > 5)
 		{
-			moveCoolD--;
-			sprite.move(0, 1.5);
+			punch = 0;
+			if (moveCoolD == 10)
+				sprite.move(0, 20);
 			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
 		}
 		else if (moveCoolD > 0)
 		{
-			sprite.setTextureRect(sf::IntRect(132, 23, 26, 61));
-			moveCoolD--;
+			if (moveCoolD == 5)
+				sprite.move(0, 5);
+			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
 		}
 		else if (moveCoolD <= 0)
 		{
-			action = 0;
-			upper = false;
-			punch = 0;
 			sprite.setTextureRect(sf::IntRect(0, 27, 26, 61));
-
-			sprite.setScale(1.2, 1.2);
+			action = 0;
 		}
+		moveCoolD--;
 		break;
 	}
 	case 4://upper left punch
@@ -247,38 +252,45 @@ void Player::updatePlayer(sf::Event& event)
 		if (moveCoolD > 25)
 		{
 			sprite.setTextureRect(sf::IntRect(132, 23, 26, 61));
-			moveCoolD--;
 		}
 		else if (moveCoolD > 20)
 		{
-			sprite.move(0, -1.5);
+			if (moveCoolD == 25)
+				sprite.move(0, -5);
 			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
-			moveCoolD--;
 		}
 		else if (moveCoolD > 15)
 		{
-			sprite.move(0, -1.5);
-			sprite.setTextureRect(sf::IntRect(191, 19, 28, 65));
-			moveCoolD--;
+			if (moveCoolD == 20)
+				sprite.move(0, -10);
+			sprite.setTextureRect(sf::IntRect(191, 19, 28, 70));
+		}
+		else if (moveCoolD > 10)
+		{
+			punch = 4;
+			if (moveCoolD == 15)
+				sprite.move(0, -10);
+			sprite.setTextureRect(sf::IntRect(216, 7, 28, 83));
 		}
 		else if (moveCoolD > 5)
 		{
-			moveCoolD--;
-			sprite.move(0, 1.5);
+			punch = 0;
+			if (moveCoolD == 10)
+				sprite.move(0, 20);
 			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
 		}
 		else if (moveCoolD > 0)
 		{
-			sprite.setTextureRect(sf::IntRect(132, 23, 26, 61));
-			moveCoolD--;
+			if (moveCoolD == 5)
+				sprite.move(0, 5);
+			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
 		}
 		else if (moveCoolD <= 0)
 		{
-			action = 0;
-			upper = false;
-			punch = 0;
 			sprite.setTextureRect(sf::IntRect(0, 27, 26, 61));
+			action = 0;
 		}
+		moveCoolD--;
 		break;
 	}
 	case 5://blocking
@@ -406,10 +418,12 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		else if (moveCoolD > 15)
 		{
+			punch = 5;
 			sprite.setTextureRect(sf::IntRect(400, 0, 31, 85));
 		}
 		else if (moveCoolD > 10)
 		{
+			punch = 0;
 			sprite.setTextureRect(sf::IntRect(376, 5, 24, 85));
 		}
 		else if (moveCoolD > 5)
@@ -460,7 +474,7 @@ void Player::updatePlayer(sf::Event& event)
 	}
 	case 11://punched left
 	{
-		sprite.setScale(-1.2, 1.2);
+		sprite.setScale(-1.1, 1.1);
 		if (moveCoolD > 13)
 		{
 			sprite.setTextureRect(sf::IntRect(150, 100, 29, 62));
@@ -478,8 +492,8 @@ void Player::updatePlayer(sf::Event& event)
 		{
 			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
 			action = 0;
-			sprite.setPosition(256 / 2, 240 * 0.75);
-			sprite.setScale(1.2, 1.2);
+			sprite.setPosition(256 / 2, 240 * 0.75 - 10);
+			sprite.setScale(1.1, 1.1);
 		}
 		moveCoolD--;
 		break;
