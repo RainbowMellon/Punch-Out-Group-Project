@@ -80,12 +80,12 @@ void UIManager::drawText(std::string text)
 
 //pass a refrence to the opponent to access the states
 //used for while fighting
-void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int stage)
+void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int stage, int round)
 {
 	sf::Font font;
 	font.loadFromFile("punch-out-nes.ttf");
 
-	std::string starCount_str, stamina_str, clock_str;
+	std::string starCount_str, stamina_str, clock_str, round_str;
 	int starCount, stamina, second, minute;
 	float playerHealth = 1, opponentHealth = 1;
 	//facilitates the different views
@@ -94,7 +94,8 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int sta
 		playerHB_pos(138, 18),
 		opponentHB_pos(146, 18),
 		sec_pos(226, 18),
-		min_pos(210, 18);
+		min_pos(210, 18),
+		round_pos(237, 28);
 
 	switch (stage)
 	{
@@ -107,6 +108,7 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int sta
 		opponentHB_pos.x += 257;
 		min_pos.x += 257;
 		sec_pos.x += 257;
+		round_pos.x += 257;
 	}
 	//star count num
 	starCount = player.getStarCount();
@@ -124,6 +126,13 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int sta
 	text.setPosition(stamina_pos);
 	text.setScale(0.1, 0.1);
 	text.setString(stamina_str);
+	(*window).draw(text);
+
+	//round
+	round_str = std::to_string(round);
+	text.setString(round_str);
+	text.setPosition(round_pos);
+	text.setScale(0.06, 0.06);
 	(*window).draw(text);
 
 	//player healthBar

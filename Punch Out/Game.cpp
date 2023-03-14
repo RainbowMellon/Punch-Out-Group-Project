@@ -71,7 +71,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			//Draw Player, Opponent, FightUI
 			opponent->draw(window);
 			littleMac.drawPlayer(window);
-			UI.drawStats(littleMac, *opponent, time, 1);
+			UI.drawStats(littleMac, *opponent, time, 1, round);
 			std::cout << time << std::endl;
 
 			//If the opponent or player is KOed, go to win or lose screen
@@ -82,10 +82,11 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) && !isKeyPressed)
 			{
 				state = 3;
+				round++;
 				isKeyPressed = true;
 				mainTheme.play();
 			}
-			UI.drawStats(littleMac, *opponent, time, 2);
+			UI.drawStats(littleMac, *opponent, time, 2, round);
 			break;
 	
 		
