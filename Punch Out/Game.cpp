@@ -61,7 +61,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			else
 				time+= 3;
 			littleMac.updatePlayer(event);
-			opponent->update(time);
+			opponent->update(time, littleMac);
 
 			//If timer is 3,00,00 (3 minutes) stop the fight and go back to the states screen, increase round as well
 

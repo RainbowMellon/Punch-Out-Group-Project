@@ -16,7 +16,7 @@ int main()
   //Loading stage sprite sheet
   sf::Texture stageT;
   sf::Sprite stageS;
-  stageT.loadFromFile("punchout sprites/stage_SpriteSheet.png");
+  stageT.loadFromFile("punchout sprites/stage_SpriteSheet1.png");
   stageS.setTexture(stageT);
   stageS.setTextureRect(sf::IntRect(0, 0, 1280, 960));
 
