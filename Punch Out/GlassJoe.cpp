@@ -12,8 +12,8 @@ GlassJoe::GlassJoe()
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0, 0, 55, 100));
 	sprite.setOrigin(55 / 2, 115 / 2);
-	sprite.setPosition(124, 100);
-	srand(time(NULL));
+	sprite.setPosition(124, 240*.75 +20);
+	sprite.setScale(.95, .95);
 }
 
 /*
@@ -26,7 +26,6 @@ void GlassJoe::update(int time, Player& mac)
 	{
 		if (time < 4000)
 			idle(time);
-		
 
 		else if (time < 4500)
 		{
@@ -34,16 +33,15 @@ void GlassJoe::update(int time, Player& mac)
 		}
 		else
 		{
-				if (time % 1000 < 500)
-					idle(time);
+			if (time % 1000 < 500)
+				idle(time);
+			else
+			{
+				if (time % 4000 < 3000)
+					hook(time);
 				else
-				{
-					int r = rand() % 5;
-					if (r == 0)
-						jab(time);
-					else
-						hook(time);
-				}
+					jab(time);
+			}
 		}
 	}
 		
@@ -55,25 +53,25 @@ void GlassJoe::idle(int time)//joe's idle animation before vive la france
 	if (time % 150 < 50)//timing on these doesn't exactly line up, need to look at it more
 	{
 		sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
-		sprite.setPosition(128, 100);
+		sprite.setPosition(148, 125);
 	}
 
 	else if (time % 150 < 75)
 	{
 		sprite.setTextureRect(sf::IntRect(474, 17, 31, 94));
-		sprite.setPosition(132, 100);
+		sprite.setPosition(152, 125);
 	}
 
 	else if (time % 150< 125)
 	{
 		sprite.setTextureRect(sf::IntRect(430, 13, 31, 98));
-		sprite.setPosition(136, 100);
+		sprite.setPosition(156, 125);
 	}
 
 	else if (time % 150 < 150)
 	{
 		sprite.setTextureRect(sf::IntRect(474, 17, 31, 94));
-		sprite.setPosition(132, 100);
+		sprite.setPosition(152, 125);
 	}
 
 
@@ -202,7 +200,15 @@ int GlassJoe::getDamage()
 
 void GlassJoe::wasHit(Player& mac)
 {
-	
+	if (mac.isPunching() == 1)
+	{
+		if (timesHit <= 4)
+		{
+			if()
+			sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
+		}
+			
+	}
 }
 
 GlassJoe::~GlassJoe()
