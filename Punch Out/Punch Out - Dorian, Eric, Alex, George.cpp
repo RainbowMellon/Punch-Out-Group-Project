@@ -18,7 +18,7 @@ int main()
   sf::Sprite stageS;
   stageT.loadFromFile("punchout sprites/stage_SpriteSheet.png");
   stageS.setTexture(stageT);
-  stageS.setTextureRect(sf::IntRect(0, 0, 1024, 960));
+  stageS.setTextureRect(sf::IntRect(0, 0, 1280, 960));
 
   Game game(window, view);
 

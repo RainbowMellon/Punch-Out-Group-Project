@@ -10,7 +10,7 @@ Game::Game(sf::RenderWindow& window, sf::View& view)
 	oppoKO = 0;
 	points = 0;
 	round = 1;
-	state = 3;
+	state = 0;
 	time = 0; //For timer, first 2 digits are milliseconds, second two are seconds, fifth one is minute 
 	fadeout.setSize(sf::Vector2f(256, 240));
 	fadeout.setFillColor(sf::Color(0, 0, 0, 0));
@@ -27,7 +27,12 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 	switch (state) //what ever the current state of the game, game does this. Ex, if we're not in the fight state don't show or update fight screen
 	{	
 		case 0: //Main menu
-
+			view.setCenter(898 + 5, 110 + 2); //center of first + borders
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+			{
+				//do transitions
+				state = 3;
+			}
 			break;
 		case 1: //Stats screen
 			
