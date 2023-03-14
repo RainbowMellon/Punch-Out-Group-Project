@@ -1,0 +1,41 @@
+
+*.vsidx
+*.vsidx
+*.vsidx
+*.lock
+*.db
+*.db-shm
+*.db-wal
+*.ipch
+*.pdb
+*.exe
+*.opendb
+.vs/Punch Out - Dorian, Eric, Alex, George/v17/.suo
+*.vsidx
+Debug/Punch Out - Dorian, Eric, Alex, George.exe
+.vs/Punch Out - Dorian, Eric, Alex, George/FileContentIndex/f815aec9-959b-4c36-8435-49a1923279b3.vsidx
+*.obj
+Punch Out/Debug/Opponent.obj
+Punch Out/Debug/Player.obj
+.vs/Punch Out - Dorian, Eric, Alex, George/FileContentIndex/f815aec9-959b-4c36-8435-49a1923279b3.vsidx
+.vs/Punch Out - Dorian, Eric, Alex, George/FileContentIndex/f815aec9-959b-4c36-8435-49a1923279b3.vsidx
+Debug/Punch Out - Dorian, Eric, Alex, George.exe
+Debug/Punch Out - Dorian, Eric, Alex, George.pdb
+Punch Out/Debug/Game.obj
+Punch Out/Debug/Opponent.obj
+Punch Out/Debug/Player.obj
+Punch Out/Debug/Punch Ou.642e84e5.tlog/CL.command.1.tlog
+*.tlog
+Punch Out/Debug/Punch Ou.642e84e5.tlog/CL.read.1.tlog
+Punch Out/Debug/Punch Ou.642e84e5.tlog/CL.write.1.tlog
+Punch Out/Debug/Punch Ou.642e84e5.tlog/link.command.1.tlog
+Punch Out/Debug/Punch Ou.642e84e5.tlog/link.read.1.tlog
+Punch Out/Debug/Punch Ou.642e84e5.tlog/link.write.1.tlog
+*.idb
+*.pdb
+*.obj
+*.obj
+*.ilk
+*.recipe
+*.lastbuildstate
+*.tlog
