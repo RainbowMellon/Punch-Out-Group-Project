@@ -5,6 +5,7 @@ Player::Player()
 {
 	isWinded = false;
 	keyPressed = false;
+	action = 0;
 	moveCoolD = 0;
 	dir = 0;
 	texture.loadFromFile("punchout sprites/little-mac.png"); //FullSpriteSheet
@@ -13,7 +14,6 @@ Player::Player()
 	sprite.scale(1.2, 1.2);
 	sprite.setOrigin(25 / 2, 61 / 2);
 	sprite.setPosition(256 / 2, 240 * 0.75);
-
 	buffer.loadFromFile("sounds/Dodge.flac");
 	sound.setBuffer(buffer);
 }
@@ -26,108 +26,154 @@ void Player::drawPlayer(sf::RenderWindow& window)
 
 void Player::updatePlayer(sf::Event& event)
 {
+	sprite.setScale(1.2, 1.2);
+
 
 	if (event.type == sf::Event::KeyReleased) //No repeating keys if key is held down
 		keyPressed = false;
 
-	
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::P) && moveCoolD <= 0) && !keyPressed) //punch forward
+
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::P) && moveCoolD <= 0) && !keyPressed && !isWinded) //punch forward
 	{
-		keyPressed = punching = true;
+		keyPressed = true;
+		action = 1;
 		dir = 1;//right punch
 		moveCoolD = 20;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))//left upper
+		{
+			moveCoolD = 30;
+			action = 3;
+		}
 	}
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::O) && moveCoolD <= 0) && !keyPressed)
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::O) && moveCoolD <= 0) && !keyPressed && !isWinded)
 	{
-		keyPressed = punching = true;
+		keyPressed = true;
+		action = 2;
 		dir = -1;//left punch
 		moveCoolD = 20;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))//left upper
+		{
+			action = 4;
+			moveCoolD = 30;
+			upper = true;
+		}
 	}
+
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::A) && moveCoolD <= 0) && !keyPressed) //Move right
 	{
 		keyPressed = true;
+		action = 6;
 		moveCoolD = 30;
 		dir = -2;
 		sound.play();
 	}
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::D) && moveCoolD <= 0) && !keyPressed) //move left
 	{
+		action = 7;
 		keyPressed = true;
 		moveCoolD = 30;
 		dir = 2;
 		sound.play();
 	}
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::S) && moveCoolD <= 0) && !keyPressed)
-    {
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::S) && moveCoolD <= 0) && !keyPressed && !isWinded)
+	{
+		action = 5;
 		keyPressed = true;
 		moveCoolD = 15;
 		blocking = true;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && moveCoolD > 0 && blocking && !keyPressed)
 	{
+		action = 8;
 		keyPressed = true;
 		moveCoolD = 20;
 		blocking = false;
 		dodging = true;
 
 	}
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W) && moveCoolD <= 0) && !keyPressed)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && moveCoolD <= 0 && !keyPressed && !isWinded)
 	{
-		punching = true;
-		moveCoolD = 30;
-		dir = 10;
-		upper = true;
+		//star punch
+		action = 9;
+		moveCoolD = 55;
+		keyPressed = true;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Backspace))
+	{
+		//this is temp until the oppo actually punches
+		action = 10;
+		punch = 0;
+		moveCoolD = 15;
+		blocking = false;
+		dodging = false;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Equal))
+	{
+		//this is temp until the oppo actually punches
+		action = 11;
+		punch = 0;
+		moveCoolD = 15;
+		blocking = false;
+		dodging = false;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::U) && moveCoolD <= 0)
+	{
+		keyPressed = true;
+		isWinded = !isWinded;
+		moveCoolD = 5;
+		aniCoolD = 300;
+		action = 12;
 	}
 
-	if (upper)
-	{
-		if (moveCoolD > 25)
-		{
-			sprite.setTextureRect(sf::IntRect(125,26,25,61));
-			moveCoolD--;
-		}
-		if (moveCoolD > 0)
-			moveCoolD--;
-		if (moveCoolD <= 0)
-		{
-			upper = false;
-			punching = false;
-			//sprite.setTextureRect(sf::IntRect(0, 27, 26, 61));
-		}
-	}
+	/*
+	To-Do:
+	Fix the clunky ass uppercut animation
+	Create star uppercut
+	make isPpunching work correctly
+	*/
 
-	else if (dodging)
-	{
-		if (moveCoolD > 0)
-		{
-			sprite.setTextureRect(sf::IntRect(399, 100, 25, 61));
-			moveCoolD--;
-		}
-		else
-		{
-			sprite.setTextureRect(sf::IntRect(0, 26, 25, 61));
-			dodging = false;
-		}
-	}
 
-	else if (blocking)
+	if (isWinded)
+		sprite.setColor(sf::Color(250, 0, 255));
+	else
+		sprite.setColor(sf::Color(255, 255, 255));
+
+
+	switch (action)
 	{
-		if (moveCoolD > 0)
+	case 1://forward right punch
+	{
+		sprite.setScale(-1.2, 1.2);
+		if (moveCoolD > 15)
 		{
-			sprite.setTextureRect(sf::IntRect(374, 100, 25, 61));
+			sprite.setTextureRect(sf::IntRect(132, 23, 27, 61));
 			moveCoolD--;
 		}
-		else
+		else if (moveCoolD > 10)
 		{
-			sprite.setTextureRect(sf::IntRect(0, 26, 25, 61));
-			blocking = false;
+			sprite.setTextureRect(sf::IntRect(163, 23, 28, 64));
+			moveCoolD--;
+			punch = 1;
 		}
-	}
-	
-	else if (punching && dir != 10)
-	{
-		if(moveCoolD == 20 && dir == 1)//mirrors the sprite if it's right punching
+		else if (moveCoolD > 0)
+		{
+			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
+			if (moveCoolD == 10)
+				sprite.move(0, -10);
+			moveCoolD--;
+			punch = 0;
+		}
+		if (moveCoolD == 0)
+		{
 			sprite.scale(-1, 1);
+			sprite.move(0, 10);
+			action = 0;
+			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
+		}
+		break;
+	}
+	case 2://forward left punch
+	{
 		if (moveCoolD > 15)
 		{
 			sprite.setTextureRect(sf::IntRect(132, 23, 27, 61));
@@ -141,44 +187,356 @@ void Player::updatePlayer(sf::Event& event)
 		else if (moveCoolD > 0)
 		{
 			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
-			if (moveCoolD == 10 && !upper)
+			if (moveCoolD == 10)
 				sprite.move(0, -10);
 			moveCoolD--;
 		}
 		if (moveCoolD == 0)
 		{
 			sprite.move(0, 10);
-			if(dir == 1)
-				sprite.scale(-1, 1);
-			punching = false;
+			action = 0;
+			punch = 0;
 			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
 		}
+		break;
 	}
+	case 3://upper right punch
+	{
+		sprite.setScale(-1.2, 1.2);
+		if (moveCoolD > 25)
+		{
+			sprite.setTextureRect(sf::IntRect(132, 23, 26, 61));
+			moveCoolD--;
+		}
+		else if (moveCoolD > 20)
+		{
+			sprite.move(0, -1.5);
+			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
+			moveCoolD--;
+		}
+		else if (moveCoolD > 15)
+		{
+			sprite.move(0, -1.5);
+			sprite.setTextureRect(sf::IntRect(191, 19, 28, 65));
+			moveCoolD--;
+		}
+		else if (moveCoolD > 5)
+		{
+			moveCoolD--;
+			sprite.move(0, 1.5);
+			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
+		}
+		else if (moveCoolD > 0)
+		{
+			sprite.setTextureRect(sf::IntRect(132, 23, 26, 61));
+			moveCoolD--;
+		}
+		else if (moveCoolD <= 0)
+		{
+			action = 0;
+			upper = false;
+			punch = 0;
+			sprite.setTextureRect(sf::IntRect(0, 27, 26, 61));
 
-	else  //if they aren't punching they're moving
+			sprite.setScale(1.2, 1.2);
+		}
+		break;
+	}
+	case 4://upper left punch
+	{
+		if (moveCoolD > 25)
+		{
+			sprite.setTextureRect(sf::IntRect(132, 23, 26, 61));
+			moveCoolD--;
+		}
+		else if (moveCoolD > 20)
+		{
+			sprite.move(0, -1.5);
+			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
+			moveCoolD--;
+		}
+		else if (moveCoolD > 15)
+		{
+			sprite.move(0, -1.5);
+			sprite.setTextureRect(sf::IntRect(191, 19, 28, 65));
+			moveCoolD--;
+		}
+		else if (moveCoolD > 5)
+		{
+			moveCoolD--;
+			sprite.move(0, 1.5);
+			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
+		}
+		else if (moveCoolD > 0)
+		{
+			sprite.setTextureRect(sf::IntRect(132, 23, 26, 61));
+			moveCoolD--;
+		}
+		else if (moveCoolD <= 0)
+		{
+			action = 0;
+			upper = false;
+			punch = 0;
+			sprite.setTextureRect(sf::IntRect(0, 27, 26, 61));
+		}
+		break;
+	}
+	case 5://blocking
+	{
+		if (moveCoolD > 0)
+		{
+			sprite.setTextureRect(sf::IntRect(374, 100, 25, 61));
+			blocking = true;
+			moveCoolD--;
+		}
+		else
+		{
+			sprite.setTextureRect(sf::IntRect(0, 26, 25, 61));
+			blocking = false;
+			action = 0;
+		}
+		break;
+	}
+	case 6://dodge left
 	{
 		if (moveCoolD > 15)
 		{
 			if (dir < 0)
 				sprite.setTextureRect(sf::IntRect(50, 100, 25, 61)); // when it gets to this point change the rect on the texture
-			else
-				sprite.setTextureRect(sf::IntRect(100, 100, 25, 61));
-			sprite.move(sf::Vector2f(dir, 0));
+			sprite.move(sf::Vector2f(-2, 0));
 			moveCoolD--;
 		}
 		else if (moveCoolD > 10)
 		{
 			sprite.setTextureRect(sf::IntRect(26, 27, 25, 61)); // when it gets to this point change the rect on the texture
-			sprite.move(dir * -1, 0);
+			sprite.move(2, 0);
 			moveCoolD--;
 		}
 		else if (moveCoolD > 0)
 		{
 			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
-			sprite.move(sf::Vector2f(dir * -1, 0));
+			sprite.move(sf::Vector2f(2, 0));
+			moveCoolD--;
+
+		}
+		else if (moveCoolD == 0)
+		{
+			action = 0;
+			if (isWinded)
+				action = 12;
+		}
+		break;
+	}
+	case 7://dodge right
+	{
+		if (moveCoolD > 15)
+		{
+			sprite.setTextureRect(sf::IntRect(100, 100, 25, 61)); // when it gets to this point change the rect on the texture
+			sprite.move(sf::Vector2f(2, 0));
 			moveCoolD--;
 		}
+		else if (moveCoolD > 10)
+		{
+			sprite.setTextureRect(sf::IntRect(26, 27, 25, 61)); // when it gets to this point change the rect on the texture
+			sprite.move(-2, 0);
+			moveCoolD--;
+		}
+		else if (moveCoolD > 0)
+		{
+			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
+			sprite.move(sf::Vector2f(-2, 0));
+			moveCoolD--;
+		}
+		else if (moveCoolD == 0)
+		{
+			action = 0;
+			if (isWinded)
+				action = 12;
+		}
+		break;
 	}
+	case 8://dodge back
+	{
+		if (moveCoolD > 0)
+		{
+			sprite.setTextureRect(sf::IntRect(399, 100, 25, 61));
+			moveCoolD--;
+		}
+		else
+		{
+			action = 0;
+			sprite.setTextureRect(sf::IntRect(0, 26, 25, 61));
+			dodging = false;
+		}
+		break;
+	}
+	case 9://star punch
+	{
+		if (moveCoolD > 50)
+		{
+			sprite.setTextureRect(sf::IntRect(245, 26, 27, 61));
+		}
+		else if (moveCoolD > 45)
+		{
+			sprite.setTextureRect(sf::IntRect(275, 26, 27, 61));
+		}
+		else if (moveCoolD > 40)
+		{
+			sprite.setTextureRect(sf::IntRect(245, 26, 27, 61));
+		}
+		else if (moveCoolD > 35)
+		{
+			sprite.setTextureRect(sf::IntRect(275, 26, 27, 61));
+		}
+		else if (moveCoolD > 30)
+		{
+			sprite.setTextureRect(sf::IntRect(314, 23, 28, 61));
+		}
+		else if (moveCoolD > 25)
+		{
+			if (moveCoolD == 30)
+				sprite.move(0, -20);
+			sprite.setTextureRect(sf::IntRect(350, 15, 26, 80));
+		}
+		else if (moveCoolD > 20)
+		{
+			if (moveCoolD == 25)
+				sprite.move(0, -20);
+			sprite.setTextureRect(sf::IntRect(376, 5, 24, 85));
+		}
+		else if (moveCoolD > 15)
+		{
+			sprite.setTextureRect(sf::IntRect(400, 0, 31, 85));
+		}
+		else if (moveCoolD > 10)
+		{
+			sprite.setTextureRect(sf::IntRect(376, 5, 24, 85));
+		}
+		else if (moveCoolD > 5)
+		{
+			if (moveCoolD == 10)
+				sprite.move(0, 20);
+			sprite.setTextureRect(sf::IntRect(350, 15, 26, 80));
+		}
+		else if (moveCoolD > 0)
+		{
+			if (moveCoolD == 5)
+			{
+				sprite.move(0, 20);
+			}
+			sprite.setTextureRect(sf::IntRect(314, 15, 26, 80));
+		}
+		if (moveCoolD <= 0)
+		{
+			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
+			action = 0;
+		}
+		moveCoolD--;
+		break;
+	}
+	case 10://punched right
+	{
+		if (moveCoolD > 13)
+		{
+			sprite.setTextureRect(sf::IntRect(150, 100, 29, 62));
+			sprite.move(0, 1);
+		}
+		else if (moveCoolD > 0)
+		{
+			if (moveCoolD > 11)
+				sprite.move(0, 1);
+			else if (moveCoolD > 0)
+				sprite.move(0, -1);
+			sprite.setTextureRect(sf::IntRect(190, 100, 27, 62));
+		}
+		else if (moveCoolD <= 0)
+		{
+			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
+			action = 0;
+			sprite.setPosition(256 / 2, 240 * 0.75);
+		}
+		moveCoolD--;
+		break;
+	}
+	case 11://punched left
+	{
+		sprite.setScale(-1.2, 1.2);
+		if (moveCoolD > 13)
+		{
+			sprite.setTextureRect(sf::IntRect(150, 100, 29, 62));
+			sprite.move(0, 1);
+		}
+		else if (moveCoolD > 0)
+		{
+			if (moveCoolD > 11)
+				sprite.move(0, 1);
+			else if (moveCoolD > 0)
+				sprite.move(0, -1);
+			sprite.setTextureRect(sf::IntRect(190, 100, 27, 62));
+		}
+		else if (moveCoolD <= 0)
+		{
+			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
+			action = 0;
+			sprite.setPosition(256 / 2, 240 * 0.75);
+			sprite.setScale(1.2, 1.2);
+		}
+		moveCoolD--;
+		break;
+	}
+	case 12://winded animation
+	{
+		if (aniCoolD % 40 > 20)
+		{
+			sprite.setTextureRect(sf::IntRect(50, 27, 25, 61));
+		}
+		else
+			sprite.setTextureRect(sf::IntRect(100, 27, 25, 61));
+		aniCoolD--;
+		if (aniCoolD <= 0)
+		{
+			isWinded = false;
+			sprite.setColor(sf::Color(255, 255, 255));
+			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
+		}
+
+		if (moveCoolD > 0)
+			moveCoolD--;
+		break;
+	}
+	default:
+	{
+		action = 0;
+	}
+	}
+}
+
+
+//returns whether or not mac's punch should hurt the opponent
+int Player::isPunching()
+{
+	return punch;
+}
+
+
+bool Player::isBlocking()
+{
+	return blocking;
+}
+
+
+bool Player::isDodging()
+{
+	return dodging;
+}
+
+
+Player::~Player() {}
+
+
+bool Player::getWinded()
+{
+	return isWinded;
 }
 
 
@@ -192,16 +550,3 @@ int Player::getStarCount()
 {
 	return starCount;
 }
-
-bool Player::isPunching()
-{
-	return(punching && moveCoolD > 10 && moveCoolD < 15);
-}
-
-
-bool Player::isBlocking()
-{
-	return blocking;
-}
-
-Player::~Player() {}

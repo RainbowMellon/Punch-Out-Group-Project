@@ -6,7 +6,7 @@ Opponent::Opponent()
 
 }
 
-void Opponent::update(int time)
+void Opponent::update(int time, Player& mac)
 {
 
 }

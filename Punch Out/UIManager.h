@@ -15,7 +15,7 @@ public:
   void winScreen(float);
   void loseScreen();
   void drawText(std::string);
-  void drawStats(Player&, Opponent&, int);
+  void drawStats(Player&, Opponent&, int, int);
   void roundStartScreen(Player&, Opponent&);
 
 private:
