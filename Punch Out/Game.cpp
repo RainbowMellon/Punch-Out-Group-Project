@@ -78,16 +78,28 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 
 			
 			if (time % 6000 == 0 && time != 0)
-				time += 4000;
+				time = 10000;
+			else if (time % 16000 == 0 && time != 0)
+				time = 20000;
+			else if (time % 26000 == 0 && time != 0)
+				time = 30000;
 			else
 				time+= 3;
+			
 			littleMac.updatePlayer(event);
 			opponent->update(time, littleMac);
 
 			//If timer is 3,00,00 (3 minutes) stop the fight and go back to the states screen, increase round as well
 
 
-			//if the timer is 3 minutes and it's round three, go to the disision screen.
+				//if the timer is 3 minutes and it's round three, go to the disision screen.
+			if (time == 30000)
+			{
+				state = 5;
+				playerKO = 0;
+				oppoKO = 0;
+				fadeout.setPosition(0, 0);
+			}
 
 			//Draw Player, Opponent, FightUI
 			opponent->draw(window);
@@ -96,8 +108,27 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 
 			//If the opponent or player is KOed, go to win or lose screen
 			break;
-		
-		case 5: //Mario counts for opponent
+		case 5: //time out, return to 
+			opponent->draw(window);
+			littleMac.drawPlayer(window);
+			UI.drawStats(littleMac, *opponent, time, 1, round);
+			window.draw(fadeout);
+
+			if (playerKO < 75)
+				playerKO++; //since playerKO isn't needed anymore and reseted, we're using it as a placeholder
+			else if (fadeout.getFillColor().a < 255)
+				fadeout.setFillColor(sf::Color(0, 0, 0, fadeout.getFillColor().a + 5));
+			else if(round + 1 < 4)
+			{
+				state = 1;
+				round++;
+				playerKO = 0;
+				fadeout.setFillColor(sf::Color(0, 0, 0, 0));
+				fadeout.setPosition(0, 220);
+			}
+			//else
+			break;
+		case 6: //Mario counts for opponent
 			view.setCenter(384 + 3, 110 + 2); //center of second + 3 for border
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) && !isKeyPressed)
 			{
@@ -105,17 +136,17 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 				isKeyPressed = true;
 				mainTheme.play();
 			}
-			UI.drawStats(littleMac, *opponent, time, 2);
+			//UI.drawStats(littleMac, *opponent, time, 2);
 			break;
-		case 6: //Mario counts for little mac
+		case 7: //Mario counts for little mac
 			break;
-		case 7: // fadeout into win screen
+		case 8: // fadeout into win screen
 			break;
-		case 8: //win screen, will either fadeout to state 1 (while changing opponent), or scroll to state 9
+		case 9: //win screen, will either fadeout to state 1 (while changing opponent), or scroll to state 9
 			break;
-		case 9: // scroll to title bout screen, then change state to 1(while changing oppponent
+		case 10: // scroll to title bout screen, then change state to 1(while changing oppponent
 			break;
-		case 10: //Doc biking with mac, after a title bout
+		case 11: //Doc biking with mac, after a title bout
 				break;
 
 	}
