@@ -60,7 +60,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 				fadeout.setFillColor(sf::Color(0, 0, 0, 0));
 				//backgroundTexture.loadFromFile("punchout sprites/stage1.png");
 				mainTheme.play();
-				state = 3;
+				state = 4;
 			}
 
 			break;
