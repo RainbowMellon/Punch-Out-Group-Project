@@ -20,7 +20,7 @@ GlassJoe::GlassJoe()
 To Do: finish what happens after vive
 do was hit
 */
-void GlassJoe::update(int time, Player& mac)
+void GlassJoe::update(int time)
 {
 	if (round == 1)
 	{
@@ -44,6 +44,7 @@ void GlassJoe::update(int time, Player& mac)
 			}
 		}
 	}
+	
 		
 }
 
@@ -79,7 +80,7 @@ void GlassJoe::idle(int time)//joe's idle animation before vive la france
 
 void GlassJoe::hook(int time)
 {//hook, seems to happen about 80 % of the time but I couldn't find actual stats for how often it happens
-	if (time % 500 < 30)
+	if (time % 300 < 30)
 	{
 		sprite.setTextureRect(sf::IntRect(13, 241, 35, 87));
 		sprite.move(-1, 0);
@@ -100,7 +101,7 @@ void GlassJoe::hook(int time)
 	else
 		sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
 		
-	punch = 0;
+	punch = 1;
 	
 }
 void GlassJoe::jab(int time)// jab, seems to happen about 20% of the time.
@@ -137,46 +138,46 @@ void GlassJoe::jab(int time)// jab, seems to happen about 20% of the time.
 	else
 		sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
 	
-	punch = 1;
+	punch = 2;
 
 }
 void GlassJoe::vive(int time)
 {
-	if (time % 500 < 25)
+	if (time % 300 < 25)
 	{
 		sprite.setTextureRect(sf::IntRect(337, 17, 29, 94));
 		sprite.move(.5, -2);
 	}
-	else if (time % 500 < 50)
+	else if (time % 300 < 50)
 	{
 		sprite.setTextureRect(sf::IntRect(380, 13, 29, 98));
 		sprite.move(.5, .5);
 	}
-	else if (time % 500 < 75)
+	else if (time % 300 < 75)
 	{
 		sprite.setTextureRect(sf::IntRect(337, 17, 29, 94));
 		sprite.move(.5, -2);
 	}
 
-	else if (time % 500 < 100)
+	else if (time % 300 < 100)
 	{
 		sprite.setTextureRect(sf::IntRect(380, 13, 29, 98));
 		sprite.move(.5, .5);
 	}
-	else if (time % 500 < 125)
+	else if (time % 300 < 125)
 		sprite.setTextureRect(sf::IntRect(146, 342, 31, 98));
-	else if (time % 500 < 150)
+	else if (time % 300 < 150)
 		sprite.setTextureRect(sf::IntRect(193, 342, 29, 98));
-	else if (time % 500 < 175)
+	else if (time % 300 < 175)
 		sprite.setTextureRect(sf::IntRect(146, 342, 31, 98));
-	else if (time % 500 < 200)
+	else if (time % 300 < 200)
 		sprite.setTextureRect(sf::IntRect(193, 342, 29, 98));
-	else if (time % 500 < 250)
+	else if (time % 300 < 250)
 	{
 		sprite.setTextureRect(sf::IntRect(337, 17, 29, 94));
 		sprite.move(-1, 1.5);
 	}
-	else if (time % 500 < 275)
+	else if (time % 300 < 275)
 		sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
 	
 	
@@ -198,16 +199,55 @@ int GlassJoe::getDamage()
 	return 11;
 }
 
-void GlassJoe::wasHit(Player& mac)
+void GlassJoe::wasHit(Player& mac, int time)
 {
-	if (mac.isPunching() == 1)
+	if (mac.isPunching() == 1 || mac.isPunching() == 2)
 	{
-		if (timesHit <= 4)
+		if (jabsHit < 3)
 		{
-			if()
-			sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
+			if (punch != 0)
+			{
+				if (time % 50 < 10)
+					sprite.setTextureRect(sf::IntRect(323, 342, 29, 98));
+				else
+					sprite.setTextureRect(sf::IntRect(57, 563, 31, 101));
+			}
+
+			else
+			{
+				if (mac.isPunching() == 1)
+				{
+					if (time % 50 < 30)
+					{
+						sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
+						sprite.move(-1, -1);
+					}
+					else
+					{
+						sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
+						sprite.move(1.5, 1.5);
+					}
+				}
+				else if (mac.isPunching() == 2)
+				{
+					if (time % 50 < 30)
+					{
+						sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
+						sprite.move(1, -1);
+					}
+					else
+					{
+						sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
+						sprite.move(-1.5, 1.5);
+					}
+				}
+			}
 		}
-			
+		else
+		{
+
+		}
+		
 	}
 }
 
