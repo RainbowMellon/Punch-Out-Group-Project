@@ -90,10 +90,10 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int sta
 	float playerHealth = 1, opponentHealth = 1;
 	//facilitates the different views
 	sf::Vector2f starcount_pos(33, 17),
-		stamina_pos(63, 17),
+		stamina_pos(74, 17),
 		playerHB_pos(138, 18),
 		opponentHB_pos(146, 18),
-		sec_pos(226, 18),
+		sec_pos(228, 18),
 		min_pos(210, 18),
 		round_pos(237, 28);
 
@@ -121,11 +121,12 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int sta
 	(*window).draw(text);
 
 	//stamina num
-	stamina = opponent.getStamina();
+	stamina = player.getStamina();
 	stamina_str = std::to_string(stamina);
 	text.setPosition(stamina_pos);
 	text.setScale(0.1, 0.1);
 	text.setString(stamina_str);
+	text.setOrigin(text.getLocalBounds().width, 0);
 	(*window).draw(text);
 
 	//round

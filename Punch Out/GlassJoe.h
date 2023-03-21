@@ -11,6 +11,7 @@ public:
 	void draw(sf::RenderWindow&);
 	int getHealth();
 	int getDamage();
+	int getStamina();
 	void wasHit(Player&);
 	void vive(int);
 	void jab(int);

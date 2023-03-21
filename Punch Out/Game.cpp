@@ -28,7 +28,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 	{	
 		case 0: //Main menu
 			view.setCenter(898 + 5, 110 + 2); //center of first + borders
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 			{
 				view.setCenter(128 + 2, 110 + 2);
 				state = 1;

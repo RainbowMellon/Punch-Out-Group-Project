@@ -199,6 +199,11 @@ int GlassJoe::getDamage()
 	return 11;
 }
 
+int GlassJoe::getStamina()
+{
+	return stamina;
+}
+
 void GlassJoe::wasHit(Player& mac)
 {
 	if (mac.isPunching() == 1 || mac.isPunching() == 2)
