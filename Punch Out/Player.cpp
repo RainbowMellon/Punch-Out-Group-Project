@@ -7,6 +7,8 @@ Player::Player()
 	keyPressed = false;
 	action = 0;
 	moveCoolD = 0;
+	health = 96;
+	hearts = 20;
 	dir = 0;
 	texture.loadFromFile("punchout sprites/little-mac.png"); //FullSpriteSheet
 	sprite.setTexture(texture);
@@ -23,6 +25,14 @@ void Player::drawPlayer(sf::RenderWindow& window)
 	window.draw(sprite);
 }
 
+
+/*
+punch 1 = forward right punch
+punch 2 = forward left punch 
+punch 3 = upper right punch
+punch 4 = upper left punch
+punch 5 = star punch
+*/
 void Player::updatePlayer(sf::Event& event)
 {
 	sprite.setScale(1.1, 1.1);
@@ -96,6 +106,14 @@ void Player::updatePlayer(sf::Event& event)
 		moveCoolD = 55;
 		keyPressed = true;
 	}
+
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::P) || sf::Keyboard::isKeyPressed(sf::Keyboard::O))
+		&& knockedDown)
+	{
+		struggle--;
+	}
+
+	//all this is temporary testing tools until we link up opponent and player
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Backspace))
 	{
 		//this is temp until the oppo actually punches
@@ -122,10 +140,20 @@ void Player::updatePlayer(sf::Event& event)
 		aniCoolD = 200;
 		action = 12;
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::T) && moveCoolD <= 0)
+	{
+		struggle = 12;
+		knockedDown = true;
+		action = 13;
+		moveCoolD = 5;
+	}
 
 	/*
 	To-Do:
-	make isPpunching work correctly
+	make mac fall over when he runs out of health
+	make mac able to get back up a total of 3 times a round
+	fix the somehow worse version of the uppercut animation
+	make the heart system actually do something
 	*/
 
 
@@ -154,7 +182,6 @@ void Player::updatePlayer(sf::Event& event)
 		else if (moveCoolD > 0)
 		{
 			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
-			punch = 1;
 			if (moveCoolD == 10)
 				sprite.move(0, -10);
 			moveCoolD--;
@@ -195,7 +222,6 @@ void Player::updatePlayer(sf::Event& event)
 			punch = 0;
 			sprite.move(0, 10);
 			action = 0;
-			punch = 0;
 			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
 		}
 		break;
@@ -210,7 +236,7 @@ void Player::updatePlayer(sf::Event& event)
 		else if (moveCoolD > 20)
 		{
 			if (moveCoolD == 25)
-				sprite.move(0, -5);
+				sprite.move(0, -10);
 			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
 		}
 		else if (moveCoolD > 15)
@@ -236,7 +262,7 @@ void Player::updatePlayer(sf::Event& event)
 		else if (moveCoolD > 0)
 		{
 			if (moveCoolD == 5)
-				sprite.move(0, 5);
+				sprite.move(0, 10);
 			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
 		}
 		else if (moveCoolD <= 0)
@@ -256,7 +282,7 @@ void Player::updatePlayer(sf::Event& event)
 		else if (moveCoolD > 20)
 		{
 			if (moveCoolD == 25)
-				sprite.move(0, -5);
+				sprite.move(0, -10);
 			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
 		}
 		else if (moveCoolD > 15)
@@ -282,7 +308,7 @@ void Player::updatePlayer(sf::Event& event)
 		else if (moveCoolD > 0)
 		{
 			if (moveCoolD == 5)
-				sprite.move(0, 5);
+				sprite.move(0, 10);
 			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
 		}
 		else if (moveCoolD <= 0)
@@ -518,6 +544,16 @@ void Player::updatePlayer(sf::Event& event)
 			moveCoolD--;
 		break;
 	}
+	case 13://knocked down
+	{
+		
+		if (moveCoolD <= 0)
+		{
+			action = 0;
+		}
+		moveCoolD--;
+		break;
+	}
 	default:
 	{
 		action = 0;
@@ -526,7 +562,6 @@ void Player::updatePlayer(sf::Event& event)
 }
 
 
-//returns whether or not mac's punch should hurt the opponent
 int Player::isPunching()
 {
 	return punch;
@@ -563,4 +598,10 @@ int Player::getHealth()
 int Player::getStarCount()
 {
 	return starCount;
+}
+
+
+int Player::getHearts()
+{
+	return hearts;
 }
