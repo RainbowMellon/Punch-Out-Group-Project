@@ -14,6 +14,7 @@ public:
 	int getHealth();
 	int getDamage();
 	int getStarCount();
+	int getHearts();
 	int isPunching();
 	bool isDodging();
 	bool isBlocking();
@@ -22,9 +23,8 @@ private:
 
 	sf::Sprite sprite;
 	sf::Texture texture;
-	int moveCoolD, dir, starCount, damage, health, action, punch, aniCoolD;
-	bool isWinded, keyPressed, blocking, dodging, upper;
+	int moveCoolD, dir, starCount, damage, health, action, punch, aniCoolD, hearts, struggle;
+	bool isWinded, keyPressed, blocking, dodging, upper, knockedDown;
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
 };
-
