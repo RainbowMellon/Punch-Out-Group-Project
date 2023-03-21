@@ -14,16 +14,17 @@ public:
 	int getHealth();
 	int getDamage();
 	int getStarCount();
-	int getHearts();
+	int getStamina();
 	int isPunching();
 	bool isDodging();
 	bool isBlocking();
 	bool getWinded();
+	void punchMac(int);
 private:
 
 	sf::Sprite sprite;
 	sf::Texture texture;
-	int moveCoolD, dir, starCount, damage, health, action, punch, aniCoolD, hearts, struggle;
+	int moveCoolD, dir, starCount, damage, health, action, punch, aniCoolD, stamina, struggle;
 	bool isWinded, keyPressed, blocking, dodging, upper, knockedDown;
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
