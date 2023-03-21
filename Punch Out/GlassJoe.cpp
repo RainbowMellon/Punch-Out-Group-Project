@@ -12,7 +12,7 @@ GlassJoe::GlassJoe()
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0, 0, 55, 100));
 	sprite.setOrigin(55 / 2, 115 / 2);
-	sprite.setPosition(124, 240*.75 +20);
+	sprite.setPosition(148, 125);
 	sprite.setScale(.95, .95);
 }
 
@@ -199,7 +199,7 @@ int GlassJoe::getDamage()
 	return 11;
 }
 
-void GlassJoe::wasHit(Player& mac, int time)
+void GlassJoe::wasHit(Player& mac)
 {
 	if (mac.isPunching() == 1 || mac.isPunching() == 2)
 	{
@@ -207,39 +207,18 @@ void GlassJoe::wasHit(Player& mac, int time)
 		{
 			if (punch != 0)
 			{
-				if (time % 50 < 10)
-					sprite.setTextureRect(sf::IntRect(323, 342, 29, 98));
-				else
-					sprite.setTextureRect(sf::IntRect(57, 563, 31, 101));
+				
 			}
 
 			else
 			{
 				if (mac.isPunching() == 1)
 				{
-					if (time % 50 < 30)
-					{
-						sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
-						sprite.move(-1, -1);
-					}
-					else
-					{
-						sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
-						sprite.move(1.5, 1.5);
-					}
+					
 				}
 				else if (mac.isPunching() == 2)
 				{
-					if (time % 50 < 30)
-					{
-						sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
-						sprite.move(1, -1);
-					}
-					else
-					{
-						sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
-						sprite.move(-1.5, 1.5);
-					}
+					
 				}
 			}
 		}
