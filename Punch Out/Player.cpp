@@ -8,7 +8,7 @@ Player::Player()
 	action = 0;
 	moveCoolD = 0;
 	health = 96;
-	hearts = 20;
+	stamina = 20;
 	dir = 0;
 	texture.loadFromFile("punchout sprites/little-mac.png"); //FullSpriteSheet
 	sprite.setTexture(texture);
@@ -601,7 +601,22 @@ int Player::getStarCount()
 }
 
 
-int Player::getHearts()
+int Player::getStamina()
 {
-	return hearts;
+	return stamina;
+}
+
+
+void Player::punchMac(int punch_type)
+{
+	if (punch_type == 1)
+	{
+		action = 10;
+		aniCoolD = 15;
+	}
+	if (punch_type == 2)
+	{
+		action = 11;
+		aniCoolD = 15;
+	}
 }
