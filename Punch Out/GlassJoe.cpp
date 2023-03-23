@@ -20,7 +20,7 @@ GlassJoe::GlassJoe()
 To Do: finish what happens after vive
 do was hit
 */
-void GlassJoe::update(int time)
+void GlassJoe::update(int time,Player& mac)
 {
 	if (round == 1)
 	{
@@ -44,8 +44,12 @@ void GlassJoe::update(int time)
 			}
 		}
 	}
-	
-		
+
+	if (wasHit(mac) == 1)
+	{
+		sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
+
+	}
 }
 
 
@@ -80,23 +84,23 @@ void GlassJoe::idle(int time)//joe's idle animation before vive la france
 
 void GlassJoe::hook(int time)
 {//hook, seems to happen about 80 % of the time but I couldn't find actual stats for how often it happens
-	if (time % 300 < 30)
+	if (time % 500 < 30)
 	{
 		sprite.setTextureRect(sf::IntRect(13, 241, 35, 87));
 		sprite.move(-1, 0);
 	}
 		
-	else if ( time % 300 < 60)
+	else if ( time % 500 < 60)
 		sprite.setTextureRect(sf::IntRect(58, 241, 35, 87));
-	else if(time % 300 < 90)
+	else if(time % 500 < 90)
 		sprite.setTextureRect(sf::IntRect(13, 241, 35, 87));
-	else if (time % 300 < 120)
+	else if (time % 500 < 120)
 	{
 		sprite.setTextureRect(sf::IntRect(105, 249, 34, 79));
 		sprite.move(1, 0);
 
 	}
-	else if (time % 300 < 270)
+	else if (time % 500 < 470)
 		sprite.setTextureRect(sf::IntRect(151, 237, 39, 91));
 	else
 		sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
@@ -199,7 +203,7 @@ int GlassJoe::getDamage()
 	return 11;
 }
 
-void GlassJoe::wasHit(Player& mac)
+int GlassJoe::wasHit(Player& mac)
 {
 	if (mac.isPunching() == 1 || mac.isPunching() == 2)
 	{
@@ -212,14 +216,11 @@ void GlassJoe::wasHit(Player& mac)
 
 			else
 			{
-				if (mac.isPunching() == 1)
+				if (mac.isPunching() == 1 || mac.isPunching() == 2)
 				{
-					
+					return 1;
 				}
-				else if (mac.isPunching() == 2)
-				{
-					
-				}
+			
 			}
 		}
 		else
