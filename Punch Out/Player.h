@@ -19,6 +19,7 @@ public:
 	bool isDodging();
 	bool isBlocking();
 	bool getWinded();
+	void punchMac(int);
 private:
 
 	sf::Sprite sprite;

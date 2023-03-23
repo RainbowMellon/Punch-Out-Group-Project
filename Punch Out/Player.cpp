@@ -605,3 +605,18 @@ int Player::getStamina()
 {
 	return stamina;
 }
+
+
+void Player::punchMac(int punch_type)
+{
+	if (punch_type == 1)
+	{
+		action = 10;
+		aniCoolD = 15;
+	}
+	if (punch_type == 2)
+	{
+		action = 11;
+		aniCoolD = 15;
+	}
+}
