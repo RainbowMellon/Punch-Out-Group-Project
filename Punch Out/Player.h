@@ -9,8 +9,6 @@ public:
 	~Player();
 	void updatePlayer(sf::Event&);
 	void drawPlayer(sf::RenderWindow&);
-	void update();
-	void draw();
 	int getHealth();
 	int getDamage();
 	int getStarCount();
