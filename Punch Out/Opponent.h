@@ -15,7 +15,7 @@ public:
 	int getStamina();
 	virtual void setHealth(int);
 	virtual int getDamage();
-	virtual void wasHit(Player&)=0;
+	virtual int wasHit(Player&)=0;
 
 
 protected:
