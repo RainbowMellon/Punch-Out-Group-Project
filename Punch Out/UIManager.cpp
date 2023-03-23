@@ -116,7 +116,7 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int sta
 	sf::Text text(starCount_str, font);
 	text.setFillColor(sf::Color::White);
 	text.setCharacterSize(100);
-	text.setScale(0.1, 0.1);
+	text.setScale(0.09, 0.09);
 	text.setPosition(starcount_pos);
 	(*window).draw(text);
 
@@ -124,10 +124,11 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int sta
 	stamina = player.getStamina();
 	stamina_str = std::to_string(stamina);
 	text.setPosition(stamina_pos);
-	text.setScale(0.1, 0.1);
+	text.setScale(0.09, 0.09);
 	text.setString(stamina_str);
 	text.setOrigin(text.getLocalBounds().width, 0);
 	(*window).draw(text);
+	text.setOrigin(0, 0);
 
 	//round
 	round_str = std::to_string(round);
