@@ -11,8 +11,8 @@ public:
 	~Opponent();
 	virtual void update(int, Player&);
 	virtual void draw(sf::RenderWindow&);
-	int getHealth();
-	int getStamina();
+	virtual int getHealth();
+	virtual int getStamina();
 	virtual void setHealth(int);
 	virtual int getDamage();
 	virtual int wasHit(Player&)=0;

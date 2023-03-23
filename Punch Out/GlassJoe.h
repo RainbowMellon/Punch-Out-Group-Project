@@ -12,7 +12,7 @@ public:
 	int getHealth();
 	int getDamage();
 	int getStamina();
-	void wasHit(Player&);
+	int wasHit(Player&);
 	void vive(int);
 	void jab(int);
 	void hook(int);

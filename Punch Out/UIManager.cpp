@@ -31,12 +31,12 @@ UIManager::UIManager(sf::RenderWindow& newWindow, sf::View& newView, Player& new
   player = &newPlayer;
 
   //player health on screen
-  pHealth.setSize(sf::Vector2f(7, 48));
+  pHealth.setSize(sf::Vector2f(48, 7));
   pHealth.setFillColor(sf::Color::Black);
   pHealth.setOutlineThickness(0);
 
   //opponent health on screen
-  oHealth.setSize(sf::Vector2f(7, 48));
+  oHealth.setSize(sf::Vector2f(48, 7));
   oHealth.setFillColor(sf::Color::Black);
   oHealth.setOutlineThickness(0);
 }
@@ -147,7 +147,7 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int sta
 	//opponent healthBar
 	opponentHealth = opponent.getHealth() / 96.f;
 	oHealth.setPosition(opponentHB_pos);
-	oHealth.setSize(sf::Vector2f(48 * opponentHealth, 7));
+	oHealth.setSize(sf::Vector2f(48 - 48 * opponentHealth, 7));
 	(*window).draw(oHealth);
 
 	//clock
