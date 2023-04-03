@@ -34,38 +34,22 @@ void PistonHonda1::update(int time, Player&)
 	switch (round)
 	{
 	case 1:
-		if (time < 4000)
+		
+		if (time < 1400)
 			idle(time);
 
-		else if (time < 4500)
+		else if (time >= 1400 && time <= 1800)
 		{
-			taunt(time);
+			jab(time);
 		}
-		else
-		{
-			if (time % 1000 < 500)
-				idle(time);
-			else
-			{
-				if (time % 4000 < 3000)
-					hook(time);
-				else
-					jab(time);
-			}
-		}
-		/*
-		if (time == 10000)
-			//Banzai;
-			if (time == 240002)
-				//Banzai;
-				break;*/
+		break;
 
 	case 2:
 		if (time == 4002)
 			//Banzai;
 			if (time == 22001)
 				//Banzai;
-				break;
+		break;
 
 	case 3:
 		if (time == 2001)
@@ -74,7 +58,7 @@ void PistonHonda1::update(int time, Player&)
 				//Banzai;
 				if (time == 24002)
 					//Banzai;
-					break;
+		break;
 	}
 }
 
