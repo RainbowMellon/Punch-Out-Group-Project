@@ -3,6 +3,7 @@
 #include "UIManager.h"
 #include "Opponent.h"
 #include "GlassJoe.h"
+#include "PistonHonda1.h"
 
 class Game
 {
@@ -28,4 +29,5 @@ private:
 	sf::Music mainTheme;
 	bool isKeyPressed;
 	GlassJoe joe;
+	PistonHonda1 honda;
 };

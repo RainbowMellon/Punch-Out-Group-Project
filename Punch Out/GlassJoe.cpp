@@ -1,6 +1,7 @@
 #include "GlassJoe.h"
 #include <iostream>
 
+
 GlassJoe::GlassJoe()
 {
 	health = 96;
