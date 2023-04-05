@@ -15,7 +15,7 @@ public:
 	virtual int getStamina();
 	virtual void setHealth(int);
 	virtual int getDamage();
-	virtual int wasHit(Player&)=0;
+	virtual bool wasHit(Player&)=0;
 	int getPunch();
 protected:
 	int health, damage, stamina, canDodgeCD, cantDodgeCD, rank, age, weight,round, punch;
