@@ -215,33 +215,111 @@ int GlassJoe::getStamina()
 	return stamina;
 }
 
-int GlassJoe::wasHit(Player& mac)
+bool GlassJoe::wasHit(Player& mac, int time)
 {
-	if (mac.isPunching() == 1 || mac.isPunching() == 2)
+	
+
+	switch (mac.getAction())
 	{
+
+	case 1:
+
+		upsHit = 0;
 		if (jabsHit < 3)
 		{
-			if (punch != 0)
+			if (time % 100 < 100)
 			{
-				
-			}
+				sprite.setPosition(140, 155);
+				sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
+				sprite.move(1, -1);
+				setHealth(health - 1);
+				return true;
 
-			else
-			{
-				if (mac.isPunching() == 1 || mac.isPunching() == 2)
-				{
-					return 1;
-				}
-			
 			}
 		}
-		else
+
+
+		else if (jabsHit >= 3)
 		{
-
+			sprite.setPosition(140, 145);
+			if (time % 100 < 40)
+				sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
+			else
+				sprite.setTextureRect(sf::IntRect(54, 458, 32, 91));
 		}
-		
+		jabsHit++;
+
+		break;
+
+	case 2:
+
+		upsHit = 0;
+		if (jabsHit < 3)
+		{
+			if (time % 100 < 100)
+			{
+
+				sprite.setPosition(140, 155);
+				sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
+				sprite.move(1, -1);
+				setHealth(health - 1);
+				return true;
+
+			}
+		}
+
+
+		else if (jabsHit >= 3)
+		{
+			sprite.setPosition(140, 145);
+			if (time % 100 < 40)
+				sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
+			else
+				sprite.setTextureRect(sf::IntRect(54, 458, 32, 91));
+		}
+		jabsHit++;
+		break;
+
+	case 3:
+		jabsHit = 0;
+		sprite.setScale(-1.f, 1.f);
+		if (upsHit < 3)
+		{
+			sprite.setPosition(120, 150);
+			if (time % 100 < 40)
+			{
+				sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
+			}
+
+			else if (time % 100 < 100)
+			{
+				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
+			}
+			return true;
+		}
+
+		else if (upsHit >= 3)
+		{
+			if (time % 100 < 30)
+			{
+				sprite.setTextureRect(sf::IntRect(108, 452, 34, 97));
+			}
+
+			else if (time % 100 < 60)
+			{
+				sprite.setTextureRect(sf::IntRect(153, 452, 34, 97));
+			}
+
+			else if (time % 100 < 100)
+			{
+				sprite.setTextureRect(sf::IntRect(198, 452, 34, 97));
+			}
+		}
+
+		break;
+
+
 	}
 }
-
 GlassJoe::~GlassJoe()
 {}
