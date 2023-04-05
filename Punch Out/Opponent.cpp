@@ -47,5 +47,7 @@ int Opponent::getStamina()
 Opponent::~Opponent()
 {}
 
-
-
+int Opponent::getPunch()
+{
+	return punch;
+}
