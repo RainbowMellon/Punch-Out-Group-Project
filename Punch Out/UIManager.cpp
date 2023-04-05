@@ -174,5 +174,10 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int sta
 //used for inbetween fighting
 void UIManager::roundStartScreen(Player& player, Opponent& opponent)
 {
-
+	sf::Sprite playerFace, oppoFace;
+	sf::Texture texture;
+	texture.loadFromFile("punchout sprites/Stat_screen_faces.png", sf::IntRect(85, 322, 80, 69));
+	playerFace.setTexture(texture);
+	playerFace.setPosition(sf::Vector2f(790, 340));
+	(*window).draw(playerFace);
 }

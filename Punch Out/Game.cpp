@@ -10,7 +10,7 @@ Game::Game(sf::RenderWindow& window, sf::View& view)
 	oppoKO = 0;
 	points = 0;
 	round = 1;
-	state = 4;
+	state = 0;
 	time = 0; //For timer, first 2 digits are milliseconds, second two are seconds, fifth one is minute 
 	fadeout.setSize(sf::Vector2f(256, 240));
 	fadeout.setFillColor(sf::Color(0, 0, 0, 0));
@@ -23,21 +23,21 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 {
 		if (event.type == sf::Event::KeyReleased) // No repeat keys, because window.setKeyRepeat doesn't work in this scenario
 		isKeyPressed = false;
-
+		UI.roundStartScreen(littleMac, *opponent);
 	switch (state) //what ever the current state of the game, game does this. Ex, if we're not in the fight state don't show or update fight screen
 	{	
 		case 0: //Main menu
 			view.setCenter(898 + 5, 110 + 2); //center of first + borders
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
 			{
-				view.setCenter(128 + 2, 110 + 2);
+				view.setCenter(898 + 5, 340 + 3);
 				state = 1;
 			}
 			break;
 		case 1: //Stats screen
 			
 			//draw states, if round >= 2, draw the opponents and docs quotes
-
+			
 			//when enter is press, scroll down to round image, fade in black box, then switch states
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 			{
@@ -48,7 +48,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 		case 2: //view transistion? I might make stats screen absorb this
 			window.draw(fadeout);
 
-			if (view.getCenter().y < 110 * 3)
+			if (view.getCenter().y < 340 * 1.6)
 				view.move(0, 5);
 			else if (time < 75)
 				time++;
