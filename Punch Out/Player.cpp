@@ -107,12 +107,6 @@ void Player::updatePlayer(sf::Event& event)
 		keyPressed = true;
 	}
 
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::P) || sf::Keyboard::isKeyPressed(sf::Keyboard::O))
-		&& knockedDown)
-	{
-		struggle--;
-	}
-
 	//all this is temporary testing tools until we link up opponent and player
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Backspace))
 	{
@@ -476,6 +470,7 @@ void Player::updatePlayer(sf::Event& event)
 	}
 	case 10://punched right
 	{
+		std::cout << "do the thing" << std::endl;
 		if (moveCoolD > 13)
 		{
 			sprite.setTextureRect(sf::IntRect(150, 100, 29, 62));
@@ -612,11 +607,11 @@ void Player::punchMac(int punch_type)
 	if (punch_type == 1)
 	{
 		action = 10;
-		aniCoolD = 15;
+		moveCoolD = 15;
 	}
 	if (punch_type == 2)
 	{
 		action = 11;
-		aniCoolD = 15;
+		moveCoolD = 15;
 	}
 }
