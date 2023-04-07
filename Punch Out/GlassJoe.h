@@ -20,6 +20,12 @@ public:
 	void idle(int);
 	int getPunch();
 	
+	bool hasIntro();
+	sf::String introMusicFile();
+
+	//Returns true while the character is doing his intro, returns false when it's done
+	bool Intro();
+	bool toStage();
 
 private:
 	int health, stamina, canDodgeCD, cantDodgeCD, rank, age, weight;
