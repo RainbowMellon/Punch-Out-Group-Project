@@ -67,6 +67,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 		case 3: // intro to the fight
 			break;
 		case 4: //Fight screen
+			littleMac.punchMac(opponent->getPunch(), opponent->getDamage());
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) && !isKeyPressed)
 			{
 				state = 4;
