@@ -35,5 +35,5 @@ private:
 	sf::Sound gameSound;
 	bool isKeyPressed;
 	GlassJoe joe;
-	PistonHonda1 honda;
+	//PistonHonda1 honda; bad
 };
