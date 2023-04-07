@@ -22,6 +22,31 @@ Opponent::Opponent(int num)
 
 }
 
+int Opponent::getHealth()
+{
+	return health;
+}
+
+bool Opponent::hasIntro()
+{
+	return false;
+}
+
+bool Opponent::Intro()
+{
+	return false;
+}
+
+bool Opponent::toStage()
+{
+	return false;
+}
+
+sf::String Opponent::introMusicFile()
+{
+	return sf::String();
+}
+
 void Opponent::draw(sf::RenderWindow& window)
 {
 
