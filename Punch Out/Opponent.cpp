@@ -50,10 +50,6 @@ bool Opponent::wasHit(Player& mac, int time)
 Opponent::~Opponent()
 {}
 
-int Opponent::getHealth()
-{
-	return health;
-}
 
 bool Opponent::hasIntro()
 {
