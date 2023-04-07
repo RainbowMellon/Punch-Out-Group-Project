@@ -17,6 +17,14 @@ public:
 	virtual int getDamage();
 	virtual bool wasHit(Player&)=0;
 	int getPunch();
+	
+	virtual bool hasIntro();
+	virtual sf::String introMusicFile();
+	//Returns true while the character is doing his intro, returns false when it's done
+	virtual bool Intro();
+	//Returns true while the opponent is moving toward the middle stage, returns false if it isn't there yet
+	virtual bool toStage();
+	
 protected:
 	int health, damage, stamina, canDodgeCD, cantDodgeCD, rank, age, weight,round, punch;
 	/*Health is the number of hp the opponent has left, damage is how much they do 
