@@ -27,7 +27,7 @@ public:
 	
 
 private:
-	int health, stamina, canDodgeCD, cantDodgeCD, rank, age, weight,jabsHit,upsHit;
+	int health, stamina, canDodgeCD, cantDodgeCD, rank, age, weight,jabsHit,upsHit, timer;
 	bool isInPattern, isStunned;
 	std::string name, location, stats;
 	sf::Sprite sprite;
