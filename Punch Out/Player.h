@@ -20,6 +20,7 @@ public:
 	bool getWinded();
 	void punchMac(int, int);
 	void setHealth(int);
+	int getPunch();
 private:
 
 	sf::Sprite sprite;
