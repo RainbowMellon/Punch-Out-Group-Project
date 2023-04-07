@@ -47,10 +47,11 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 	{	
 		case 0: //Main menu
 			view.setCenter(898 + 5, 110 + 2); //center of first + borders
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !isKeyPressed)
 			{
 				view.setCenter(128 + 2, 110 + 2);
 				state = 1;
+				isKeyPressed = true;
 			}
 			break;
 		case 1: //Stats screen
@@ -58,10 +59,11 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			//draw states, if round >= 2, draw the opponents and docs quotes
 
 			//when enter is press, scroll down to round image, fade in black box, then switch states
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !isKeyPressed)
 			{
 				state = 2;
 				roundTex.loadFromFile("punchout Sprites/round" + std::to_string(round) + ".png");
+				isKeyPressed = true;
 			}
 			break;
 
@@ -154,6 +156,17 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			littleMac.updatePlayer(event);
 			opponent->update(time, littleMac);
 
+			if (opponent->wasHit(littleMac,time))
+			{
+				points += 10;
+			}
+
+			if (opponent->getHealth() <= 0)
+			{
+				points += 1000;
+				state = 7;
+				gameSound.play();
+			}
 				//if the timer is 3 minutes and it's round three, go to the disicion screen.
 			if (time == 30000)
 			{
@@ -197,7 +210,6 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			//else
 			break;
 		case 7: //Mario counts for opponent
-			view.setCenter(384 + 3, 110 + 2); //center of second + 3 for border
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) && !isKeyPressed)
 			{
 				state = 3;
