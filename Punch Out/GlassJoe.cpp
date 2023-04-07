@@ -11,7 +11,7 @@ GlassJoe::GlassJoe()
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0, 0, 55, 100));
 	sprite.setOrigin(55 / 2, 115 / 2);
-	sprite.setPosition(220, 60);
+	sprite.setPosition(148, 125);
 	sprite.setScale(.95, .95);
 	round = 1;
 	jabsHit = 0;
@@ -22,6 +22,8 @@ GlassJoe::GlassJoe()
 To Do: finish what happens after vive
 do was hit
 */
+
+
 void GlassJoe::update(int time,Player& mac)
 {
 	sprite.setScale(1.f, 1.f);
@@ -242,17 +244,24 @@ bool GlassJoe::wasHit(Player& mac, int time)
 		{
 			if (time % 100 < 100)
 			{
+				std::cout << "thing 2" << std::endl;
 				sprite.setPosition(140, 155);
 				sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
 				sprite.move(1, -1);
-				setHealth(health - 1);
+				
+				if (mac.getPunch() == 1)
+				{
+					setHealth(health - 4);
+					jabsHit++;
+				}
 				return true;
 
 			}
+			 
 		}
 
 
-		else if (jabsHit >= 3)
+		else if (jabsHit >= 4)
 		{
 			sprite.setPosition(140, 145);
 			if (time % 100 < 40)
@@ -260,7 +269,7 @@ bool GlassJoe::wasHit(Player& mac, int time)
 			else
 				sprite.setTextureRect(sf::IntRect(54, 458, 32, 91));
 		}
-		jabsHit++;
+		 
 
 		break;
 
@@ -290,7 +299,7 @@ bool GlassJoe::wasHit(Player& mac, int time)
 			else
 				sprite.setTextureRect(sf::IntRect(54, 458, 32, 91));
 		}
-		jabsHit++;
+		 
 		break;
 
 	case 3:
@@ -334,42 +343,6 @@ bool GlassJoe::wasHit(Player& mac, int time)
 
 
 	}
-}
-
-bool GlassJoe::hasIntro()
-{
-	return true;
-}
-
-sf::String GlassJoe::introMusicFile()
-{
-	return "sounds/GlassJoeTheme.flac";
-}
-
-bool GlassJoe::Intro()
-{
-	if (timer > 0)
-	{
-		timer--;
-		sprite.setTextureRect(sf::IntRect(55, 110 * 7, 55, 110));
-		return true;
-	}
-	timer = 500;
-	return false;
-}
-
-bool GlassJoe::toStage()
-{
-	if (timer > 0)
-	{
-		if (sprite.getPosition().x > 140)
-			sprite.move(-0.75, 0);
-		if (sprite.getPosition().y < 90)
-			sprite.move(0, 0.5);
-
-		return true;
-	}
-	return false;
 }
 
 GlassJoe::~GlassJoe()
