@@ -45,7 +45,7 @@ int Opponent::getStamina()
 
 bool Opponent::wasHit(Player& mac, int time)
 {
-
+	return false;
 }
 Opponent::~Opponent()
 {}
