@@ -9,6 +9,7 @@ GlassJoe::GlassJoe()
 	location = "Paris, France";
 	stats = "1-99      1 KO";
 	round = 1;
+	timer = 470;
 	texture.loadFromFile("punchout sprites/GlassJoe.png");
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0, 0, 55, 100));
@@ -321,5 +322,41 @@ bool GlassJoe::wasHit(Player& mac, int time)
 
 	}
 }
+
+ bool GlassJoe::hasIntro()
+{
+	return true;
+}
+
+ sf::String GlassJoe::introMusicFile()
+ {
+	 return "sounds/GlassJoeTheme.flac";
+ }
+
+ bool GlassJoe::Intro()
+ {
+	 if (timer > 0)
+	 {
+		 timer--;
+		 sprite.setTextureRect(sf::IntRect(55, 110 * 7, 55, 110));
+		 return true;
+	 }
+	 timer = 500;
+	 return false;
+ }
+
+bool GlassJoe::toStage()
+ {
+	 if (timer > 0)
+	 {
+		 if(sprite.getPosition().x > 140)
+			 sprite.move(-0.75, 0);
+		 if (sprite.getPosition().y < 90)
+			 sprite.move(0, 0.5);
+
+		 return true;
+	 }
+	 return false;
+ }
 GlassJoe::~GlassJoe()
 {}
