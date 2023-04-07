@@ -573,6 +573,12 @@ void Player::updatePlayer(sf::Event& event)
 }
 
 
+int Player::getAction()
+{
+	return action;
+}
+
+
 int Player::isPunching()
 {
 	return punch;
