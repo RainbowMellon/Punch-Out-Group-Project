@@ -15,18 +15,11 @@ public:
 	virtual int getStamina();
 	virtual void setHealth(int);
 	virtual int getDamage();
-	virtual bool wasHit(Player&)=0;
-	int getPunch();
-	
-	virtual bool hasIntro();
-	virtual sf::String introMusicFile();
-	//Returns true while the character is doing his intro, returns false when it's done
-	virtual bool Intro();
-	//Returns true while the opponent is moving toward the middle stage, returns false if it isn't there yet
-	virtual bool toStage();
-	
+	virtual bool wasHit(Player&, int);
+
+
 protected:
-	int health, damage, stamina, canDodgeCD, cantDodgeCD, rank, age, weight,round, punch;
+	int health, damage, stamina, canDodgeCD, cantDodgeCD, rank, age, weight,round;
 	/*Health is the number of hp the opponent has left, damage is how much they do 
 	to mac, cool downs for when the opponent can dodge, and nums for the screens
 	between the rounds*/

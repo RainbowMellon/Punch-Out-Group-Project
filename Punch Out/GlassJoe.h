@@ -10,6 +10,7 @@ public:
 	void update(int time,Player&);
 	void draw(sf::RenderWindow&);
 	int getHealth();
+	void setHealth(int);
 	int getDamage();
 	int getStamina();
 	bool wasHit(Player&, int);
@@ -17,17 +18,12 @@ public:
 	void jab(int);
 	void hook(int);
 	void idle(int);
-	
-	bool hasIntro();
-	sf::String introMusicFile();
-
-	//Returns true while the character is doing his intro, returns false when it's done
-	bool Intro();
-	bool toStage();
+	int getPunch();
 	
 
 private:
-	int health, stamina, canDodgeCD, cantDodgeCD, rank, age, weight,jabsHit,upsHit, timer;
+	int health, stamina, canDodgeCD, cantDodgeCD, rank, age, weight;
+	int punch, jabsHit, upsHit, macPunch;
 	bool isInPattern, isStunned;
 	std::string name, location, stats;
 	sf::Sprite sprite;

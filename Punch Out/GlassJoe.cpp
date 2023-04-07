@@ -1,21 +1,21 @@
 #include "GlassJoe.h"
 #include <iostream>
 
-
 GlassJoe::GlassJoe()
 {
 	health = 96;
 	name = "Glass Joe";
 	location = "Paris, France";
 	stats = "1-99      1 KO";
-	round = 1;
-	timer = 470;
 	texture.loadFromFile("punchout sprites/GlassJoe.png");
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0, 0, 55, 100));
 	sprite.setOrigin(55 / 2, 115 / 2);
 	sprite.setPosition(148, 125);
 	sprite.setScale(.95, .95);
+	round = 1;
+	jabsHit = 0;
+	upsHit = 0;
 }
 
 /*
@@ -24,40 +24,52 @@ do was hit
 */
 void GlassJoe::update(int time,Player& mac)
 {
-	if (round == 1)
-	{
-		if (time < 4000)
-			idle(time);
+	sprite.setScale(1.f, 1.f);
 
-		else if (time < 4500)
-		{
-			vive(time);
-		}
+	switch (round)
+	{
+	case 1:
+
+		if (mac.getAction() != 0)
+			wasHit(mac, time);
 		else
 		{
-			if (time % 1000 < 500)
+			if (time < 4000)
+			{
 				idle(time);
+			}
+
+
+			else if (time < 4500)
+			{
+				vive(time);
+			}
 			else
 			{
-				if (time % 4000 < 3000)
-					hook(time);
+				if (time % 1000 < 500)
+					idle(time);
 				else
-					jab(time);
+				{
+					if (time % 4000 < 3000)
+						hook(time);
+					
+					else
+						jab(time);
+					
+				}
 			}
 		}
+		
+		break;
 	}
 
-	if (wasHit(mac) == 1)
-	{
-		sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
-
-	}
 }
 
 
 void GlassJoe::idle(int time)//joe's idle animation before vive la france
 {
-	if (time % 150 < 50)//timing on these doesn't exactly line up, need to look at it more
+
+	if (time % 150 < 50)
 	{
 		sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
 		sprite.setPosition(148, 125);
@@ -295,6 +307,7 @@ bool GlassJoe::wasHit(Player& mac, int time)
 			else if (time % 100 < 100)
 			{
 				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
+				setHealth(health - 1);
 			}
 			return true;
 		}
@@ -316,47 +329,22 @@ bool GlassJoe::wasHit(Player& mac, int time)
 				sprite.setTextureRect(sf::IntRect(198, 452, 34, 97));
 			}
 		}
-
+		upsHit++;
 		break;
 
 
 	}
 }
 
- bool GlassJoe::hasIntro()
-{
-	return true;
-}
-
- sf::String GlassJoe::introMusicFile()
- {
-	 return "sounds/GlassJoeTheme.flac";
- }
-
- bool GlassJoe::Intro()
- {
-	 if (timer > 0)
-	 {
-		 timer--;
-		 sprite.setTextureRect(sf::IntRect(55, 110 * 7, 55, 110));
-		 return true;
-	 }
-	 timer = 500;
-	 return false;
- }
-
-bool GlassJoe::toStage()
- {
-	 if (timer > 0)
-	 {
-		 if(sprite.getPosition().x > 140)
-			 sprite.move(-0.75, 0);
-		 if (sprite.getPosition().y < 90)
-			 sprite.move(0, 0.5);
-
-		 return true;
-	 }
-	 return false;
- }
 GlassJoe::~GlassJoe()
 {}
+
+int GlassJoe::getPunch()
+{
+	return punch;
+}
+
+void GlassJoe::setHealth(int newHealth)
+{
+	health = newHealth;
+}
