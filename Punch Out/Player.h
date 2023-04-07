@@ -14,6 +14,7 @@ public:
 	int getStarCount();
 	int getStamina();
 	int isPunching();
+	int getAction();
 	bool isDodging();
 	bool isBlocking();
 	bool getWinded();
