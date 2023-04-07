@@ -16,6 +16,7 @@ public:
 	virtual void setHealth(int);
 	virtual int getDamage();
 	virtual int wasHit(Player&)=0;
+	virtual std::string getUIStuff(int)=0;
 
 
 protected:

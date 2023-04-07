@@ -5,9 +5,12 @@
 GlassJoe::GlassJoe()
 {
 	health = 96;
+	rank = "2";
 	name = "Glass Joe";
-	location = "Paris, France";
-	stats = "1-99      1 KO";
+	location = "From\n Paris,\n    France";
+	stats = " 1-99  1KO";
+	age = "38";
+	weight = "110";
 	round = 1;
 	texture.loadFromFile("punchout sprites/GlassJoe.png");
 	sprite.setTexture(texture);
@@ -230,6 +233,7 @@ int GlassJoe::wasHit(Player& mac)
 			{
 				if (mac.isPunching() == 1 || mac.isPunching() == 2)
 				{
+					health--;
 					return 1;
 				}
 			
@@ -241,7 +245,37 @@ int GlassJoe::wasHit(Player& mac)
 		}
 		
 	}
+	
 }
+
+
+std::string GlassJoe::getUIStuff(int type)
+{
+	std::string whatGet;
+	switch(type)
+	{
+	case 1:
+		whatGet = rank;
+		break;
+	case 2:
+		whatGet = name;
+		break;
+	case 3:
+		whatGet = stats;
+		break;
+	case 4:
+		whatGet = location;
+		break;
+	case 5:
+		whatGet = age;
+		break;
+	case 6:
+		whatGet = weight;
+	}
+
+	return whatGet;
+}
+
 
 GlassJoe::~GlassJoe()
 {}

@@ -17,12 +17,13 @@ public:
 	void jab(int);
 	void hook(int);
 	void idle(int);
+	std::string getUIStuff(int);
 	
 
 private:
-	int health, stamina, canDodgeCD, cantDodgeCD, rank, age, weight,punch,jabsHit,upsHit;
+	int health, stamina, canDodgeCD, cantDodgeCD, punch, jabsHit, upsHit;
 	bool isInPattern, isStunned;
-	std::string name, location, stats;
+	std::string name, location, stats, rank, age, weight;
 	sf::Sprite sprite;
 	sf::Texture texture;
 };

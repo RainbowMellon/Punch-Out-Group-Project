@@ -178,6 +178,58 @@ void UIManager::roundStartScreen(Player& player, Opponent& opponent)
 	sf::Texture texture;
 	texture.loadFromFile("punchout sprites/Stat_screen_faces.png", sf::IntRect(85, 322, 80, 69));
 	playerFace.setTexture(texture);
-	playerFace.setPosition(sf::Vector2f(790, 340));
+	playerFace.setPosition(sf::Vector2f(790, 347));
 	(*window).draw(playerFace);
+
+	texture.loadFromFile("punchout sprites/Stat_screen_faces.png", sf::IntRect(2, 162, 80, 77));
+	oppoFace.setTexture(texture);
+	oppoFace.setPosition(sf::Vector2f(940, 280));
+	(*window).draw(oppoFace);
+
+	sf::Font font;
+	font.loadFromFile("punch-out-nes.ttf");
+	std::string stats[6];
+	sf::Text text;
+	text.setFont(font);
+	text.setScale(.25, .25);
+
+	for (int i = 0; i < 6; i++)
+		stats[i] = opponent.getUIStuff(i + 1);
+
+	//rank
+	text.setString("Ranked: #" + stats[0]);
+	text.setPosition(sf::Vector2f(941, 255));
+	text.setFillColor(sf::Color::Green);
+	(*window).draw(text);
+
+	//name
+	text.setString(stats[1]);
+	text.setPosition(sf::Vector2f(941, 270));
+	text.setFillColor(sf::Color::White);
+	(*window).draw(text);
+
+	//stats
+	text.setString(stats[2]);
+	text.setPosition(sf::Vector2f(941, 364));
+	(*window).draw(text);
+
+	//profile
+	text.setString("\"profile\"");
+	text.setPosition(sf::Vector2f(941, 379));
+	(*window).draw(text);
+
+	//location
+	text.setString(stats[3]);
+	text.setPosition(sf::Vector2f(941, 395));
+	(*window).draw(text);
+
+	//age
+	text.setString("age: " + stats[4]);
+	text.setPosition(sf::Vector2f(941, 422));
+	(*window).draw(text);
+
+	//weight
+	text.setString("weight:" + stats[5]);
+	text.setPosition(sf::Vector2f(941, 437));
+	(*window).draw(text);
 }
