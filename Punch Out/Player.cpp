@@ -182,19 +182,21 @@ void Player::updatePlayer(sf::Event& event)
 		{
 			sprite.setTextureRect(sf::IntRect(163, 23, 28, 64));
 			moveCoolD--;
-			punch = 1;
 		}
 		else if (moveCoolD > 0)
 		{
-			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
-			if (moveCoolD == 10)
-				sprite.move(0, -10);
-			moveCoolD--;
 			punch = 0;
+			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
+			if (moveCoolD == 10) 
+			{
+				punch = 1;
+				std::cout << "thing" << std::endl;
+				sprite.move(0, -10);
+			}
+			moveCoolD--;
 		}
 		if (moveCoolD == 0)
 		{
-			punch = 0;
 			sprite.scale(-1, 1);
 			sprite.move(0, 10);
 			action = 0;
@@ -570,6 +572,12 @@ void Player::updatePlayer(sf::Event& event)
 		action = 0;
 	}
 	}
+}
+
+
+int Player::getPunch()
+{
+	return punch;
 }
 
 
