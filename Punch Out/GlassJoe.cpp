@@ -11,7 +11,7 @@ GlassJoe::GlassJoe()
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0, 0, 55, 100));
 	sprite.setOrigin(55 / 2, 115 / 2);
-	sprite.setPosition(148, 125);
+	sprite.setPosition(220, 60);
 	sprite.setScale(.95, .95);
 	round = 1;
 	jabsHit = 0;
@@ -334,6 +334,42 @@ bool GlassJoe::wasHit(Player& mac, int time)
 
 
 	}
+}
+
+bool GlassJoe::hasIntro()
+{
+	return true;
+}
+
+sf::String GlassJoe::introMusicFile()
+{
+	return "sounds/GlassJoeTheme.flac";
+}
+
+bool GlassJoe::Intro()
+{
+	if (timer > 0)
+	{
+		timer--;
+		sprite.setTextureRect(sf::IntRect(55, 110 * 7, 55, 110));
+		return true;
+	}
+	timer = 500;
+	return false;
+}
+
+bool GlassJoe::toStage()
+{
+	if (timer > 0)
+	{
+		if (sprite.getPosition().x > 140)
+			sprite.move(-0.75, 0);
+		if (sprite.getPosition().y < 90)
+			sprite.move(0, 0.5);
+
+		return true;
+	}
+	return false;
 }
 
 GlassJoe::~GlassJoe()
