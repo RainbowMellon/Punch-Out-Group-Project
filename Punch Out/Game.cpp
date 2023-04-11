@@ -15,7 +15,7 @@ Game::Game(sf::RenderWindow& window, sf::View& view)
 	fadeout.setSize(sf::Vector2f(256, 240));
 	fadeout.setFillColor(sf::Color(0, 0, 0, 0));
 	fadeout.getFillColor().a;
-	fadeout.setPosition(sf::Vector2f(878, 345));
+	fadeout.setPosition(770, 430);
 	UI.setPointers(window, view, littleMac);
 	mainTheme.openFromFile("sounds/Bout Theme.wav");
 }
@@ -24,7 +24,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 {
 		if (event.type == sf::Event::KeyReleased) // No repeat keys, because window.setKeyRepeat doesn't work in this scenario
 		isKeyPressed = false;
-		UI.roundStartScreen(littleMac, *opponent);
+		UI.roundStartScreen(littleMac, *opponent, round);
 	switch (state) //what ever the current state of the game, game does this. Ex, if we're not in the fight state don't show or update fight screen
 	{	
 		case 0: //Main menu

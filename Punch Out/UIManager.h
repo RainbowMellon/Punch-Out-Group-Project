@@ -16,11 +16,13 @@ public:
   void loseScreen();
   void drawText(std::string);
   void drawStats(Player&, Opponent&, int, int, int);
-  void roundStartScreen(Player&, Opponent&);
+  void roundStartScreen(Player&, Opponent&, int);
 
 private:
   sf::RenderWindow *window;
   sf::View *view;
   Player *player;
+  sf::Texture roundTex;
+  sf::Sprite roundSprite;
   sf::RectangleShape pHealth, oHealth;
 };
