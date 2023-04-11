@@ -6,10 +6,10 @@ GlassJoe::GlassJoe()
 {
 	health = 96;
 	rank = "2";
-	name = "Glass Joe";
-	location = "From\n Paris,\n    France";
-	stats = " 1-99  1KO";
-	age = "38";
+	name = "Glass Joe\n\n\n\n\n\n";
+	location = "\n\nFrom\n Paris,\n    France\n\n";
+	stats = "\n\n\n\n\n\n 1-99  1KO\n\n";
+	age = "38\n\n";
 	weight = "110";
 	round = 1;
 	texture.loadFromFile("punchout sprites/GlassJoe.png");

@@ -53,3 +53,6 @@ Punch Out/Debug/Punch Ou.642e84e5.tlog/link.write.1.tlog
 Punch Out/Punch Out - Dorian, Eric, Alex, George.vcxproj
 Punch Out/Punch Out - Dorian, Eric, Alex, George.vcxproj
 *.pdb
+*.vsidx
+*.tlog
+*.ilk

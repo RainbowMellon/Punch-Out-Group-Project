@@ -176,11 +176,14 @@ void UIManager::roundStartScreen(Player& player, Opponent& opponent)
 {
 	sf::Sprite playerFace, oppoFace;
 	sf::Texture texture;
+
+	//player face
 	texture.loadFromFile("punchout sprites/Stat_screen_faces.png", sf::IntRect(85, 322, 80, 69));
 	playerFace.setTexture(texture);
-	playerFace.setPosition(sf::Vector2f(790, 347));
+	playerFace.setPosition(sf::Vector2f(790, 346));
 	(*window).draw(playerFace);
 
+	//opponent face
 	texture.loadFromFile("punchout sprites/Stat_screen_faces.png", sf::IntRect(2, 162, 80, 77));
 	oppoFace.setTexture(texture);
 	oppoFace.setPosition(sf::Vector2f(940, 280));
@@ -196,40 +199,43 @@ void UIManager::roundStartScreen(Player& player, Opponent& opponent)
 	for (int i = 0; i < 6; i++)
 		stats[i] = opponent.getUIStuff(i + 1);
 
-	//rank
+	//opponent rank
 	text.setString("Ranked: #" + stats[0]);
 	text.setPosition(sf::Vector2f(941, 255));
 	text.setFillColor(sf::Color::Green);
 	(*window).draw(text);
 
-	//name
-	text.setString(stats[1]);
-	text.setPosition(sf::Vector2f(941, 270));
+	//player rank
+	text.setString("Ranked: #3");
+	text.setPosition(sf::Vector2f(790, 420));
+	text.setFillColor(sf::Color::Green);
+	(*window).draw(text);	
+
+	//player profile
+	text.setString("From bronx\n      n.y.\nage: 17\n\nweight:107\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\little mac");
 	text.setFillColor(sf::Color::White);
+	text.setPosition(sf::Vector2f(790, 290));
+	(*window).draw(text);
+	
+	//player stats
+	text.setString(" 0- -  -ko");
+	text.setPosition(sf::Vector2f(790, 330));
 	(*window).draw(text);
 
-	//stats
-	text.setString(stats[2]);
-	text.setPosition(sf::Vector2f(941, 364));
+	//opponent profile
+	text.setString(stats[1] + stats[2] + "\"profile\"" + stats[3] 
+		+ "age: " + stats[4] + "weight:" + stats[5]);
+	text.setPosition(sf::Vector2f(941, 270));
 	(*window).draw(text);
 
-	//profile
-	text.setString("\"profile\"");
-	text.setPosition(sf::Vector2f(941, 379));
+	//vs. and push start!
+	text.setString("  vs.\n\n\n\n\n\n\n push\n\nstart!");
+	text.setPosition(sf::Vector2f(880, 345));
+	text.setFillColor(sf::Color(235, 140, 40));
 	(*window).draw(text);
 
-	//location
-	text.setString(stats[3]);
-	text.setPosition(sf::Vector2f(941, 395));
-	(*window).draw(text);
-
-	//age
-	text.setString("age: " + stats[4]);
-	text.setPosition(sf::Vector2f(941, 422));
-	(*window).draw(text);
-
-	//weight
-	text.setString("weight:" + stats[5]);
-	text.setPosition(sf::Vector2f(941, 437));
+	//circuit
+	text.setString("  minor circuit");
+	text.setPosition(sf::Vector2f(790, 260));
 	(*window).draw(text);
 }

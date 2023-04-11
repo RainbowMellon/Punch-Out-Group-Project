@@ -15,6 +15,7 @@ Game::Game(sf::RenderWindow& window, sf::View& view)
 	fadeout.setSize(sf::Vector2f(256, 240));
 	fadeout.setFillColor(sf::Color(0, 0, 0, 0));
 	fadeout.getFillColor().a;
+	fadeout.setPosition(sf::Vector2f(878, 345));
 	UI.setPointers(window, view, littleMac);
 	mainTheme.openFromFile("sounds/Bout Theme.wav");
 }
@@ -48,7 +49,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 		case 2: //view transistion? I might make stats screen absorb this
 			window.draw(fadeout);
 
-			if (view.getCenter().y < 340 * 1.6)
+			if (view.getCenter().y < 350 * 1.6)
 				view.move(0, 5);
 			else if (time < 75)
 				time++;

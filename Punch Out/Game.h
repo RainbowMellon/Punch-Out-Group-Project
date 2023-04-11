@@ -29,5 +29,5 @@ private:
 	sf::Music mainTheme;
 	bool isKeyPressed;
 	GlassJoe joe;
-	PistonHonda1 honda;
+	//PistonHonda1 honda;
 };
