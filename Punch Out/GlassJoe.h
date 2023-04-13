@@ -18,6 +18,7 @@ public:
 	void jab(int);
 	void hook(int);
 	void idle(int);
+	std::string getUIStuff(int);
 	int getPunch();
 	
 	bool hasIntro();
@@ -31,7 +32,7 @@ private:
 	int health, stamina, canDodgeCD, cantDodgeCD, rank, age, weight;
 	int punch, jabsHit, upsHit, macPunch;
 	bool isInPattern, isStunned;
-	std::string name, location, stats;
+	std::string name, location, stats, rank, age, weight;
 	sf::Sprite sprite;
 	sf::Texture texture;
 };

@@ -2,6 +2,7 @@
 #include "UIManager.h"
 #include <string>
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 
 UIManager::UIManager()
@@ -19,6 +20,8 @@ UIManager::UIManager()
 	oHealth.setSize(sf::Vector2f(48, 7));
 	oHealth.setFillColor(sf::Color::Black);
 	oHealth.setOutlineThickness(0);
+
+	roundSprite.setPosition(770, 430);
 }
 
 
@@ -39,6 +42,8 @@ UIManager::UIManager(sf::RenderWindow& newWindow, sf::View& newView, Player& new
   oHealth.setSize(sf::Vector2f(48, 7));
   oHealth.setFillColor(sf::Color::Black);
   oHealth.setOutlineThickness(0);
+
+  roundSprite.setPosition(770, 430);
 }
 
 void UIManager::setPointers(sf::RenderWindow& window, sf::View& view, Player& player)
@@ -172,7 +177,74 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int sta
 
 //pass a refrence to the opponent to access the states
 //used for inbetween fighting
-void UIManager::roundStartScreen(Player& player, Opponent& opponent)
+void UIManager::roundStartScreen(Player& player, Opponent& opponent, int round)
 {
+	sf::Sprite playerFace, oppoFace;
+	sf::Texture texture;
+	roundTex.loadFromFile("punchout Sprites/round" + std::to_string(round) + ".png");
+	roundSprite.setTexture(roundTex);
 
+	//player face
+	texture.loadFromFile("punchout sprites/Stat_screen_faces.png", sf::IntRect(85, 322, 80, 69));
+	playerFace.setTexture(texture);
+	playerFace.setPosition(790, 346);
+	(*window).draw(playerFace);
+
+	//opponent face
+	texture.loadFromFile("punchout sprites/Stat_screen_faces.png", sf::IntRect(2, 162, 80, 77));
+	oppoFace.setTexture(texture);
+	oppoFace.setPosition(940, 280);
+	(*window).draw(oppoFace);
+
+	sf::Font font;
+	font.loadFromFile("punch-out-nes.ttf");
+	std::string stats[6];
+	sf::Text text;
+	text.setFont(font);
+	text.setScale(.25, .25);
+
+	for (int i = 0; i < 6; i++)
+		stats[i] = opponent.getUIStuff(i + 1);
+
+	//opponent rank
+	text.setString("Ranked: #" + stats[0]);
+	text.setPosition(941, 255);
+	text.setFillColor(sf::Color::Green);
+	(*window).draw(text);
+
+	//player rank
+	text.setString("Ranked: #3");
+	text.setPosition(790, 420);
+	text.setFillColor(sf::Color::Green);
+	(*window).draw(text);	
+
+	//player profile
+	text.setString("From bronx\n      n.y.\nage: 17\n\nweight:107\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\little mac");
+	text.setFillColor(sf::Color::White);
+	text.setPosition(790, 290);
+	(*window).draw(text);
+	
+	//player stats
+	text.setString(" 0- -  -ko");
+	text.setPosition(790, 330);
+	(*window).draw(text);
+
+	//opponent profile
+	text.setString(stats[1] + stats[2] + "\"profile\"" + stats[3] 
+		+ "age: " + stats[4] + "weight:" + stats[5]);
+	text.setPosition(941, 270);
+	(*window).draw(text);
+
+	//vs. and push start!
+	text.setString("  vs.\n\n\n\n\n\n\n push\n\nstart!");
+	text.setPosition(880, 345);
+	text.setFillColor(sf::Color(235, 140, 40));
+	(*window).draw(text);
+
+	//circuit
+	text.setString("  minor circuit");
+	text.setPosition(790, 260);
+	(*window).draw(text);
+
+	(*window).draw(roundSprite);
 }
