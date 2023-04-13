@@ -29,7 +29,7 @@ public:
 	bool toStage();
 
 private:
-	int health, stamina, canDodgeCD, cantDodgeCD, rank, age, weight;
+	int health, stamina, canDodgeCD, cantDodgeCD, rank, age, weight, timer;
 	int punch, jabsHit, upsHit, macPunch;
 	bool isInPattern, isStunned;
 	std::string name, location, stats, rank, age, weight;
