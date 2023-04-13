@@ -27,11 +27,6 @@ Game::Game(sf::RenderWindow& window, sf::View& view)
 	marioSprite.setTextureRect(sf::IntRect(8 + 32 * 1, 8, 32, 48));
 	marioSprite.setPosition(180, 110);
 
-	//setting up round sprite
-	roundTex.loadFromFile("punchout Sprites/round" + std::to_string(round) + ".png");
-	roundSprite.setTexture(roundTex);
-	roundSprite.setPosition(0, 220);
-
 	//setting up sound & music
 	mainTheme.openFromFile("sounds/Bout Theme.wav");
 	gameSound.setBuffer(gameSoundBuffer);
@@ -63,7 +58,6 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !isKeyPressed)
 			{
 				state = 2;
-				roundTex.loadFromFile("punchout Sprites/round" + std::to_string(round) + ".png");
 				isKeyPressed = true;
 			}
 			break;
@@ -102,7 +96,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			if (mainTheme.getStatus() == mainTheme.Playing)
 			{
 				opponent->Intro();
-				UI.drawStats(littleMac, *opponent, time, 1, round);
+				UI.drawStats(littleMac, *opponent, time, 1, round, points);
 				opponent->draw(window);
 				littleMac.drawPlayer(window);
 				
@@ -121,7 +115,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			{
 				opponent->toStage();
 
-				UI.drawStats(littleMac, *opponent, time, 1, round);
+				UI.drawStats(littleMac, *opponent, time, 1, round, points);
 				opponent->draw(window);
 				littleMac.drawPlayer(window);
 				window.draw(marioSprite);
@@ -186,14 +180,14 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			//Draw Player, Opponent, FightUI
 			opponent->draw(window);
 			littleMac.drawPlayer(window);
-			UI.drawStats(littleMac, *opponent, time, 1,round);
+			UI.drawStats(littleMac, *opponent, time, 1, round, points);
 
 			//If the opponent or player is KOed, go to win or lose screen
 			break;
 		case 6: //time out, return to 
 			opponent->draw(window);
 			littleMac.drawPlayer(window);
-			UI.drawStats(littleMac, *opponent, time, 1, round);
+			UI.drawStats(littleMac, *opponent, time, 1, round, points);
 			window.draw(fadeout);
 
 			if (playerKO < 75)
@@ -220,7 +214,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 
 			//marioCount(int)
 
-			UI.drawStats(littleMac, *opponent, time, 1,round);
+			UI.drawStats(littleMac, *opponent, time, 1, round, points);
 			opponent->draw(window);
 			littleMac.drawPlayer(window);
 			break;
@@ -233,7 +227,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 				placeHolderInt = 1;
 			}
 			
-			UI.drawStats(littleMac, *opponent, time, 1, round);
+			UI.drawStats(littleMac, *opponent, time, 1, round, points);
 			opponent->draw(window);
 			littleMac.drawPlayer(window);
 
