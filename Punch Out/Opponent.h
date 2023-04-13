@@ -22,7 +22,7 @@ public:
 	virtual bool Intro();
 	//Returns true while the opponent is moving toward the middle stage, returns false if it isn't there yet
 	virtual bool toStage();
-
+	virtual std::string getUIStuff(int)=0;
 
 
 protected:
