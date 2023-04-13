@@ -44,7 +44,6 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 {
 		if (event.type == sf::Event::KeyReleased) // No repeat keys, because window.setKeyRepeat doesn't work in this scenario
 		isKeyPressed = false;
-		UI.roundStartScreen(littleMac, *opponent, round);
 	switch (state) //what ever the current state of the game, game does this. Ex, if we're not in the fight state don't show or update fight screen
 	{	
 		case 0: //Main menu
@@ -59,7 +58,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 		case 1: //Stats screen
 			
 			//draw states, if round >= 2, draw the opponents and docs quotes
-			
+			UI.roundStartScreen(littleMac, *opponent, round);
 			//when enter is press, scroll down to round image, fade in black box, then switch states
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !isKeyPressed)
 			{
@@ -70,6 +69,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			break;
 
 		case 2: //view transistion? I might make stats screen absorb this
+			UI.roundStartScreen(littleMac, *opponent, round);
 			window.draw(roundSprite);
 			window.draw(fadeout);
 			if (view.getCenter().y < 350 * 1.6)
