@@ -107,10 +107,9 @@ void Player::updatePlayer(sf::Event& event)
 		keyPressed = true;
 	}
 
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::P) || sf::Keyboard::isKeyPressed(sf::Keyboard::O))
-		&& knockedDown)
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::P) || sf::Keyboard::isKeyPressed(sf::Keyboard::O)) && knockedDown && moveCoolD <= 0)
 	{
-		struggle--;
+		aniCoolD -= 20;
 	}
 
 	//all this is temporary testing tools until we link up opponent and player
@@ -147,12 +146,18 @@ void Player::updatePlayer(sf::Event& event)
 		action = 13;
 		moveCoolD = 5;
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) && moveCoolD <= 0)
+	{
+		knockedDown = true;
+		action = 13;
+		aniCoolD = 200;
+		moveCoolD = 8;
+	}
 
 	/*
 	To-Do:
 	make mac fall over when he runs out of health
 	make mac able to get back up a total of 3 times a round
-	fix the somehow worse version of the uppercut animation
 	make the heart system actually do something
 	*/
 
@@ -177,19 +182,21 @@ void Player::updatePlayer(sf::Event& event)
 		{
 			sprite.setTextureRect(sf::IntRect(163, 23, 28, 64));
 			moveCoolD--;
-			punch = 1;
 		}
 		else if (moveCoolD > 0)
 		{
-			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
-			if (moveCoolD == 10)
-				sprite.move(0, -10);
-			moveCoolD--;
 			punch = 0;
+			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
+			if (moveCoolD == 10) 
+			{
+				punch = 1;
+				std::cout << "thing" << std::endl;
+				sprite.move(0, -10);
+			}
+			moveCoolD--;
 		}
 		if (moveCoolD == 0)
 		{
-			punch = 0;
 			sprite.scale(-1, 1);
 			sprite.move(0, 10);
 			action = 0;
@@ -494,6 +501,7 @@ void Player::updatePlayer(sf::Event& event)
 			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
 			action = 0;
 			sprite.setPosition(256 / 2, 240 * 0.75);
+			punched = false;
 		}
 		moveCoolD--;
 		break;
@@ -520,6 +528,7 @@ void Player::updatePlayer(sf::Event& event)
 			action = 0;
 			sprite.setPosition(256 / 2, 240 * 0.75 - 10);
 			sprite.setScale(1.1, 1.1);
+			punched = false;
 		}
 		moveCoolD--;
 		break;
@@ -546,12 +555,16 @@ void Player::updatePlayer(sf::Event& event)
 	}
 	case 13://knocked down
 	{
-		
-		if (moveCoolD <= 0)
+		sprite.setTextureRect(sf::IntRect(0, 27 - (aniCoolD / 5), 25, 61));
+		if (aniCoolD <= 0)
 		{
+			knockedDown = false;
 			action = 0;
 		}
-		moveCoolD--;
+		aniCoolD++;
+
+		if(moveCoolD >= 0)
+			moveCoolD--;
 		break;
 	}
 	default:
@@ -559,6 +572,18 @@ void Player::updatePlayer(sf::Event& event)
 		action = 0;
 	}
 	}
+}
+
+
+int Player::getPunch()
+{
+	return punch;
+}
+
+
+int Player::getAction()
+{
+	return action;
 }
 
 
@@ -607,16 +632,28 @@ int Player::getStamina()
 }
 
 
-void Player::punchMac(int punch_type)
+void Player::setHealth(int h)
 {
-	if (punch_type == 1)
+	health = h;
+}
+
+
+void Player::punchMac(int punch_type, int hitDmg)
+{
+	if (punch_type == 1 && !punched)
 	{
 		action = 10;
-		aniCoolD = 15;
+		moveCoolD = 15;
+		punched = true;
 	}
-	if (punch_type == 2)
+	if (punch_type == 2 && !punched)
 	{
 		action = 11;
-		aniCoolD = 15;
+		moveCoolD = 15;
+		punched = true;
+	}
+	if (moveCoolD == 15 && punched)
+	{
+		health -= hitDmg;
 	}
 }

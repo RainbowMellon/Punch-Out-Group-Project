@@ -43,9 +43,31 @@ int Opponent::getStamina()
 	return stamina;
 }
 
-
+bool Opponent::wasHit(Player& mac, int time)
+{
+	return false;
+}
 Opponent::~Opponent()
 {}
 
 
+bool Opponent::hasIntro()
+{
+	return false;
+}
+
+bool Opponent::Intro()
+{
+	return false;
+}
+
+bool Opponent::toStage()
+{
+	return false;
+}
+
+sf::String Opponent::introMusicFile()
+{
+	return sf::String();
+}
 

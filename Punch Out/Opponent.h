@@ -15,8 +15,14 @@ public:
 	virtual int getStamina();
 	virtual void setHealth(int);
 	virtual int getDamage();
-	virtual int wasHit(Player&)=0;
-	virtual std::string getUIStuff(int)=0;
+	virtual bool wasHit(Player&, int);
+	virtual bool hasIntro();
+	virtual sf::String introMusicFile();
+	//Returns true while the character is doing his intro, returns false when it's done
+	virtual bool Intro();
+	//Returns true while the opponent is moving toward the middle stage, returns false if it isn't there yet
+	virtual bool toStage();
+
 
 
 protected:
