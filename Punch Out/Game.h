@@ -22,7 +22,7 @@ public:
 	void setOppoKO();
 
 private:
-	int time, points, round, playerKO, oppoKO, state, placeHolderInt;
+	int time, points, round, playerKO, oppoKO, state, placeHolderInt, timer;
 	sf::View view;
 	sf::Texture marioTex, roundTex;
 	sf::Sprite marioSprite, roundSprite;
