@@ -17,6 +17,7 @@ public:
 	virtual int getDamage();
 	virtual bool wasHit(Player&, int);
 	virtual bool hasIntro();
+	virtual std::string getUIStuff(int)=0;
 	virtual sf::String introMusicFile();
 	//Returns true while the character is doing his intro, returns false when it's done
 	virtual bool Intro();
