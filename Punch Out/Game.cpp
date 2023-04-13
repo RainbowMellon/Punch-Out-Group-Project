@@ -72,7 +72,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 		case 2: //view transistion? I might make stats screen absorb this
 			window.draw(roundSprite);
 			window.draw(fadeout);
-			if (view.getCenter().y < 110 * 3)
+			if (view.getCenter().y < 350 * 1.6)
 				view.move(0, 5);
 			else if (time < 75)
 				time++;
