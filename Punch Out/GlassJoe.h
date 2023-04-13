@@ -30,7 +30,7 @@ public:
 
 private:
 	int health, stamina, canDodgeCD, cantDodgeCD;
-	int punch, jabsHit, upsHit, macPunch;
+	int punch, jabsHit, upsHit, macPunch, timer;
 	bool isInPattern, isStunned;
 	std::string name, location, stats, rank, age, weight;
 	sf::Sprite sprite;
