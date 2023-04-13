@@ -218,7 +218,9 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		else if (moveCoolD > 0)
 		{
-			punch = 2;
+			punch = 0;
+			if (moveCoolD == 10)
+				punch = 2;
 			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
 			if (moveCoolD == 10)
 				sprite.move(0, -10);
@@ -254,9 +256,11 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		else if (moveCoolD > 10)
 		{
+			punch = 0;
 			if (moveCoolD == 15)
 				sprite.move(0, -10);
-			punch = 3;
+			if(moveCoolD == 15)
+				punch = 3;
 			sprite.setTextureRect(sf::IntRect(216,7,28,83));
 		}
 		else if (moveCoolD > 5)
@@ -300,7 +304,9 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		else if (moveCoolD > 10)
 		{
-			punch = 4;
+			punch = 0;
+			if (moveCoolD == 15)
+				punch = 4;
 			if (moveCoolD == 15)
 				sprite.move(0, -10);
 			sprite.setTextureRect(sf::IntRect(216, 7, 28, 83));
