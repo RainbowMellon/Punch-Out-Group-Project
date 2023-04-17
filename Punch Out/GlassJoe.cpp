@@ -28,7 +28,7 @@ do was hit
 */
 void GlassJoe::update(int time,Player& mac, int round)
 {
-	
+	std::cout << punch;
 	sprite.setScale(1.f, 1.f);
 
 	switch (round)
@@ -56,10 +56,25 @@ void GlassJoe::update(int time,Player& mac, int round)
 				else
 				{
 					if (time % 4000 < 3000)
+					{
+
+						if (time % 500 == 1)
+							punch = 1;
+						else
+							punch = 0;
 						hook(time);
+
+					}
 					
 					else
+					{
+						if (time % 500 == 1)
+							punch = 2;
+						else
+							punch = 0;
 						jab(time);
+					}
+						
 					
 				}
 			}
@@ -104,6 +119,8 @@ void GlassJoe::idle(int time)//joe's idle animation before vive la france
 
 void GlassJoe::hook(int time)
 {//hook, seems to happen about 80 % of the time but I couldn't find actual stats for how often it happens
+	
+
 	if (time % 500 < 30)
 	{
 		sprite.setTextureRect(sf::IntRect(13, 241, 35, 87));
@@ -125,13 +142,16 @@ void GlassJoe::hook(int time)
 	else
 		sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
 		
-	punch = 1;
+	
 	
 }
 
 
 void GlassJoe::jab(int time)// jab, seems to happen about 20% of the time.
 {
+
+	
+
 	if (time % 500 < 50)
 	{
 		sprite.setTextureRect(sf::IntRect(13, 126, 29, 98));
@@ -164,8 +184,7 @@ void GlassJoe::jab(int time)// jab, seems to happen about 20% of the time.
 	else
 		sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
 	
-	punch = 2;
-
+	
 }
 
 
@@ -235,6 +254,7 @@ int GlassJoe::getStamina()
 
 bool GlassJoe::wasHit(Player& mac, int time)
 {
+	
 	
 
 	switch (mac.getAction())
@@ -316,18 +336,21 @@ bool GlassJoe::wasHit(Player& mac, int time)
 	case 3:
 		jabsHit = 0;
 		sprite.setScale(-1.f, 1.f);
+
 		if (upsHit < 7)
 		{
-			sprite.setPosition(120, 150);
-			if (time % 100 < 40)
+			
+			if (mac.getMoveCD() * 4 >= 60)
 			{
+				
+				sprite.setPosition(120, 150);
 				sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
 			}
 
-			else if (time % 100 < 100)
+			else
 			{
 				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
-				
+				sprite.move(-.5, -.5);
 			}
 
 			if (mac.getPunch() == 3)
@@ -363,17 +386,21 @@ bool GlassJoe::wasHit(Player& mac, int time)
 		jabsHit = 0;
 		if (upsHit < 7)
 		{
-			sprite.setPosition(130, 150);
-			if (time % 100 < 40)
+
+			if (mac.getMoveCD() * 4 >= 60)
 			{
+				sprite.setPosition(140, 150);
 				sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
 			}
 
-			else if (time % 100 < 100)
+			else 
 			{
 				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
-
+				sprite.move(.5, -.5);
 			}
+		
+
+			
 
 			if (mac.getPunch() == 4)
 			{
@@ -405,28 +432,37 @@ bool GlassJoe::wasHit(Player& mac, int time)
 		break;
 
 	case 9:
-		sprite.setScale(-1.f, 1.f);
-		sprite.setPosition(130, 150);
-		if (time % 200 < 40)
+		if (mac.getPunch() == 5)
+			setHealth(health - 10);
+		
+		if (mac.getMoveCD() >= 40)
 		{
 			sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
+			sprite.setPosition(140, 150);
 		}
-		else if (time % 200 < 80)
+
+		
+		else
 		{
-			sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
+			sprite.setScale(-1.f, 1.f);
+
+			if (mac.getMoveCD() >= 20)
+			{
+				sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
+				sprite.move(-.5, -.5);
+			}
+			else if (mac.getMoveCD() >= 0)
+			{
+				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
+				sprite.move(-.5, -.5);
+			}
+			
 		}
 
-		else if (time % 200 < 200)
-		{
-			sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
-
-			if (mac.getPunch() == 5)
-				setHealth(health - 2);
-		}
-
-
+		
+		
+		
 	}
-	time++;
 }
 
 
@@ -496,3 +532,4 @@ void GlassJoe::setHealth(int newHealth)
 {
 	health = newHealth;
 }
+
