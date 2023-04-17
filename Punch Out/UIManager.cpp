@@ -62,12 +62,17 @@ UIManager::~UIManager()
 //give the time on the win clock
 void UIManager::winScreen(float time)
 {
-  //view.setCenter(0, 0);
-  //coordinate of the win screen
-  //view.move(?, ?);
+  	sf::Font font;
+	font.loadFromFile("punch-out-nes.ttf");
+	std::string stats[6];
+	sf::Text text;
+	text.setFont(font);
+	text.setScale(.25, .25);
 
-  //how long it took to win
-  //window.draw(sf::Text(std::to_string(time)));
+	text.setString("The w.v.b.a.\n   minor\n  circuit");
+	text.setPosition(130, 570);
+	text.setFillColor(sf::Color(31, 255, 255));
+	(*window).draw(text);
 }
 
 
