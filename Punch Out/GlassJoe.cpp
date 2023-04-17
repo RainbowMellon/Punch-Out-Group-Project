@@ -17,7 +17,6 @@ GlassJoe::GlassJoe()
 	sprite.setOrigin(55 / 2, 115 / 2);
 	sprite.setPosition(210, 90);
 	sprite.setScale(.95, .95);
-	round = 1;
 	jabsHit = 0;
 	upsHit = 0;
 }
@@ -27,8 +26,9 @@ GlassJoe::GlassJoe()
 To Do: finish what happens after vive
 do was hit
 */
-void GlassJoe::update(int time,Player& mac)
+void GlassJoe::update(int time,Player& mac, int round)
 {
+	
 	sprite.setScale(1.f, 1.f);
 
 	switch (round)
@@ -239,23 +239,24 @@ bool GlassJoe::wasHit(Player& mac, int time)
 
 	switch (mac.getAction())
 	{
-
+		
 	case 1:
 
 		upsHit = 0;
-		if (jabsHit < 3)
+		if (jabsHit < 7)//for some reason jabsHit is increasing by 2 instead of one
 		{
 			if (time % 100 < 100)
 			{
-				std::cout << "thing 2" << std::endl;
 				sprite.setPosition(140, 155);
 				sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
 				sprite.move(1, -1);
 				
 				if (mac.getPunch() == 1)
 				{
-					setHealth(health - 4);
+					setHealth(health - 2);
 					jabsHit++;
+					
+					
 				}
 				return true;
 
@@ -264,8 +265,9 @@ bool GlassJoe::wasHit(Player& mac, int time)
 		}
 
 
-		else if (jabsHit >= 4)
+		else if (jabsHit > 6)
 		{
+			
 			sprite.setPosition(140, 145);
 			if (time % 100 < 40)
 				sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
@@ -279,25 +281,28 @@ bool GlassJoe::wasHit(Player& mac, int time)
 	case 2:
 
 		upsHit = 0;
-		if (jabsHit < 3)
+		if (jabsHit < 7)
 		{
 			if (time % 100 < 100)
 			{
-				if (mac.isPunching() == 1 || mac.isPunching() == 2)
-				{
-					health--;
-					return 1;
-				}
 				sprite.setPosition(140, 155);
 				sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
 				sprite.move(1, -1);
-				setHealth(health - 1);
+
+				if (mac.getPunch() == 2)
+				{
+					setHealth(health - 2);
+					jabsHit++;
+					
+				}
 				return true;
+
 			}
+
 		}
 
 
-		else if (jabsHit >= 3)
+		else if (jabsHit > 6)
 		{
 			sprite.setPosition(140, 145);
 			if (time % 100 < 40)
@@ -311,7 +316,7 @@ bool GlassJoe::wasHit(Player& mac, int time)
 	case 3:
 		jabsHit = 0;
 		sprite.setScale(-1.f, 1.f);
-		if (upsHit < 3)
+		if (upsHit < 7)
 		{
 			sprite.setPosition(120, 150);
 			if (time % 100 < 40)
@@ -322,13 +327,20 @@ bool GlassJoe::wasHit(Player& mac, int time)
 			else if (time % 100 < 100)
 			{
 				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
-				setHealth(health - 1);
+				
+			}
+
+			if (mac.getPunch() == 3)
+			{
+				setHealth(health - 2);
+				upsHit++;
 			}
 			return true;
 		}
 
-		else if (upsHit >= 3)
+		else if (upsHit > 6)
 		{
+			sprite.setPosition(115, 140);
 			if (time % 100 < 30)
 			{
 				sprite.setTextureRect(sf::IntRect(108, 452, 34, 97));
@@ -347,9 +359,76 @@ bool GlassJoe::wasHit(Player& mac, int time)
 		upsHit++;
 		break;
 
+	case 4:
+		jabsHit = 0;
+		if (upsHit < 7)
+		{
+			sprite.setPosition(130, 150);
+			if (time % 100 < 40)
+			{
+				sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
+			}
+
+			else if (time % 100 < 100)
+			{
+				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
+
+			}
+
+			if (mac.getPunch() == 4)
+			{
+				setHealth(health - 2);
+				upsHit++;
+			}
+			return true;
+		}
+
+		else if (upsHit > 6)
+		{
+			sprite.setPosition(145, 140);
+			if (time % 100 < 30)
+			{
+				sprite.setTextureRect(sf::IntRect(108, 452, 34, 97));
+			}
+
+			else if (time % 100 < 60)
+			{
+				sprite.setTextureRect(sf::IntRect(153, 452, 34, 97));
+			}
+
+			else if (time % 100 < 100)
+			{
+				sprite.setTextureRect(sf::IntRect(198, 452, 34, 97));
+			}
+		}
+		upsHit++;
+		break;
+
+	case 9:
+		sprite.setScale(-1.f, 1.f);
+		sprite.setPosition(130, 150);
+		if (time % 200 < 40)
+		{
+			sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
+		}
+		else if (time % 200 < 80)
+		{
+			sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
+		}
+
+		else if (time % 200 < 200)
+		{
+			sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
+
+			if (mac.getPunch() == 5)
+				setHealth(health - 2);
+		}
+
 
 	}
+	time++;
 }
+
 
 bool GlassJoe::hasIntro()
 {
@@ -361,29 +440,19 @@ sf::String GlassJoe::introMusicFile()
 	return "sounds/GlassJoeTheme.flac";
 }
 
-bool GlassJoe::Intro()
+void GlassJoe::Intro()
 {
-	if (timer > 0)
-	{
-		timer--;
-		sprite.setTextureRect(sf::IntRect(55, 110 * 7, 55, 110));
-		return true;
-	}
-	timer = 500;
-	return false;
+
+	sprite.setTextureRect(sf::IntRect(55, 110 * 7, 55, 110));
 }
 
-bool GlassJoe::toStage()
+void GlassJoe::toStage()
 {
-	if (timer > 0)
-	{
-		if (sprite.getPosition().x > 140)
+	
+	if (sprite.getPosition().x > 140)
 			sprite.move(-0.75, 0);
-		if (sprite.getPosition().y < 90)
+	if (sprite.getPosition().y < 90)
 			sprite.move(0, 0.5);
-
-		return true;
-	}
 }
 
 

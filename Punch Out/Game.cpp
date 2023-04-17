@@ -149,7 +149,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 				time+= 3;
 			
 			littleMac.updatePlayer(event);
-			opponent->update(time, littleMac);
+			opponent->update(time, littleMac,round);
 
 			if (opponent->wasHit(littleMac,time))
 			{

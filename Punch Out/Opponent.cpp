@@ -7,7 +7,7 @@ Opponent::Opponent()
 
 }
 
-void Opponent::update(int time, Player& mac)
+void Opponent::update(int time, Player& mac, int round)
 {
 
 }
@@ -56,14 +56,14 @@ bool Opponent::hasIntro()
 	return false;
 }
 
-bool Opponent::Intro()
+void Opponent::Intro()
 {
-	return false;
+	
 }
 
-bool Opponent::toStage()
+void Opponent::toStage()
 {
-	return false;
+	
 }
 
 sf::String Opponent::introMusicFile()

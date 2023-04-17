@@ -7,7 +7,7 @@ class GlassJoe : public Opponent
 public:
 	GlassJoe();
 	~GlassJoe();
-	void update(int time,Player&);
+	void update(int time,Player&,int);
 	void draw(sf::RenderWindow&);
 	int getHealth();
 	void setHealth(int);
@@ -25,8 +25,8 @@ public:
 	sf::String introMusicFile();
 
 	//Returns true while the character is doing his intro, returns false when it's done
-	bool Intro();
-	bool toStage();
+	void Intro();
+	void toStage();
 
 private:
 	int health, stamina, canDodgeCD, cantDodgeCD, timer;
