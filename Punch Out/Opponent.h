@@ -9,7 +9,7 @@ public:
 	Opponent(int);
 	Opponent();
 	~Opponent();
-	virtual void update(int, Player&);
+	virtual void update(int, Player&,int);
 	virtual void draw(sf::RenderWindow&);
 	virtual int getHealth();
 	virtual int getStamina();
@@ -20,9 +20,9 @@ public:
 	virtual std::string getUIStuff(int)=0;
 	virtual sf::String introMusicFile();
 	//Returns true while the character is doing his intro, returns false when it's done
-	virtual bool Intro();
+	virtual void Intro();
 	//Returns true while the opponent is moving toward the middle stage, returns false if it isn't there yet
-	virtual bool toStage();
+	virtual void toStage();
 
 
 
