@@ -29,7 +29,7 @@ do was hit
 
 void GlassJoe::update(int time,Player& mac, int round)
 {
-	std::cout << jabsHit;
+	
 	sprite.setScale(1.f, 1.f);
 
 	switch (round)
@@ -268,8 +268,7 @@ bool GlassJoe::wasHit(Player& mac, int time)
 
 		else if (jabsHit > 6)
 		{
-			if (mac.getPunch() == 1)
-				jabsHit++;
+			
 			sprite.setPosition(140, 145);
 			if (time % 100 < 40)
 				sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
