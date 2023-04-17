@@ -21,7 +21,7 @@ UIManager::UIManager()
 	oHealth.setFillColor(sf::Color::Black);
 	oHealth.setOutlineThickness(0);
 
-	roundSprite.setPosition(760, 430);
+	roundSprite.setPosition(776, 455);
 }
 
 
