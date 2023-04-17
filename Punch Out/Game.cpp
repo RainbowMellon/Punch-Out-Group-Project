@@ -146,9 +146,13 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 				time = 30000;
 			else if (time >= 30000 && time <=30100)
 			{
-				if(round  != 3)
+				if (round == 3)
+					state = 10;
+				else
+				{
 					round++;
-				state = 1;
+					state = 1;
+				}
 				time = 0;
 			}
 			else
@@ -241,6 +245,8 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 		case 9: // fadeout into win screen
 			break;
 		case 10: //win screen, will either fadeout to state 1 (while changing opponent), or scroll to state 9
+			view.setCenter(130, 570);
+			UI.winScreen(time);
 			break;
 		case 11: // scroll to title bout screen, then change state to 1(while changing oppponent
 			break;
