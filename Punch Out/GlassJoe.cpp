@@ -15,18 +15,17 @@ GlassJoe::GlassJoe()
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0, 0, 55, 100));
 	sprite.setOrigin(55 / 2, 115 / 2);
-	sprite.setPosition(148, 125);
+	sprite.setPosition(210, 90);
 	sprite.setScale(.95, .95);
 	jabsHit = 0;
 	upsHit = 0;
 }
 
+
 /*
 To Do: finish what happens after vive
 do was hit
 */
-
-
 void GlassJoe::update(int time,Player& mac, int round)
 {
 	
