@@ -45,7 +45,6 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			view.setCenter(898 + 5, 110 + 2); //center of first + borders
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !isKeyPressed)
 			{
-				
 				state = 1;
 				isKeyPressed = true;
 			}
@@ -72,7 +71,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 				time++;
 			else if (fadeout.getFillColor().a < 255)
 				fadeout.setFillColor(sf::Color(0, 0, 0, fadeout.getFillColor().a + 5));
-			else if (opponent->hasIntro()) //Check to see if the opponent has an intro
+			else if (opponent->hasIntro() && round == 1) //Check to see if the opponent has an intro
 			{
 				fadeout.setFillColor(sf::Color(0, 0, 0, 0));
 				mainTheme.openFromFile(opponent->introMusicFile());
@@ -145,6 +144,13 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 				time = 20000;
 			else if (time % 26000 == 0 && time != 0)
 				time = 30000;
+			else if (time >= 30000 && time <=30100)
+			{
+				if(round  != 3)
+					round++;
+				state = 1;
+				time = 0;
+			}
 			else
 				time+= 3;
 			
