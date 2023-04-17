@@ -45,13 +45,13 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			view.setCenter(898 + 5, 110 + 2); //center of first + borders
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !isKeyPressed)
 			{
-				view.setCenter(898 + 5, 340 + 3);
+				
 				state = 1;
 				isKeyPressed = true;
 			}
 			break;
 		case 1: //Stats screen
-			
+			view.setCenter(898 + 5, 340 + 3);
 			//draw states, if round >= 2, draw the opponents and docs quotes
 			UI.roundStartScreen(littleMac, *opponent, round);
 			//when enter is press, scroll down to round image, fade in black box, then switch states
