@@ -28,7 +28,7 @@ void Player::drawPlayer(sf::RenderWindow& window)
 
 /*
 punch 1 = forward right punch
-punch 2 = forward left punch 
+punch 2 = forward left punch
 punch 3 = upper right punch
 punch 4 = upper left punch
 punch 5 = star punch
@@ -187,7 +187,7 @@ void Player::updatePlayer(sf::Event& event)
 		{
 			punch = 0;
 			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
-			if (moveCoolD == 10) 
+			if (moveCoolD == 10)
 			{
 				punch = 1;
 				std::cout << "thing" << std::endl;
@@ -259,9 +259,9 @@ void Player::updatePlayer(sf::Event& event)
 			punch = 0;
 			if (moveCoolD == 15)
 				sprite.move(0, -10);
-			if(moveCoolD == 15)
+			if (moveCoolD == 15)
 				punch = 3;
-			sprite.setTextureRect(sf::IntRect(216,7,28,83));
+			sprite.setTextureRect(sf::IntRect(216, 7, 28, 83));
 		}
 		else if (moveCoolD > 5)
 		{
@@ -458,7 +458,7 @@ void Player::updatePlayer(sf::Event& event)
 		else if (moveCoolD > 15)
 		{
 			punch = 0;
-			if(moveCoolD == 20)
+			if (moveCoolD == 20)
 				punch = 5;
 			sprite.setTextureRect(sf::IntRect(400, 0, 31, 85));
 		}
@@ -570,7 +570,7 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		aniCoolD++;
 
-		if(moveCoolD >= 0)
+		if (moveCoolD >= 0)
 			moveCoolD--;
 		break;
 	}
@@ -663,4 +663,10 @@ void Player::punchMac(int punch_type, int hitDmg)
 	{
 		health -= hitDmg;
 	}
+}
+
+
+int Player::getMoveCD()
+{
+	return moveCoolD;	
 }
