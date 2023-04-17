@@ -6,7 +6,7 @@
 #include "PistonHonda1.h"
 
 class Game
-{
+{ 
 public:
 	Game(sf::RenderWindow&, sf::View&);
 	~Game();
