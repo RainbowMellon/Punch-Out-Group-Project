@@ -21,6 +21,7 @@ public:
 	void punchMac(int, int);
 	void setHealth(int);
 	int getPunch();
+	int getMoveCD();
 private:
 
 	sf::Sprite sprite;
