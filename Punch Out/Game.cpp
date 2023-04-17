@@ -10,7 +10,7 @@ Game::Game(sf::RenderWindow& window, sf::View& view)
 	oppoKO = 0;
 	points = 0;
 	round = 1;
-	state = 5;
+	state = 0;
 	time = 0; //For timer, first 2 digits are milliseconds, second two are seconds, fifth one is minute 
 	placeHolderInt = 0;
 
