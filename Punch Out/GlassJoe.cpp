@@ -275,7 +275,7 @@ bool GlassJoe::wasHit(Player& mac, int time)
 				{
 					setHealth(health - 2);
 					jabsHit++;
-					
+					timesHit++;
 					
 				}
 				return true;
@@ -313,7 +313,7 @@ bool GlassJoe::wasHit(Player& mac, int time)
 				{
 					setHealth(health - 2);
 					jabsHit++;
-					
+					timesHit++;
 				}
 				return true;
 
@@ -357,6 +357,7 @@ bool GlassJoe::wasHit(Player& mac, int time)
 			{
 				setHealth(health - 2);
 				upsHit++;
+				timesHit++;
 			}
 			return true;
 		}
@@ -406,6 +407,7 @@ bool GlassJoe::wasHit(Player& mac, int time)
 			{
 				setHealth(health - 2);
 				upsHit++;
+				timesHit++;
 			}
 			return true;
 		}
@@ -433,7 +435,10 @@ bool GlassJoe::wasHit(Player& mac, int time)
 
 	case 9:
 		if (mac.getPunch() == 5)
+		{
 			setHealth(health - 10);
+			timesHit++;
+		}
 		
 		if (mac.getMoveCD() >= 40)
 		{
