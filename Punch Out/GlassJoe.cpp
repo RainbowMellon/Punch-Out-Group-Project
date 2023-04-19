@@ -29,6 +29,7 @@ do was hit
 void GlassJoe::update(int time, Player& mac, int round)
 {
 	sprite.setScale(1.f, 1.f);
+	std::cout << jabsHit << "   " << upsHit << std::endl;
 
 	switch (round)
 	{
@@ -290,6 +291,8 @@ int GlassJoe::wasHit(Player& mac, int time)
 				sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
 			else
 				sprite.setTextureRect(sf::IntRect(54, 458, 32, 91));
+			if (mac.getPunch() != 0)
+				return 0;
 		}
 
 
@@ -322,11 +325,14 @@ int GlassJoe::wasHit(Player& mac, int time)
 
 		else if (jabsHit > 6)
 		{
+
 			sprite.setPosition(140, 145);
 			if (time % 100 < 40)
 				sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
 			else
 				sprite.setTextureRect(sf::IntRect(54, 458, 32, 91));
+			if (mac.getPunch() != 0)
+				return 0;
 
 		}
 		break;
@@ -365,6 +371,7 @@ int GlassJoe::wasHit(Player& mac, int time)
 
 		else if (upsHit > 6)
 		{
+			
 			sprite.setPosition(115, 140);
 			if (time % 100 < 30)
 			{
@@ -380,6 +387,8 @@ int GlassJoe::wasHit(Player& mac, int time)
 			{
 				sprite.setTextureRect(sf::IntRect(198, 452, 34, 97));
 			}
+			if (mac.getPunch() != 0)
+				return 0;
 		}
 		break;
 
@@ -403,9 +412,6 @@ int GlassJoe::wasHit(Player& mac, int time)
 				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
 
 			}
-
-
-
 
 			if (mac.getPunch() == 4)
 			{
@@ -433,6 +439,9 @@ int GlassJoe::wasHit(Player& mac, int time)
 			{
 				sprite.setTextureRect(sf::IntRect(198, 452, 34, 97));
 			}
+			if (mac.getPunch() != 0)
+				return 0;
+
 		}
 		upsHit++;
 		break;
@@ -469,7 +478,8 @@ int GlassJoe::wasHit(Player& mac, int time)
 
 		}
 
-
+	default:
+		return 0;
 
 
 	}
