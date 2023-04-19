@@ -101,9 +101,9 @@ void Player::updatePlayer(sf::Event& event)
 			dodging = true;
 
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && moveCoolD <= 0 && !keyPressed && !isWinded)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && moveCoolD <= 0 && !keyPressed && !isWinded && starCount != 0)
 		{
-			//star punch
+			starCount--;
 			action = 9;
 			moveCoolD = 55;
 			keyPressed = true;
