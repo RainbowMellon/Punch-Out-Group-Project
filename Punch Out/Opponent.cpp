@@ -71,3 +71,8 @@ sf::String Opponent::introMusicFile()
 	return sf::String();
 }
 
+
+int Opponent::getTimesHit()
+{
+	return timesHit;
+}
