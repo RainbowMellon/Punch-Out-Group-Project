@@ -13,7 +13,7 @@ public:
 	void setHealth(int);
 	int getDamage();
 	int getStamina();
-	bool wasHit(Player&, int);
+	int wasHit(Player&, int);
 	void vive(int);
 	void jab(int);
 	void hook(int);
