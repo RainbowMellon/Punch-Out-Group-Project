@@ -42,74 +42,77 @@ void Player::updatePlayer(sf::Event& event)
 		keyPressed = false;
 
 
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::P) && moveCoolD <= 0) && !keyPressed && !isWinded) //punch forward
+	if (!knockedDown)
 	{
-		keyPressed = true;
-		action = 1;
-		dir = 1;//right punch
-		moveCoolD = 20;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))//left upper
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::P) && moveCoolD <= 0) && !keyPressed && !isWinded) //punch forward
 		{
+			keyPressed = true;
+			action = 1;
+			dir = 1;//right punch
+			moveCoolD = 20;
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))//left upper
+			{
+				moveCoolD = 30;
+				action = 3;
+			}
+		}
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::O) && moveCoolD <= 0) && !keyPressed && !isWinded)
+		{
+			keyPressed = true;
+			action = 2;
+			dir = -1;//left punch
+			moveCoolD = 20;
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))//left upper
+			{
+				action = 4;
+				moveCoolD = 30;
+				upper = true;
+			}
+		}
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::A) && moveCoolD <= 0) && !keyPressed) //Move right
+		{
+			keyPressed = true;
+			action = 6;
 			moveCoolD = 30;
-			action = 3;
+			dir = -2;
+			sound.play();
+		}
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::D) && moveCoolD <= 0) && !keyPressed) //move left
+		{
+			action = 7;
+			keyPressed = true;
+			moveCoolD = 30;
+			dir = 2;
+			sound.play();
+		}
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::S) && moveCoolD <= 0) && !keyPressed && !isWinded)
+		{
+			action = 5;
+			keyPressed = true;
+			moveCoolD = 15;
+			blocking = true;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && moveCoolD > 0 && blocking && !keyPressed)
+		{
+			action = 8;
+			keyPressed = true;
+			moveCoolD = 20;
+			blocking = false;
+			dodging = true;
+
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && moveCoolD <= 0 && !keyPressed && !isWinded)
+		{
+			//star punch
+			action = 9;
+			moveCoolD = 55;
+			keyPressed = true;
 		}
 	}
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::O) && moveCoolD <= 0) && !keyPressed && !isWinded)
-	{
-		keyPressed = true;
-		action = 2;
-		dir = -1;//left punch
-		moveCoolD = 20;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))//left upper
-		{
-			action = 4;
-			moveCoolD = 30;
-			upper = true;
-		}
-	}
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::A) && moveCoolD <= 0) && !keyPressed) //Move right
-	{
-		keyPressed = true;
-		action = 6;
-		moveCoolD = 30;
-		dir = -2;
-		sound.play();
-	}
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::D) && moveCoolD <= 0) && !keyPressed) //move left
-	{
-		action = 7;
-		keyPressed = true;
-		moveCoolD = 30;
-		dir = 2;
-		sound.play();
-	}
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::S) && moveCoolD <= 0) && !keyPressed && !isWinded)
-	{
-		action = 5;
-		keyPressed = true;
-		moveCoolD = 15;
-		blocking = true;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && moveCoolD > 0 && blocking && !keyPressed)
-	{
-		action = 8;
-		keyPressed = true;
-		moveCoolD = 20;
-		blocking = false;
-		dodging = true;
-
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && moveCoolD <= 0 && !keyPressed && !isWinded)
-	{
-		//star punch
-		action = 9;
-		moveCoolD = 55;
-		keyPressed = true;
-	}
-
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::P) || sf::Keyboard::isKeyPressed(sf::Keyboard::O)) && knockedDown && moveCoolD <= 0)
 	{
-		aniCoolD -= 20;
+		aniCoolD += 20;
+		moveCoolD = 10;
 	}
 
 	//all this is temporary testing tools until we link up opponent and player
@@ -150,7 +153,7 @@ void Player::updatePlayer(sf::Event& event)
 	{
 		knockedDown = true;
 		action = 13;
-		aniCoolD = 200;
+		aniCoolD = 0;
 		moveCoolD = 8;
 	}
 
@@ -190,7 +193,6 @@ void Player::updatePlayer(sf::Event& event)
 			if (moveCoolD == 10)
 			{
 				punch = 1;
-				std::cout << "thing" << std::endl;
 				sprite.move(0, -10);
 			}
 			moveCoolD--;
@@ -457,13 +459,12 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		else if (moveCoolD > 15)
 		{
-			punch = 0;
-			if (moveCoolD == 20)
-				punch = 5;
+			punch = 5;
 			sprite.setTextureRect(sf::IntRect(400, 0, 31, 85));
 		}
 		else if (moveCoolD > 10)
 		{
+			punch = 0;
 			sprite.setTextureRect(sf::IntRect(376, 5, 24, 85));
 		}
 		else if (moveCoolD > 5)
@@ -562,16 +563,30 @@ void Player::updatePlayer(sf::Event& event)
 	}
 	case 13://knocked down
 	{
-		sprite.setTextureRect(sf::IntRect(0, 27 - (aniCoolD / 5), 25, 61));
-		if (aniCoolD <= 0)
+		sprite.setTextureRect(sf::IntRect(100, 27, 25, 61));
+		sprite.setPosition(256 / 2, (240 * 0.75 - 10) + 60 - (aniCoolD / 5));
+		if (moveCoolD > 0)
 		{
-			knockedDown = false;
-			action = 0;
-		}
-		aniCoolD++;
-
-		if (moveCoolD >= 0)
 			moveCoolD--;
+		}
+
+		if (aniCoolD > -200)
+		{
+			aniCoolD--;
+		}
+		if (aniCoolD <= -200)
+			std::cout << "YOU LOSE BITCH" << std::endl << "How'd you lose to glass joe???????????????" << std::endl;
+		if (aniCoolD >= 200)
+		{
+			action = 0;
+			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
+			std::cout << "you dont lose bitch" << std::endl;
+			aniCoolD = 0;
+			moveCoolD = 0;
+			knockedDown = false;
+			sprite.setPosition(256 / 2, 240 * 0.75 - 10);
+		}
+
 		break;
 	}
 	default:
@@ -579,6 +594,12 @@ void Player::updatePlayer(sf::Event& event)
 		action = 0;
 	}
 	}
+}
+
+
+bool Player::isKnockedDown()
+{
+	return knockedDown;
 }
 
 
@@ -645,8 +666,15 @@ void Player::setHealth(int h)
 }
 
 
+int Player::getMoveCD()
+{
+	return moveCoolD;
+}
+
+
 void Player::punchMac(int punch_type, int hitDmg)
 {
+	std::cout << punch_type;
 	if (punch_type == 1 && !punched)
 	{
 		action = 10;
@@ -663,10 +691,4 @@ void Player::punchMac(int punch_type, int hitDmg)
 	{
 		health -= hitDmg;
 	}
-}
-
-
-int Player::getMoveCD()
-{
-	return moveCoolD;	
 }
