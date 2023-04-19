@@ -693,3 +693,10 @@ void Player::punchMac(int punch_type, int hitDmg)
 		health -= hitDmg;
 	}
 }
+
+
+bool Player::giveStar()
+{
+	starCount++;
+	return true;
+}
