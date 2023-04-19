@@ -102,7 +102,7 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int sta
 	sf::Vector2f starcount_pos(33, 17),
 		stamina_pos(74, 17),
 		playerHB_pos(138, 18),
-		opponentHB_pos(146, 18),
+		opponentHB_pos(194, 18),
 		sec_pos(228, 18),
 		min_pos(210, 18),
 		round_pos(237, 28),
@@ -151,15 +151,16 @@ void UIManager::drawStats(Player& player, Opponent& opponent, int clock, int sta
 
 	//player healthBar
 	playerHealth = player.getHealth() / 96.f;
-	pHealth.setPosition(playerHB_pos);
-	pHealth.setOrigin(pHealth.getLocalBounds().width, 0);
 	pHealth.setSize(sf::Vector2f(48 - 48 * playerHealth, 7));
+	pHealth.setOrigin(pHealth.getLocalBounds().width, 0);
+	pHealth.setPosition(playerHB_pos);
 	(*window).draw(pHealth);
 
 	//opponent healthBar
 	opponentHealth = opponent.getHealth() / 96.f;
-	oHealth.setPosition(opponentHB_pos);
 	oHealth.setSize(sf::Vector2f(48 - 48 * opponentHealth, 7));
+	oHealth.setOrigin(oHealth.getLocalBounds().width, 0);
+	oHealth.setPosition(opponentHB_pos);
 	(*window).draw(oHealth);
 
 	//clock
