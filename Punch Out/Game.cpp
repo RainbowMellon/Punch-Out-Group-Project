@@ -19,7 +19,6 @@ Game::Game(sf::RenderWindow& window, sf::View& view)
 	fadeout.setFillColor(sf::Color(0, 0, 0, 0));
 	fadeout.getFillColor().a;
 	fadeout.setPosition(770, 430);
-	fadeout.setPosition(0, 220);
 
 	//setting up mario
 	marioTex.loadFromFile("punchout Sprites/Mario.png");
