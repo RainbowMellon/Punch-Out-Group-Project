@@ -26,9 +26,8 @@ GlassJoe::GlassJoe()
 To Do: finish what happens after vive
 do was hit
 */
-void GlassJoe::update(int time,Player& mac, int round)
+void GlassJoe::update(int time, Player& mac, int round)
 {
-	std::cout << punch;
 	sprite.setScale(1.f, 1.f);
 
 	switch (round)
@@ -65,7 +64,7 @@ void GlassJoe::update(int time,Player& mac, int round)
 						hook(time);
 
 					}
-					
+
 					else
 					{
 						if (time % 500 == 1)
@@ -74,12 +73,12 @@ void GlassJoe::update(int time,Player& mac, int round)
 							punch = 0;
 						jab(time);
 					}
-						
-					
+
+
 				}
 			}
 		}
-		
+
 		break;
 	}
 
@@ -101,7 +100,7 @@ void GlassJoe::idle(int time)//joe's idle animation before vive la france
 		sprite.setPosition(152, 125);
 	}
 
-	else if (time % 150< 125)
+	else if (time % 150 < 125)
 	{
 		sprite.setTextureRect(sf::IntRect(430, 13, 31, 98));
 		sprite.setPosition(156, 125);
@@ -119,17 +118,17 @@ void GlassJoe::idle(int time)//joe's idle animation before vive la france
 
 void GlassJoe::hook(int time)
 {//hook, seems to happen about 80 % of the time but I couldn't find actual stats for how often it happens
-	
+
 
 	if (time % 500 < 30)
 	{
 		sprite.setTextureRect(sf::IntRect(13, 241, 35, 87));
 		sprite.move(-1, 0);
 	}
-		
-	else if ( time % 500 < 60)
+
+	else if (time % 500 < 60)
 		sprite.setTextureRect(sf::IntRect(58, 241, 35, 87));
-	else if(time % 500 < 90)
+	else if (time % 500 < 90)
 		sprite.setTextureRect(sf::IntRect(13, 241, 35, 87));
 	else if (time % 500 < 120)
 	{
@@ -141,16 +140,16 @@ void GlassJoe::hook(int time)
 		sprite.setTextureRect(sf::IntRect(151, 237, 39, 91));
 	else
 		sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
-		
-	
-	
+
+
+
 }
 
 
 void GlassJoe::jab(int time)// jab, seems to happen about 20% of the time.
 {
 
-	
+
 
 	if (time % 500 < 50)
 	{
@@ -178,13 +177,13 @@ void GlassJoe::jab(int time)// jab, seems to happen about 20% of the time.
 	}
 	else if (time % 500 < 300)
 	{
-		sprite.setTextureRect(sf::IntRect(95,126,29,98));
+		sprite.setTextureRect(sf::IntRect(95, 126, 29, 98));
 		sprite.move(1, -.5);
 	}
 	else
 		sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
-	
-	
+
+
 }
 
 
@@ -226,10 +225,10 @@ void GlassJoe::vive(int time)
 	}
 	else if (time % 300 < 275)
 		sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
-	
-	
-	
-	
+
+
+
+
 }
 void GlassJoe::draw(sf::RenderWindow& window)
 {
@@ -252,49 +251,47 @@ int GlassJoe::getStamina()
 	return stamina;
 }
 
-bool GlassJoe::wasHit(Player& mac, int time)
+int GlassJoe::wasHit(Player& mac, int time)
 {
-	
-	
+
+
 
 	switch (mac.getAction())
 	{
-		
+
 	case 1:
 
 		upsHit = 0;
 		if (jabsHit < 7)//for some reason jabsHit is increasing by 2 instead of one
 		{
-			if (time % 100 < 100)
+			if (mac.getMoveCD() >= 0)
 			{
 				sprite.setPosition(140, 155);
 				sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
 				sprite.move(1, -1);
-				
+
 				if (mac.getPunch() == 1)
 				{
 					setHealth(health - 2);
 					jabsHit++;
-					timesHit++;
-					
+
+					return 10;
 				}
-				return true;
 
 			}
-			 
+
 		}
 
 
 		else if (jabsHit > 6)
 		{
-			
 			sprite.setPosition(140, 145);
 			if (time % 100 < 40)
 				sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
 			else
 				sprite.setTextureRect(sf::IntRect(54, 458, 32, 91));
 		}
-		 
+
 
 		break;
 
@@ -303,7 +300,7 @@ bool GlassJoe::wasHit(Player& mac, int time)
 		upsHit = 0;
 		if (jabsHit < 7)
 		{
-			if (time % 100 < 100)
+			if (mac.getMoveCD() >= 0)
 			{
 				sprite.setPosition(140, 155);
 				sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
@@ -313,9 +310,10 @@ bool GlassJoe::wasHit(Player& mac, int time)
 				{
 					setHealth(health - 2);
 					jabsHit++;
-					timesHit++;
+					return 10;
+
 				}
-				return true;
+
 
 			}
 
@@ -329,8 +327,8 @@ bool GlassJoe::wasHit(Player& mac, int time)
 				sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
 			else
 				sprite.setTextureRect(sf::IntRect(54, 458, 32, 91));
+
 		}
-		 
 		break;
 
 	case 3:
@@ -339,27 +337,30 @@ bool GlassJoe::wasHit(Player& mac, int time)
 
 		if (upsHit < 7)
 		{
-			
-			if (mac.getMoveCD() * 4 >= 60)
+			if (mac.getMoveCD() == 25)
 			{
-				
-				sprite.setPosition(120, 150);
+				sprite.setPosition(140, 150);
+			}
+			else if (mac.getMoveCD() >= 15)
+			{
+
+				sprite.move(-.5, -.5);
 				sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
 			}
 
 			else
 			{
 				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
-				sprite.move(-.5, -.5);
+
 			}
 
 			if (mac.getPunch() == 3)
 			{
 				setHealth(health - 2);
 				upsHit++;
-				timesHit++;
+				return 10;
 			}
-			return true;
+
 		}
 
 		else if (upsHit > 6)
@@ -380,36 +381,39 @@ bool GlassJoe::wasHit(Player& mac, int time)
 				sprite.setTextureRect(sf::IntRect(198, 452, 34, 97));
 			}
 		}
-		upsHit++;
 		break;
 
 	case 4:
 		jabsHit = 0;
 		if (upsHit < 7)
 		{
-
-			if (mac.getMoveCD() * 4 >= 60)
+			if (mac.getMoveCD() == 25)
 			{
 				sprite.setPosition(140, 150);
+			}
+			else if (mac.getMoveCD() >= 15)
+			{
+
+				sprite.move(.5, -.5);
 				sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
 			}
 
-			else 
+			else
 			{
 				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
-				sprite.move(.5, -.5);
-			}
-		
 
-			
+			}
+
+
+
 
 			if (mac.getPunch() == 4)
 			{
 				setHealth(health - 2);
 				upsHit++;
-				timesHit++;
+				return 10;
 			}
-			return true;
+
 		}
 
 		else if (upsHit > 6)
@@ -437,16 +441,17 @@ bool GlassJoe::wasHit(Player& mac, int time)
 		if (mac.getPunch() == 5)
 		{
 			setHealth(health - 10);
-			timesHit++;
+			return 500;
 		}
-		
+
+
 		if (mac.getMoveCD() >= 40)
 		{
 			sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
 			sprite.setPosition(140, 150);
 		}
 
-		
+
 		else
 		{
 			sprite.setScale(-1.f, 1.f);
@@ -461,12 +466,12 @@ bool GlassJoe::wasHit(Player& mac, int time)
 				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
 				sprite.move(-.5, -.5);
 			}
-			
+
 		}
 
-		
-		
-		
+
+
+
 	}
 }
 
@@ -489,18 +494,18 @@ void GlassJoe::Intro()
 
 void GlassJoe::toStage()
 {
-	
+
 	if (sprite.getPosition().x > 140)
-			sprite.move(-0.75, 0);
+		sprite.move(-0.75, 0);
 	if (sprite.getPosition().y < 90)
-			sprite.move(0, 0.5);
+		sprite.move(0, 0.5);
 }
 
 
 std::string GlassJoe::getUIStuff(int type)
 {
 	std::string whatGet;
-	switch(type)
+	switch (type)
 	{
 	case 1:
 		whatGet = rank;
