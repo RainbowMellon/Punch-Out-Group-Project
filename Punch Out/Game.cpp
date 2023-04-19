@@ -164,6 +164,8 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			if (opponent->wasHit(littleMac,time))
 			{
 				points += 10;
+				if (opponent->getTimesHit() > 5)
+					littleMac.giveStar();
 			}
 
 			if (opponent->getHealth() <= 0)
