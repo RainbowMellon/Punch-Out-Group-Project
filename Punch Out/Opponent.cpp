@@ -43,9 +43,9 @@ int Opponent::getStamina()
 	return stamina;
 }
 
-bool Opponent::wasHit(Player& mac, int time)
+int Opponent::wasHit(Player& mac, int time)
 {
-	return false;
+	return 0;
 }
 Opponent::~Opponent()
 {}
