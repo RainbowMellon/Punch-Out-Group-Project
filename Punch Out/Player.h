@@ -22,6 +22,7 @@ public:
 	void setHealth(int);
 	int getPunch();
 	int getMoveCD();
+	bool isKnockedDown();
 private:
 
 	sf::Sprite sprite;
