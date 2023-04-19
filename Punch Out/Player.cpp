@@ -459,12 +459,13 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		else if (moveCoolD > 15)
 		{
-			punch = 5;
+			punch = 0;
+			if(moveCoolD == 20)
+				punch = 5;
 			sprite.setTextureRect(sf::IntRect(400, 0, 31, 85));
 		}
 		else if (moveCoolD > 10)
 		{
-			punch = 0;
 			sprite.setTextureRect(sf::IntRect(376, 5, 24, 85));
 		}
 		else if (moveCoolD > 5)
