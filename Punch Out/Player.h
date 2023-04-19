@@ -23,6 +23,8 @@ public:
 	int getPunch();
 	int getMoveCD();
 	bool isKnockedDown();
+	bool giveStar();
+	
 private:
 
 	sf::Sprite sprite;
