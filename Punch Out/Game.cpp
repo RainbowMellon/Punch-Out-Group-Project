@@ -10,7 +10,7 @@ Game::Game(sf::RenderWindow& window, sf::View& view)
 	oppoKO = 0;
 	points = 0;
 	round = 1;
-	state = 0;
+	state = 5;
 	time = 0; //For timer, first 2 digits are milliseconds, second two are seconds, fifth one is minute 
 	placeHolderInt = 0;
 
@@ -161,9 +161,9 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			littleMac.updatePlayer(event);
 			opponent->update(time, littleMac,round);
 
-			if (opponent->wasHit(littleMac,time))
+			if (opponent->wasHit(littleMac,time) != 0)
 			{
-				points += 10;
+				points += opponent->wasHit(littleMac, time);
 				if (opponent->getTimesHit() > 5)
 					littleMac.giveStar();
 			}
