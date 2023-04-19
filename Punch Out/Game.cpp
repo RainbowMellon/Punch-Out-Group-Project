@@ -194,6 +194,8 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			UI.drawStats(littleMac, *opponent, time, 1, round, points);
 
 			//If the opponent or player is KOed, go to win or lose screen
+			if (opponent->getHealth() == 0)
+				state = 10; //win screen, is temp
 			break;
 		case 6: //time out, return to 
 			opponent->draw(window);
