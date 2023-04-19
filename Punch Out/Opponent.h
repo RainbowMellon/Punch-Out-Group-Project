@@ -15,7 +15,7 @@ public:
 	virtual int getStamina();
 	virtual void setHealth(int);
 	virtual int getDamage();
-	virtual bool wasHit(Player&, int);
+	virtual int wasHit(Player&, int);
 	virtual bool hasIntro();
 	virtual std::string getUIStuff(int)=0;
 	virtual sf::String introMusicFile();
