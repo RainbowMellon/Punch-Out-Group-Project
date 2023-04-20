@@ -29,8 +29,9 @@ do was hit
 void GlassJoe::update(int time, Player& mac, int round)
 {
 	sprite.setScale(1.f, 1.f);
-	std::cout << jabsHit << "   " << upsHit << std::endl;
-
+	//std::cout << jabsHit << "   " << upsHit << std::endl;
+	if (mac.getPunch() == 1)
+		std::cout << "thing\n";
 	switch (round)
 	{
 	case 1:
@@ -263,7 +264,7 @@ int GlassJoe::wasHit(Player& mac, int time)
 	case 1:
 
 		upsHit = 0;
-		if (jabsHit < 7)//for some reason jabsHit is increasing by 2 instead of one
+		if (jabsHit < 10)
 		{
 			if (mac.getMoveCD() >= 0)
 			{
@@ -275,7 +276,7 @@ int GlassJoe::wasHit(Player& mac, int time)
 				{
 					setHealth(health - 2);
 					jabsHit++;
-
+ 
 					return 10;
 				}
 
@@ -284,7 +285,7 @@ int GlassJoe::wasHit(Player& mac, int time)
 		}
 
 
-		else if (jabsHit > 6)
+		else if (jabsHit > 9)
 		{
 			sprite.setPosition(140, 145);
 			if (time % 100 < 40)
@@ -301,7 +302,7 @@ int GlassJoe::wasHit(Player& mac, int time)
 	case 2:
 
 		upsHit = 0;
-		if (jabsHit < 7)
+		if (jabsHit < 10)
 		{
 			if (mac.getMoveCD() >= 0)
 			{
@@ -313,7 +314,7 @@ int GlassJoe::wasHit(Player& mac, int time)
 				{
 					setHealth(health - 2);
 					jabsHit++;
-					return 10;
+ 					return 10;
 
 				}
 
@@ -323,7 +324,7 @@ int GlassJoe::wasHit(Player& mac, int time)
 		}
 
 
-		else if (jabsHit > 6)
+		else if (jabsHit > 9)
 		{
 
 			sprite.setPosition(140, 145);
@@ -341,7 +342,7 @@ int GlassJoe::wasHit(Player& mac, int time)
 		jabsHit = 0;
 		sprite.setScale(-1.f, 1.f);
 
-		if (upsHit < 7)
+		if (upsHit < 10)
 		{
 			if (mac.getMoveCD() == 25)
 			{
@@ -364,12 +365,12 @@ int GlassJoe::wasHit(Player& mac, int time)
 			{
 				setHealth(health - 2);
 				upsHit++;
-				return 10;
+ 				return 10;
 			}
 
 		}
 
-		else if (upsHit > 6)
+		else if (upsHit > 9)
 		{
 			
 			sprite.setPosition(115, 140);
@@ -394,7 +395,7 @@ int GlassJoe::wasHit(Player& mac, int time)
 
 	case 4:
 		jabsHit = 0;
-		if (upsHit < 7)
+		if (upsHit < 10)
 		{
 			if (mac.getMoveCD() == 25)
 			{
@@ -417,14 +418,15 @@ int GlassJoe::wasHit(Player& mac, int time)
 			{
 				setHealth(health - 2);
 				upsHit++;
-				return 10;
+ 				return 10;
 			}
 
 		}
 
-		else if (upsHit > 6)
+		else if (upsHit > 9)
 		{
-			sprite.setPosition(145, 140);
+
+			sprite.setPosition(140, 140);
 			if (time % 100 < 30)
 			{
 				sprite.setTextureRect(sf::IntRect(108, 452, 34, 97));
@@ -441,9 +443,7 @@ int GlassJoe::wasHit(Player& mac, int time)
 			}
 			if (mac.getPunch() != 0)
 				return 0;
-
 		}
-		upsHit++;
 		break;
 
 	case 9:
