@@ -3,6 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 
+
+//Opponent is a class ment to be a rule for it's children to follow. So that in game
+//The opponent methods don't change but whatever the opponetn pointer is pointing to does
 class Opponent
 {
 public:
