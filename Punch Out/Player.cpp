@@ -29,13 +29,7 @@ void Player::drawPlayer(sf::RenderWindow& window)
 }
 
 
-/*
-punch 1 = forward right punch
-punch 2 = forward left punch
-punch 3 = upper right punch
-punch 4 = upper left punch
-punch 5 = star punch
-*/
+//Updates player as the game goes on
 void Player::updatePlayer(sf::Event& event)
 {
 	sprite.setScale(1.1, 1.1);
@@ -123,7 +117,7 @@ void Player::updatePlayer(sf::Event& event)
 	{
 		//this is temp until the oppo actually punches
 		action = 10;
-		punch = 0;
+		punch = NoPunch;
 		moveCoolD = 15;
 		blocking = false;
 		dodging = false;
@@ -132,7 +126,7 @@ void Player::updatePlayer(sf::Event& event)
 	{
 		//this is temp until the oppo actually punches
 		action = 11;
-		punch = 0;
+		punch = NoPunch;
 		moveCoolD = 15;
 		blocking = false;
 		dodging = false;
@@ -191,11 +185,11 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		else if (moveCoolD > 0)
 		{
-			punch = 0;
+			punch = NoPunch;
 			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
 			if (moveCoolD == 10)
 			{
-				punch = 1;
+				punch = RightHook;
 				sprite.move(0, -10);
 			}
 			moveCoolD--;
@@ -223,9 +217,9 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		else if (moveCoolD > 0)
 		{
-			punch = 0;
+			punch = NoPunch;
 			if (moveCoolD == 10)
-				punch = 2;
+				punch = LeftHook;
 			sprite.setTextureRect(sf::IntRect(191, 17, 25, 67));
 			if (moveCoolD == 10)
 				sprite.move(0, -10);
@@ -233,7 +227,7 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		if (moveCoolD == 0)
 		{
-			punch = 0;
+			punch = NoPunch;
 			sprite.move(0, 10);
 			action = 0;
 			sprite.setTextureRect(sf::IntRect(0, 27, 25, 61));
@@ -261,16 +255,16 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		else if (moveCoolD > 10)
 		{
-			punch = 0;
+			punch = NoPunch;
 			if (moveCoolD == 15)
 				sprite.move(0, -10);
 			if (moveCoolD == 15)
-				punch = 3;
+				punch = RightJab;
 			sprite.setTextureRect(sf::IntRect(216, 7, 28, 83));
 		}
 		else if (moveCoolD > 5)
 		{
-			punch = 0;
+			punch = NoPunch;
 			if (moveCoolD == 10)
 				sprite.move(0, 20);
 			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
@@ -309,16 +303,16 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		else if (moveCoolD > 10)
 		{
-			punch = 0;
+			punch = NoPunch;
 			if (moveCoolD == 15)
-				punch = 4;
+				punch = LeftHook;
 			if (moveCoolD == 15)
 				sprite.move(0, -10);
 			sprite.setTextureRect(sf::IntRect(216, 7, 28, 83));
 		}
 		else if (moveCoolD > 5)
 		{
-			punch = 0;
+			punch = NoPunch;
 			if (moveCoolD == 10)
 				sprite.move(0, 20);
 			sprite.setTextureRect(sf::IntRect(163, 22, 28, 61));
@@ -462,9 +456,9 @@ void Player::updatePlayer(sf::Event& event)
 		}
 		else if (moveCoolD > 15)
 		{
-			punch = 0;
+			punch = NoPunch;
 			if(moveCoolD == 20)
-				punch = 5;
+				punch = StarPunch;
 			sprite.setTextureRect(sf::IntRect(400, 0, 31, 85));
 		}
 		else if (moveCoolD > 10)
