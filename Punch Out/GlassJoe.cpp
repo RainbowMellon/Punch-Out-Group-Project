@@ -30,7 +30,7 @@ void GlassJoe::update(int time, Player& mac, int round)
 {
 	sprite.setScale(1.f, 1.f);
 	//std::cout << jabsHit << "   " << upsHit << std::endl;
-	if (mac.getPunch() == 1)
+	if (mac.getPunch() == mac.LeftHook)
 		std::cout << "thing\n";
 	switch (round)
 	{
@@ -87,6 +87,7 @@ void GlassJoe::update(int time, Player& mac, int round)
 }
 
 
+//Glass joe idle animation
 void GlassJoe::idle(int time)//joe's idle animation before vive la france
 {
 
@@ -118,6 +119,7 @@ void GlassJoe::idle(int time)//joe's idle animation before vive la france
 }
 
 
+//Glass joe hook animation
 void GlassJoe::hook(int time)
 {//hook, seems to happen about 80 % of the time but I couldn't find actual stats for how often it happens
 
@@ -148,6 +150,7 @@ void GlassJoe::hook(int time)
 }
 
 
+//Glass joe jab animation
 void GlassJoe::jab(int time)// jab, seems to happen about 20% of the time.
 {
 
@@ -188,7 +191,7 @@ void GlassJoe::jab(int time)// jab, seems to happen about 20% of the time.
 
 }
 
-
+//Glass joe vive la france animation
 void GlassJoe::vive(int time)
 {
 	if (time % 300 < 25)
@@ -232,27 +235,37 @@ void GlassJoe::vive(int time)
 
 
 }
+
+
+//Draws Glass joe sprite
 void GlassJoe::draw(sf::RenderWindow& window)
 {
 	window.draw(sprite);
 }
 
+
+//Returns Glass joe's current health
 int GlassJoe::getHealth()
 {
 	return health;
 }
 
+
+//returns damage of glass joe
 int GlassJoe::getDamage()
 {
 	return 11;
 }
 
 
+//returns max stamina for player
 int GlassJoe::getStamina()
 {
 	return stamina;
 }
 
+
+//returns whether or not he was hit
 int GlassJoe::wasHit(Player& mac, int time)
 {
 
@@ -486,21 +499,24 @@ int GlassJoe::wasHit(Player& mac, int time)
 }
 
 
+
 bool GlassJoe::hasIntro()
 {
 	return true;
 }
+
 
 sf::String GlassJoe::introMusicFile()
 {
 	return "sounds/GlassJoeTheme.flac";
 }
 
+
 void GlassJoe::Intro()
 {
-
 	sprite.setTextureRect(sf::IntRect(55, 110 * 7, 55, 110));
 }
+
 
 void GlassJoe::toStage()
 {
@@ -540,16 +556,17 @@ std::string GlassJoe::getUIStuff(int type)
 }
 
 
-GlassJoe::~GlassJoe()
-{}
-
 int GlassJoe::getPunch()
 {
 	return punch;
 }
+
 
 void GlassJoe::setHealth(int newHealth)
 {
 	health = newHealth;
 }
 
+
+GlassJoe::~GlassJoe()
+{}
