@@ -3,7 +3,6 @@
 #include <iostream>
 
 
-
 Game::Game(sf::RenderWindow& window, sf::View& view)
 {
 	timer = 0;
