@@ -60,18 +60,45 @@ UIManager::~UIManager()
 
 
 //give the time on the win clock
-void UIManager::winScreen(float time)
+void UIManager::winScreen(float time, int round, std::string newRank)
 {
   	sf::Font font;
 	font.loadFromFile("punch-out-nes.ttf");
 	std::string stats[6];
 	sf::Text text;
+	int minute, second, milli;
 	text.setFont(font);
 	text.setScale(.25, .25);
 
 	text.setString("The w.v.b.a.\n   minor\n  circuit");
-	text.setPosition(130, 570);
+	text.setOrigin(text.getLocalBounds().width / 2, 0);
+	text.setPosition(128, 475);
 	text.setFillColor(sf::Color(31, 255, 255));
+	(*window).draw(text);
+
+	text.setString("------------------------------");
+	text.setOrigin(text.getLocalBounds().width / 2, 0);
+	text.setPosition(128, 497);
+	(*window).draw(text);
+
+	text.setString("\"Great fighting\"");
+	text.setOrigin(text.getLocalBounds().width / 2, 0);
+	text.setPosition(128, 510);
+	text.setFillColor(sf::Color::White);
+	(*window).draw(text);
+
+	text.setString(" You won by tko!");
+	text.setOrigin(text.getLocalBounds().width / 2, 0);
+	text.setPosition(128, 525);
+	(*window).draw(text);
+
+	minute = time / 10000;
+	second = (time / 100) - (minute * 100);
+	milli = time - minute * 100 - second * 100;
+	text.setString("Time " + std::to_string(minute) + ":" + std::to_string(second) +
+		"." + std::to_string(milli) + ",R" + std::to_string(round));
+	text.setOrigin(text.getLocalBounds().width / 2, 0);
+	text.setPosition(128, 540);
 	(*window).draw(text);
 }
 
