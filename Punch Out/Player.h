@@ -5,6 +5,8 @@
 class Player
 {
 public:
+	
+	enum { NoPunch, RightHook, LeftHook,  RightJab, LeftJab, StarPunch};
 	Player();
 	~Player();
 	void updatePlayer(sf::Event&);
