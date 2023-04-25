@@ -171,7 +171,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			if (opponent->getHealth() <= 0)
 			{
 				points += 1000;
-				state = 7;
+				state = 10;
 				gameSound.play();
 			}
 				//if the timer is 3 minutes and it's round three, go to the disicion screen.
@@ -250,7 +250,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			break;
 		case 10: //win screen, will either fadeout to state 1 (while changing opponent), or scroll to state 9
 			view.setCenter(130, 570);
-			UI.winScreen(time);
+			UI.winScreen(time, round, opponent->getUIStuff(1));
 			break;
 		case 11: // scroll to title bout screen, then change state to 1(while changing oppponent
 			break;
