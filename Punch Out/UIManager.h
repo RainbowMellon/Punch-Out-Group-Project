@@ -12,7 +12,7 @@ public:
   UIManager(sf::RenderWindow&, sf::View&, Player&);
   ~UIManager();
   void setPointers(sf::RenderWindow&, sf::View&, Player&);
-  void winScreen(float);
+  void winScreen(float, int, std::string);
   void loseScreen();
   void drawText(std::string);
   void drawStats(Player&, Opponent&, int, int, int, int);
