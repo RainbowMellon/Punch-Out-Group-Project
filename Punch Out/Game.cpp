@@ -2,8 +2,11 @@
 #include "UIManager.h"
 #include <iostream>
 
+
+
 Game::Game(sf::RenderWindow& window, sf::View& view)
 {
+	timer = 0;
 	opponent = &joe;
 	isKeyPressed = false;
 	playerKO = 0;
@@ -34,9 +37,11 @@ Game::Game(sf::RenderWindow& window, sf::View& view)
 	UI.setPointers(window, view, littleMac);
 }
 
+
+//Shows/plays the game for the player based on what state the game is in
 void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 {
-		if (event.type == sf::Event::KeyReleased) // No repeat keys, because window.setKeyRepeat doesn't work in this scenario
+	if (event.type == sf::Event::KeyReleased) // No repeat keys, because window.setKeyRepeat doesn't work in this scenario
 		isKeyPressed = false;
 	switch (state) //what ever the current state of the game, game does this. Ex, if we're not in the fight state don't show or update fight screen
 	{	
@@ -51,8 +56,8 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 		case 1: //Stats screen
 			view.setCenter(898 + 5, 340 + 3);
 			//draw states, if round >= 2, draw the opponents and docs quotes
+
 			UI.roundStartScreen(littleMac, *opponent, round);
-			//when enter is press, scroll down to round image, fade in black box, then switch states
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !isKeyPressed)
 			{
 				state = 2;
@@ -60,7 +65,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			}
 			break;
 
-		case 2: //view transistion? I might make stats screen absorb this
+		case 2: //scroll down to round image, fade in black box, then switch states
 			UI.roundStartScreen(littleMac, *opponent, round);
 			window.draw(roundSprite);
 			window.draw(fadeout);
@@ -77,12 +82,12 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 				mainTheme.play();
 				state = 3;
 			}
-			else //if he doesn't do wht opponents usally do
+			else //if he doesn't do what opponents usally do
 			{
 				time = 0;
 				fadeout.setFillColor(sf::Color(0, 0, 0, 0));
 				//backgroundTexture.loadFromFile("punchout sprites/stage1.png");
-				mainTheme.openFromFile("RoundStart.flac");
+				mainTheme.openFromFile("sounds/RoundStart.flac");
 				mainTheme.play();
 				state = 4;
 			}
@@ -90,14 +95,12 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			break;
 		case 3: // the opponents intro
 			view.setCenter(128 + 2, 110 + 2);
-			
 			if (mainTheme.getStatus() == mainTheme.Playing)
 			{
 				opponent->Intro();
 				UI.drawStats(littleMac, *opponent, time, 1, round, points);
 				opponent->draw(window);
 				littleMac.drawPlayer(window);
-				
 				window.draw(marioSprite);
 			}
 			else 
@@ -107,8 +110,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 				mainTheme.play();
 			}
 			break;
-		case 4: //opponent moving toward center of ring
-
+		case 4: //opponent moving toward Little Mac
 			if (mainTheme.getStatus() == mainTheme.Playing)
 			{
 				opponent->toStage();
@@ -176,7 +178,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 				//if the timer is 3 minutes and it's round three, go to the disicion screen.
 			if (time == 30000)
 			{
-				state = 5;
+				state = 6;
 				playerKO = 0;
 				oppoKO = 0;
 				fadeout.setPosition(0, 0);
@@ -253,31 +255,8 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			break;
 		case 11: // scroll to title bout screen, then change state to 1(while changing oppponent
 			break;
-		case 12: //Doc biking with mac, after a title bout
-				break;
-
 	}
+}
 
-}
-int Game::getPlayerKO()
-{
-	return 3;
-}
-void Game::setPlayerKO()
-{
 
-}
-void Game::setOppoKO()
-{
-
-}
-void Game::setOppo()
-{
-
-}
-int Game::getOppoKO()
-{
-
-	return 2;
-}
 Game::~Game(){}
