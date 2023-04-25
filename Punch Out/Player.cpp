@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <iostream>
 
+
 Player::Player()
 {
 	isWinded = false;
@@ -20,6 +21,8 @@ Player::Player()
 	sound.setBuffer(buffer);
 }
 
+
+//Draws the playerSprite
 void Player::drawPlayer(sf::RenderWindow& window)
 {
 	window.draw(sprite);
@@ -598,75 +601,76 @@ void Player::updatePlayer(sf::Event& event)
 }
 
 
+//returns whether the player is knocked down or not
 bool Player::isKnockedDown()
 {
 	return knockedDown;
 }
 
 
+//Returns what punch the player is doing
 int Player::getPunch()
 {
 	return punch;
 }
 
 
+//Returns the current action of the player
 int Player::getAction()
 {
 	return action;
 }
 
 
-int Player::isPunching()
-{
-	return punch;
-}
-
-
+//Return whether the player is blocking
 bool Player::isBlocking()
 {
 	return blocking;
 }
 
-
+//Returns whether the player is dodging
 bool Player::isDodging()
 {
 	return dodging;
 }
 
 
-Player::~Player() {}
-
-
+//returns whether the player is winded
 bool Player::getWinded()
 {
 	return isWinded;
 }
 
 
+//returns the players curretn health
 int Player::getHealth()
 {
 	return health;
 }
 
 
+//returns the amount of stars the player has
 int Player::getStarCount()
 {
 	return starCount;
 }
 
 
+//returns the current stamina the players has
 int Player::getStamina()
 {
 	return stamina;
 }
 
 
+//Set's the health of the player
 void Player::setHealth(int h)
 {
 	health = h;
 }
 
 
+//Returns the current move cooldown of the player
 int Player::getMoveCD()
 {
 	return moveCoolD;
@@ -695,8 +699,12 @@ void Player::punchMac(int punch_type, int hitDmg)
 }
 
 
-bool Player::giveStar()
+//Increases the amount of stars mac has by 1
+bool Player::giveStar() //why is this a boolean?
 {
 	starCount++;
 	return true;
 }
+
+
+Player::~Player() {}
