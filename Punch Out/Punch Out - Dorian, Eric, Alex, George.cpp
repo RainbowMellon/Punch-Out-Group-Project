@@ -1,6 +1,19 @@
+/*
+Dorian, Eric, George, Alex
+4/25/23
+This program will let you play the first fight of Mike Tyson's Punchout
+from the NES.
+
+I hereby certify that this program represents my
+work and that the design and logic was completed
+without outside assistance.
+
+Dorian Williams-Webster
+*/
+
+
 #include <SFML/Graphics.hpp>
 #include "Game.h"
-#include "GlassJoe.h"
 #include <iostream>
 
 
