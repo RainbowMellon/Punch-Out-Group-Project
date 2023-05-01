@@ -161,7 +161,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			littleMac.updatePlayer(event);
 			opponent->update(time, littleMac,round);
 
-			if (opponent->wasHit(littleMac,time) != 0)
+			if (littleMac.getPunch() != 0)
 			{
 				points += opponent->wasHit(littleMac, time);
 				if (opponent->getTimesHit() > 5)
