@@ -29,66 +29,289 @@ do was hit
 void GlassJoe::update(int time, Player& mac, int round)
 {
 	sprite.setScale(1.f, 1.f);
-	//std::cout << jabsHit << "   " << upsHit << std::endl;
-	if (mac.getPunch() == mac.LeftHook)
-		std::cout << "thing\n";
-	switch (round)
+	std::cout << jabsHit << "   " << upsHit << std::endl;
+
+	if (mac.getAction() != 0)
 	{
-	case 1:
-
-		if (mac.getAction() != 0)
-			wasHit(mac, time);
-		else
+		switch (mac.getAction())
 		{
-			if (time < 4000)
-			{
-				idle(time);
-			}
+
+		case 1:
 
 
-			else if (time < 4500)
+			upsHit = 0;
+
+			if (jabsHit >= 3)
 			{
-				vive(time);
-			}
-			else
-			{
-				if (time % 1000 < 500)
-					idle(time);
+				sprite.setPosition(140, 145);
+				if (time % 100 < 40)
+					sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
 				else
-				{
-					if (time % 4000 < 3000)
-					{
+					sprite.setTextureRect(sf::IntRect(54, 458, 32, 91));
 
-						if (time % 500 == 1)
-							punch = 1;
-						else
-							punch = 0;
-						hook(time);
+			}
+			
+
+
+			else if (jabsHit < 4)
+			{
+				if (mac.getMoveCD() >= 0)
+				{
+					sprite.setPosition(140, 155);
+					sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
+					sprite.move(1, -1);
+
+					if (mac.getPunch() == mac.RightHook)
+					{
+						setHealth(health - 4);
+						jabsHit++;
+						
 
 					}
 
-					else
+				}
+
+			}
+
+
+			break;
+
+		case 2:
+
+			upsHit = 0;
+			
+			if (jabsHit >= 3)
+			{
+
+				sprite.setPosition(140, 145);
+				if (time % 100 < 40)
+					sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
+				else
+					sprite.setTextureRect(sf::IntRect(54, 458, 32, 91));
+
+			}
+
+			else if (jabsHit < 4)
+			{
+				if (mac.getMoveCD() >= 0)
+				{
+					sprite.setPosition(140, 155);
+					sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
+					sprite.move(1, -1);
+
+					if (mac.getPunch() == mac.LeftHook)
 					{
-						if (time % 500 == 1)
-							punch = 2;
-						else
-							punch = 0;
-						jab(time);
+						setHealth(health - 4);
+						jabsHit++;
+
 					}
 
 
 				}
-			}
-		}
 
-		break;
+			}
+
+
+			break;
+
+		case 3:
+			jabsHit = 0;
+			sprite.setScale(-1.f, 1.f);
+
+
+			if (upsHit >= 3)
+			{
+
+				sprite.setPosition(115, 140);
+				if (time % 100 < 30)
+				{
+					sprite.setTextureRect(sf::IntRect(108, 452, 34, 97));
+				}
+
+				else if (time % 100 < 60)
+				{
+					sprite.setTextureRect(sf::IntRect(153, 452, 34, 97));
+				}
+
+				else if (time % 100 < 100)
+				{
+					sprite.setTextureRect(sf::IntRect(198, 452, 34, 97));
+				}
+
+			}
+
+			
+
+			else if (upsHit < 4)
+			{
+				if (mac.getMoveCD() == 25)
+				{
+					sprite.setPosition(140, 150);
+				}
+				else if (mac.getMoveCD() >= 15)
+				{
+
+					sprite.move(-.5, -.5);
+					sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
+				}
+
+				else
+				{
+					sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
+
+				}
+
+				if (mac.getPunch() == mac.RightJab)
+				{
+					setHealth(health - 4);
+					upsHit++;
+				}
+
+			}
+			break;
+
+		case 4:
+			jabsHit = 0;
+			if (upsHit >= 3)
+			{
+
+				sprite.setPosition(140, 140);
+				if (time % 100 < 30)
+				{
+					sprite.setTextureRect(sf::IntRect(108, 452, 34, 97));
+				}
+
+				else if (time % 100 < 60)
+				{
+					sprite.setTextureRect(sf::IntRect(153, 452, 34, 97));
+				}
+
+				else if (time % 100 < 100)
+				{
+					sprite.setTextureRect(sf::IntRect(198, 452, 34, 97));
+				}
+
+			}
+			
+
+			else if(upsHit < 4)
+			{
+				if (mac.getMoveCD() == 25)
+				{
+					sprite.setPosition(140, 150);
+				}
+				else if (mac.getMoveCD() >= 15)
+				{
+
+					sprite.move(.5, -.5);
+					sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
+				}
+
+				else
+				{
+					sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
+				}
+
+				if (mac.getPunch() == mac.LeftJab)
+				{
+					setHealth(health - 4);
+					upsHit++;
+				}
+				
+
+			}
+			break;
+
+		case 9:
+			if (mac.getPunch() == mac.StarPunch)
+			{
+				setHealth(health - 10);
+			}
+
+
+			if (mac.getMoveCD() >= 40)
+			{
+				sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
+				sprite.setPosition(140, 150);
+			}
+
+
+			else
+			{
+				sprite.setScale(-1.f, 1.f);
+
+				if (mac.getMoveCD() >= 20)
+				{
+					sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
+					sprite.move(-.5, -.5);
+				}
+				else if (mac.getMoveCD() >= 0)
+				{
+					sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
+					sprite.move(-.5, -.5);
+				}
+
+			}
+
+		}
 	}
 
+	
+	else
+	{
+		switch (round)
+		{
+		case 1:
+
+			
+			
+				if (time % 150 == 0)
+				{ 
+					action = 1;
+					coolDown = 150;
+				}
+
+
+				else if (time == 4000)
+				{
+					action = 2;
+					coolDown = 300;
+				}
+				else
+				{
+					if (time % 1000 < 500)
+						idle(time);
+					else
+					{
+						if (time % 4000 == 0)
+						{
+
+							action = 3;
+							coolDown = 500;
+						}
+
+						else if(time % 1000 == 0)
+						{
+							action = 4;
+							coolDown = 500;
+						}
+
+
+					}
+				}
+			
+
+			break;
+		}
+	}
+	
+	if (coolDown > 0)
+		coolDown--;
 }
 
 
 //Glass joe idle animation
-void GlassJoe::idle(int time)//joe's idle animation before vive la france
+void GlassJoe::idle(int time)
 {
 
 	if (time % 150 < 50)
@@ -273,228 +496,38 @@ int GlassJoe::wasHit(Player& mac, int time)
 
 	switch (mac.getAction())
 	{
-
 	case 1:
-
-		upsHit = 0;
-		if (jabsHit < 10)
-		{
-			if (mac.getMoveCD() >= 0)
-			{
-				sprite.setPosition(140, 155);
-				sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
-				sprite.move(1, -1);
-
-				if (mac.getPunch() == 1)
-				{
-					setHealth(health - 2);
-					jabsHit++;
- 
-					return 10;
-				}
-
-			}
-
-		}
-
-
-		else if (jabsHit > 9)
-		{
-			sprite.setPosition(140, 145);
-			if (time % 100 < 40)
-				sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
-			else
-				sprite.setTextureRect(sf::IntRect(54, 458, 32, 91));
-			if (mac.getPunch() != 0)
-				return 0;
-		}
-
-
+		if (jabsHit <= 3)
+			return 10;
+		else
+			return 0;
 		break;
-
 	case 2:
-
-		upsHit = 0;
-		if (jabsHit < 10)
-		{
-			if (mac.getMoveCD() >= 0)
-			{
-				sprite.setPosition(140, 155);
-				sprite.setTextureRect(sf::IntRect(13, 585, 32, 79));
-				sprite.move(1, -1);
-
-				if (mac.getPunch() == 2)
-				{
-					setHealth(health - 2);
-					jabsHit++;
- 					return 10;
-
-				}
-
-
-			}
-
-		}
-
-
-		else if (jabsHit > 9)
-		{
-
-			sprite.setPosition(140, 145);
-			if (time % 100 < 40)
-				sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
-			else
-				sprite.setTextureRect(sf::IntRect(54, 458, 32, 91));
-			if (mac.getPunch() != 0)
-				return 0;
-
-		}
+		if (jabsHit <= 3)
+			return 10;
+		else
+			return 0;
 		break;
 
 	case 3:
-		jabsHit = 0;
-		sprite.setScale(-1.f, 1.f);
-
-		if (upsHit < 10)
-		{
-			if (mac.getMoveCD() == 25)
-			{
-				sprite.setPosition(140, 150);
-			}
-			else if (mac.getMoveCD() >= 15)
-			{
-
-				sprite.move(-.5, -.5);
-				sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
-			}
-
-			else
-			{
-				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
-
-			}
-
-			if (mac.getPunch() == 3)
-			{
-				setHealth(health - 2);
-				upsHit++;
- 				return 10;
-			}
-
-		}
-
-		else if (upsHit > 9)
-		{
-			
-			sprite.setPosition(115, 140);
-			if (time % 100 < 30)
-			{
-				sprite.setTextureRect(sf::IntRect(108, 452, 34, 97));
-			}
-
-			else if (time % 100 < 60)
-			{
-				sprite.setTextureRect(sf::IntRect(153, 452, 34, 97));
-			}
-
-			else if (time % 100 < 100)
-			{
-				sprite.setTextureRect(sf::IntRect(198, 452, 34, 97));
-			}
-			if (mac.getPunch() != 0)
-				return 0;
-		}
-		break;
-
-	case 4:
-		jabsHit = 0;
-		if (upsHit < 10)
-		{
-			if (mac.getMoveCD() == 25)
-			{
-				sprite.setPosition(140, 150);
-			}
-			else if (mac.getMoveCD() >= 15)
-			{
-
-				sprite.move(.5, -.5);
-				sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
-			}
-
-			else
-			{
-				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
-
-			}
-
-			if (mac.getPunch() == 4)
-			{
-				setHealth(health - 2);
-				upsHit++;
- 				return 10;
-			}
-
-		}
-
-		else if (upsHit > 9)
-		{
-
-			sprite.setPosition(140, 140);
-			if (time % 100 < 30)
-			{
-				sprite.setTextureRect(sf::IntRect(108, 452, 34, 97));
-			}
-
-			else if (time % 100 < 60)
-			{
-				sprite.setTextureRect(sf::IntRect(153, 452, 34, 97));
-			}
-
-			else if (time % 100 < 100)
-			{
-				sprite.setTextureRect(sf::IntRect(198, 452, 34, 97));
-			}
-			if (mac.getPunch() != 0)
-				return 0;
-		}
-		break;
-
-	case 9:
-		if (mac.getPunch() == 5)
-		{
-			setHealth(health - 10);
-			return 500;
-		}
-
-
-		if (mac.getMoveCD() >= 40)
-		{
-			sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
-			sprite.setPosition(140, 150);
-		}
-
-
+		if (upsHit <= 3)
+			return 10;
 		else
-		{
-			sprite.setScale(-1.f, 1.f);
+			return 0;
+		break;
+	
+	case 4:
+		if (upsHit <= 3)
+			return 10;
+		else
+			return 0;
+		break;
 
-			if (mac.getMoveCD() >= 20)
-			{
-				sprite.setTextureRect(sf::IntRect(99, 572, 35, 92));
-				sprite.move(-.5, -.5);
-			}
-			else if (mac.getMoveCD() >= 0)
-			{
-				sprite.setTextureRect(sf::IntRect(146, 572, 38, 92));
-				sprite.move(-.5, -.5);
-			}
-
-		}
-
+	case 5:
+		return 500;
+		
 	default:
 		return 0;
-
-
 	}
 }
 
