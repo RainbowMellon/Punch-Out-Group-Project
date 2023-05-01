@@ -100,6 +100,15 @@ void UIManager::winScreen(float time, int round, std::string newRank)
 	text.setOrigin(text.getLocalBounds().width / 2, 0);
 	text.setPosition(128, 540);
 	(*window).draw(text);
+	
+	text.setString(" You will be ranked up to #" + newRank);
+	text.setOrigin(text.getLocalBounds().width / 2, 0);
+	text.setPosition(128, 560);
+	(*window).draw(text);
+
+	text.setString("      and\n\n are you ready\n\n      for\n\nnext challenge ?");
+	text.setPosition(178, 585);
+	(*window).draw(text);
 }
 
 
