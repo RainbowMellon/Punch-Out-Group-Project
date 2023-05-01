@@ -114,7 +114,44 @@ void UIManager::winScreen(float time, int round, std::string newRank)
 
 void UIManager::loseScreen()
 {
+	sf::Font font;
+	font.loadFromFile("punch-out-nes.ttf");
+	std::string stats[6];
+	sf::Text text;
+	int minute, second, milli;
+	text.setFont(font);
+	text.setScale(.25, .25);
 
+	text.setString("The w.v.b.a.\n   minor\n  circuit");
+	text.setOrigin(text.getLocalBounds().width / 2, 0);
+	text.setPosition(128, 475);
+	text.setFillColor(sf::Color(31, 255, 255));
+	(*window).draw(text);
+
+	text.setString("------------------------------");
+	text.setOrigin(text.getLocalBounds().width / 2, 0);
+	text.setPosition(128, 497);
+	(*window).draw(text);
+
+	text.setString("\"Don't cry,mac!\"");
+	text.setOrigin(text.getLocalBounds().width / 2, 0);
+	text.setPosition(128, 510);
+	text.setFillColor(sf::Color::White);
+	(*window).draw(text);
+
+	text.setString(" You lost!");
+	text.setOrigin(text.getLocalBounds().width / 2, 0);
+	text.setPosition(128, 525);
+	(*window).draw(text);
+
+	text.setString(" Let's rematch!");
+	text.setOrigin(text.getLocalBounds().width / 2, 0);
+	text.setPosition(128, 560);
+	(*window).draw(text);
+
+	text.setString("      and\n\n are you ready\n\n      for\n\nnext challenge ?");
+	text.setPosition(178, 585);
+	(*window).draw(text);
 }
 
 //give the text you want to draw
