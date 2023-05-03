@@ -673,7 +673,6 @@ int Player::getMoveCD()
 
 void Player::punchMac(int punch_type, int hitDmg)
 {
-	std::cout << punch_type;
 	if (punch_type == 1 && !punched)
 	{
 		action = 10;
