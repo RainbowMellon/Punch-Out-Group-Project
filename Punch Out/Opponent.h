@@ -27,7 +27,7 @@ public:
 	//Returns true while the opponent is moving toward the middle stage, returns false if it isn't there yet
 	virtual void toStage();
 	virtual int getTimesHit();
-
+	virtual int getPunch()=0;
 
 
 protected:
