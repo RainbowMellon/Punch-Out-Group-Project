@@ -129,6 +129,7 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 			}
 			break;
 		case 5: //Fight screen
+			littleMac.punchMac(opponent->getPunch(), opponent->getDamage());//someone keeps removing this but it is very important
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) && !isKeyPressed)
 			{
 				littleMac.setHealth(0);
