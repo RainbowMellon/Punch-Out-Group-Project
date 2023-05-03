@@ -35,8 +35,6 @@ get stars?
 void GlassJoe::update(int time, Player& mac, int round)
 {
 	sprite.setScale(1.f, 1.f);
-	//std::cout << jabsHit << "   " << upsHit << std::endl;
-	std::cout << coolDown << std::endl;
 	if (punch != 0)
 		punch = 0;
 
