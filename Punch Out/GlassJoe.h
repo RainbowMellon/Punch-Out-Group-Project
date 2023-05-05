@@ -20,6 +20,7 @@ public:
 	void idle(int);
 	std::string getUIStuff(int);
 	int getPunch();
+	int getTimesHit();
 	
 	bool hasIntro();
 	sf::String introMusicFile();
@@ -30,7 +31,7 @@ public:
 
 private:
 	int health, stamina, canDodgeCD, cantDodgeCD, timer,action,coolDown;
-	int punch, jabsHit, upsHit, macPunch;
+	int punch, jabsHit, upsHit, macPunch, timesHit;
 	bool isInPattern, isStunned;
 	std::string name, location, stats, rank, age, weight;
 	sf::Sprite sprite;

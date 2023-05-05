@@ -28,8 +28,6 @@ GlassJoe::GlassJoe()
 fix animations on the punches
 make sure punch is active for one frame
 round 2 & 3
-get stars?
-
 */
 
 void GlassJoe::update(int time, Player& mac, int round)
@@ -111,11 +109,13 @@ void GlassJoe::update(int time, Player& mac, int round)
 
 		case 1:
 
-
+			timesHit += upsHit;
 			upsHit = 0;
 
 			if (jabsHit >= 3)
 			{
+				if (jabsHit == 3)
+					jabsHit++;
 				sprite.setPosition(140, 145);
 				if (time % 100 < 40)
 					sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
@@ -150,12 +150,13 @@ void GlassJoe::update(int time, Player& mac, int round)
 			break;
 
 		case 2:
-
+			timesHit += upsHit;
 			upsHit = 0;
 
 			if (jabsHit >= 3)
 			{
-
+				if (jabsHit == 3)
+					jabsHit++;
 				sprite.setPosition(140, 145);
 				if (time % 100 < 40)
 					sprite.setTextureRect(sf::IntRect(13, 458, 32, 91));
@@ -188,12 +189,15 @@ void GlassJoe::update(int time, Player& mac, int round)
 			break;
 
 		case 3:
+			timesHit += jabsHit;
 			jabsHit = 0;
 			sprite.setScale(-1.f, 1.f);
 
 
 			if (upsHit >= 3)
 			{
+				if (upsHit == 3)
+					upsHit++;
 
 				sprite.setPosition(115, 140);
 				if (time % 100 < 30)
@@ -244,10 +248,12 @@ void GlassJoe::update(int time, Player& mac, int round)
 			break;
 
 		case 4:
+			timesHit += jabsHit;
 			jabsHit = 0;
 			if (upsHit >= 3)
 			{
-
+				if (upsHit== 3)
+					upsHit++;
 				sprite.setPosition(140, 140);
 				if (time % 100 < 30)
 				{
@@ -610,9 +616,14 @@ void GlassJoe::setHealth(int newHealth)
 	health = newHealth;
 }
 
+int GlassJoe::getTimesHit()
+{
+	return timesHit;
+}
 
 GlassJoe::~GlassJoe()
 {}
+
 
 
 
