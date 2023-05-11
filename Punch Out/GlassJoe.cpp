@@ -33,8 +33,14 @@ round 2 & 3
 void GlassJoe::update(int time, Player& mac, int round)
 {
 	sprite.setScale(1.f, 1.f);
+
+	std::cout << punch << "    " << coolDown <<std::endl;
+
 	if (punch != 0)
+	{
 		punch = 0;
+	}
+		
 
 
 
@@ -47,33 +53,48 @@ void GlassJoe::update(int time, Player& mac, int round)
 			coolDown = 150;
 		}
 
+		else if (time == 4398)
+		{
+			action = 2;
+			coolDown = 150;
+		}
+
 		else if (time % 1000 <3 && time > 5000) //trigger for punches
 		{
 			int r = rand() % 5;
 			if (r == 0)
 			{
 				action = 3;
-				coolDown = 250;
+				coolDown = 150;
 			}
 			else
 			{
 				action = 2;
-				coolDown = 250;
+				coolDown = 150;
 			}
 		}
 
 		else if (time < 4000)//idle animations
 		{
-				if (time % 225 == 0)
+				if (time % 225 < 3)
 				{
 					action = 0;
 					coolDown = 75;
 				}
 		}
 
-		else if (time < 20000 && time % 1000 > 250)
+		else if (time < 6000 && time %1000 > 450)
 		{
-			if ((time + 125) % 225 == 0)
+			if (time % 225 == 0)
+			{
+				action = 0;
+				coolDown = 75;
+			}
+		}
+
+		else if (time < 20000 && time % 1000 > 450)
+		{
+			if (time  % 225 < 3)
 			{
 				action = 0;
 				coolDown = 75;
@@ -82,7 +103,7 @@ void GlassJoe::update(int time, Player& mac, int round)
 
 		else
 		{
-			if ((time + 25) % 225 == 0 && time % 1000 > 250)
+			if (time % 225 < 3 && time % 1000 > 450)
 			{
 				action = 0;
 				coolDown = 75;
@@ -97,8 +118,49 @@ void GlassJoe::update(int time, Player& mac, int round)
 		if (time == 3000)
 		{
 			action = 1;
-			coolDown = 300;
+			coolDown = 150;
 		}
+
+		else if (time == 3450)
+		{
+			action = 2;
+			coolDown = 150;
+		}
+
+		else if (time % 1000 < 3) 
+		{
+			int r = rand() % 5;
+			if (r == 0)
+			{
+				action = 3;
+				coolDown = 150;
+			}
+			else
+			{
+				action = 2;
+				coolDown = 150;
+			}
+		}
+
+		else if (time < 3000 && time % 1000 > 450)
+		{
+			if (time % 225 == 0)
+			{
+				action = 0;
+				coolDown = 75;
+			}
+		}
+
+		else if (time % 1000 > 450 && time > 3750)
+		{
+			if (time % 225 == 0)
+			{
+				action = 0;
+				coolDown = 75;
+			}
+		}
+
+		
 	}
 
 
@@ -406,31 +468,42 @@ void GlassJoe::update(int time, Player& mac, int round)
 			}
 			else if (coolDown > 12.5)
 				sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
+
+			
 			break;
 		case 2:
 
-			if (coolDown > 235)
+			if (coolDown > 140)
 			{
 				sprite.setTextureRect(sf::IntRect(13, 241, 35, 87));
-				sprite.move(-1, 0);
+				sprite.move(-2.5, 0);
 			}
 
-			else if (coolDown > 220)
+			else if (coolDown >120)
 				sprite.setTextureRect(sf::IntRect(58, 241, 35, 87));
-			else if (coolDown > 205)
-				sprite.setTextureRect(sf::IntRect(13, 241, 35, 87));
-			else if (coolDown > 190)
+			else if (coolDown > 100)
 			{
-				sprite.setTextureRect(sf::IntRect(105, 249, 34, 79));
-				sprite.move(1, 0);
+				sprite.setTextureRect(sf::IntRect(13, 241, 35, 87));
+				sprite.move(1.25, 1.5);
+			}
+			else if (coolDown > 75)
+			{
+				sprite.setTextureRect(sf::IntRect(151, 237, 39, 91));
+				sprite.move(.5,-.375);
 
 			}
-			else if (coolDown > 100)
+
+			else if(coolDown > 25)
 				sprite.setTextureRect(sf::IntRect(151, 237, 39, 91));
+
 			else
 				sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
-			if (coolDown == 0)
+			if (coolDown == 125)
+			{
 				punch = 1;
+				
+			}
+				
 			break;
 
 		case 3:
@@ -465,7 +538,7 @@ void GlassJoe::update(int time, Player& mac, int round)
 			}
 			else
 				sprite.setTextureRect(sf::IntRect(518, 13, 31, 98));
-			if (coolDown == 0)
+			if (coolDown == 125)
 				punch = 2;
 			break;
 		}
