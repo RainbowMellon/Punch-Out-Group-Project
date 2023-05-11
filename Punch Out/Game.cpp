@@ -252,6 +252,8 @@ void Game::play(sf::RenderWindow& window, sf::Event& event, sf::View& view)
 		case 10: //win screen, will either fadeout to state 1 (while changing opponent), or scroll to state 9
 			view.setCenter(130, 570);
 			UI.winScreen(time, round, opponent->getUIStuff(1));
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) && !isKeyPressed)
+			state = 0;
 			break;
 		case 11: // scroll to title bout screen, then change state to 1(while changing oppponent
 			break;
